@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */; };
+		07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */; };
+		07AA675F2A7BB7C3009DB3F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */; };
+		07AA67622A7BB7C3009DB3F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67602A7BB7C3009DB3F0 /* Main.storyboard */; };
+		07AA67642A7BB7C5009DB3F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */; };
+		07AA67672A7BB7C5009DB3F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */; };
+		07AA67722A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */; };
+		07AA677C2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */; };
+		07AA677E2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07AA676E2A7BB7C5009DB3F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07AA674F2A7BB7C3009DB3F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07AA67562A7BB7C3009DB3F0;
+			remoteInfo = KakaoBankClone;
+		};
+		07AA67782A7BB7C5009DB3F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07AA674F2A7BB7C3009DB3F0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07AA67562A7BB7C3009DB3F0;
+			remoteInfo = KakaoBankClone;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoBankClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		07AA67612A7BB7C3009DB3F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07AA67662A7BB7C5009DB3F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07AA67682A7BB7C5009DB3F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07AA676D2A7BB7C5009DB3F0 /* KakaoBankCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakaoBankCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneTests.swift; sourceTree = "<group>"; };
+		07AA67772A7BB7C5009DB3F0 /* KakaoBankCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakaoBankCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITests.swift; sourceTree = "<group>"; };
+		07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07AA67542A7BB7C3009DB3F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA676A2A7BB7C5009DB3F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA67742A7BB7C5009DB3F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07AA674E2A7BB7C3009DB3F0 = {
+			isa = PBXGroup;
+			children = (
+				07AA67592A7BB7C3009DB3F0 /* KakaoBankClone */,
+				07AA67702A7BB7C5009DB3F0 /* KakaoBankCloneTests */,
+				07AA677A2A7BB7C5009DB3F0 /* KakaoBankCloneUITests */,
+				07AA67582A7BB7C3009DB3F0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07AA67582A7BB7C3009DB3F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */,
+				07AA676D2A7BB7C5009DB3F0 /* KakaoBankCloneTests.xctest */,
+				07AA67772A7BB7C5009DB3F0 /* KakaoBankCloneUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07AA67592A7BB7C3009DB3F0 /* KakaoBankClone */ = {
+			isa = PBXGroup;
+			children = (
+				07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */,
+				07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */,
+				07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */,
+				07AA67602A7BB7C3009DB3F0 /* Main.storyboard */,
+				07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */,
+				07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */,
+				07AA67682A7BB7C5009DB3F0 /* Info.plist */,
+			);
+			path = KakaoBankClone;
+			sourceTree = "<group>";
+		};
+		07AA67702A7BB7C5009DB3F0 /* KakaoBankCloneTests */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */,
+			);
+			path = KakaoBankCloneTests;
+			sourceTree = "<group>";
+		};
+		07AA677A2A7BB7C5009DB3F0 /* KakaoBankCloneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */,
+				07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */,
+			);
+			path = KakaoBankCloneUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07AA67562A7BB7C3009DB3F0 /* KakaoBankClone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07AA67812A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankClone" */;
+			buildPhases = (
+				07AA67532A7BB7C3009DB3F0 /* Sources */,
+				07AA67542A7BB7C3009DB3F0 /* Frameworks */,
+				07AA67552A7BB7C3009DB3F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KakaoBankClone;
+			productName = KakaoBankClone;
+			productReference = 07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07AA676C2A7BB7C5009DB3F0 /* KakaoBankCloneTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07AA67842A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneTests" */;
+			buildPhases = (
+				07AA67692A7BB7C5009DB3F0 /* Sources */,
+				07AA676A2A7BB7C5009DB3F0 /* Frameworks */,
+				07AA676B2A7BB7C5009DB3F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07AA676F2A7BB7C5009DB3F0 /* PBXTargetDependency */,
+			);
+			name = KakaoBankCloneTests;
+			productName = KakaoBankCloneTests;
+			productReference = 07AA676D2A7BB7C5009DB3F0 /* KakaoBankCloneTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		07AA67762A7BB7C5009DB3F0 /* KakaoBankCloneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07AA67872A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneUITests" */;
+			buildPhases = (
+				07AA67732A7BB7C5009DB3F0 /* Sources */,
+				07AA67742A7BB7C5009DB3F0 /* Frameworks */,
+				07AA67752A7BB7C5009DB3F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07AA67792A7BB7C5009DB3F0 /* PBXTargetDependency */,
+			);
+			name = KakaoBankCloneUITests;
+			productName = KakaoBankCloneUITests;
+			productReference = 07AA67772A7BB7C5009DB3F0 /* KakaoBankCloneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07AA674F2A7BB7C3009DB3F0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					07AA67562A7BB7C3009DB3F0 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					07AA676C2A7BB7C5009DB3F0 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 07AA67562A7BB7C3009DB3F0;
+					};
+					07AA67762A7BB7C5009DB3F0 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 07AA67562A7BB7C3009DB3F0;
+					};
+				};
+			};
+			buildConfigurationList = 07AA67522A7BB7C3009DB3F0 /* Build configuration list for PBXProject "KakaoBankClone" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07AA674E2A7BB7C3009DB3F0;
+			productRefGroup = 07AA67582A7BB7C3009DB3F0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07AA67562A7BB7C3009DB3F0 /* KakaoBankClone */,
+				07AA676C2A7BB7C5009DB3F0 /* KakaoBankCloneTests */,
+				07AA67762A7BB7C5009DB3F0 /* KakaoBankCloneUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07AA67552A7BB7C3009DB3F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07AA67672A7BB7C5009DB3F0 /* LaunchScreen.storyboard in Resources */,
+				07AA67642A7BB7C5009DB3F0 /* Assets.xcassets in Resources */,
+				07AA67622A7BB7C3009DB3F0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA676B2A7BB7C5009DB3F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA67752A7BB7C5009DB3F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07AA67532A7BB7C3009DB3F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07AA675F2A7BB7C3009DB3F0 /* ViewController.swift in Sources */,
+				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
+				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA67692A7BB7C5009DB3F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07AA67722A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07AA67732A7BB7C5009DB3F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07AA677E2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift in Sources */,
+				07AA677C2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07AA676F2A7BB7C5009DB3F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07AA67562A7BB7C3009DB3F0 /* KakaoBankClone */;
+			targetProxy = 07AA676E2A7BB7C5009DB3F0 /* PBXContainerItemProxy */;
+		};
+		07AA67792A7BB7C5009DB3F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07AA67562A7BB7C3009DB3F0 /* KakaoBankClone */;
+			targetProxy = 07AA67782A7BB7C5009DB3F0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07AA67602A7BB7C3009DB3F0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07AA67612A7BB7C3009DB3F0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07AA67662A7BB7C5009DB3F0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07AA677F2A7BB7C5009DB3F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		07AA67802A7BB7C5009DB3F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07AA67822A7BB7C5009DB3F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KakaoBankClone/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07AA67832A7BB7C5009DB3F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KakaoBankClone/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		07AA67852A7BB7C5009DB3F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankCloneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KakaoBankClone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KakaoBankClone";
+			};
+			name = Debug;
+		};
+		07AA67862A7BB7C5009DB3F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankCloneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KakaoBankClone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/KakaoBankClone";
+			};
+			name = Release;
+		};
+		07AA67882A7BB7C5009DB3F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankCloneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KakaoBankClone;
+			};
+			name = Debug;
+		};
+		07AA67892A7BB7C5009DB3F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YJF2RZ2K47;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankCloneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = KakaoBankClone;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07AA67522A7BB7C3009DB3F0 /* Build configuration list for PBXProject "KakaoBankClone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07AA677F2A7BB7C5009DB3F0 /* Debug */,
+				07AA67802A7BB7C5009DB3F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07AA67812A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankClone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07AA67822A7BB7C5009DB3F0 /* Debug */,
+				07AA67832A7BB7C5009DB3F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07AA67842A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07AA67852A7BB7C5009DB3F0 /* Debug */,
+				07AA67862A7BB7C5009DB3F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07AA67872A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07AA67882A7BB7C5009DB3F0 /* Debug */,
+				07AA67892A7BB7C5009DB3F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07AA674F2A7BB7C3009DB3F0 /* Project object */;
+}
