@@ -7,15 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
+		0768481D2A7CBA1300812353 /* UITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481C2A7CBA1300812353 /* UITabBar.swift */; };
+		076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */; };
+		076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */; };
+		076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848242A7D306C00812353 /* AccountTopAdData.swift */; };
 		07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */; };
 		07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */; };
-		07AA675F2A7BB7C3009DB3F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */; };
-		07AA67622A7BB7C3009DB3F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67602A7BB7C3009DB3F0 /* Main.storyboard */; };
+		07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */; };
 		07AA67642A7BB7C5009DB3F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */; };
 		07AA67672A7BB7C5009DB3F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */; };
 		07AA67722A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */; };
 		07AA677C2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */; };
 		07AA677E2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */; };
+		07AA678E2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */; };
+		07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */; };
+		07AA67922A7BC1F6009DB3F0 /* MoreMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */; };
+		07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */; };
+		07AA67962A7BC215009DB3F0 /* ServiceMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */; };
+		07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */; };
+		07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */; };
+		07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */; };
+		07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */; };
+		07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */; };
+		07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A52A7BF213009DB3F0 /* UIColor.swift */; };
+		07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */; };
+		A37612E51FCED7E5EC69CD8D /* Pods_KakaoBankClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */; };
+		DE9DB6893F405A81D1321244 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */; };
+		E45BFED7CA6B2ACA96A8EAAE /* Pods_KakaoBankCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,11 +55,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		0768481C2A7CBA1300812353 /* UITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBar.swift; sourceTree = "<group>"; };
+		076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdTableViewCell.swift; sourceTree = "<group>"; };
+		076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddTableViewCell.swift; sourceTree = "<group>"; };
+		076848242A7D306C00812353 /* AccountTopAdData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdData.swift; sourceTree = "<group>"; };
 		07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoBankClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		07AA67612A7BB7C3009DB3F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07AA67662A7BB7C5009DB3F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07AA67682A7BB7C5009DB3F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +73,26 @@
 		07AA67772A7BB7C5009DB3F0 /* KakaoBankCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakaoBankCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITests.swift; sourceTree = "<group>"; };
 		07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuViewController.swift; sourceTree = "<group>"; };
+		07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
+		07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuViewModel.swift; sourceTree = "<group>"; };
+		07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
+		07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewModel.swift; sourceTree = "<group>"; };
+		07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuCellData.swift; sourceTree = "<group>"; };
+		07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		07AA67A52A7BF213009DB3F0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone.debug.xcconfig"; sourceTree = "<group>"; };
+		A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AE6BC9A24396FCDBAA6AA288 /* Pods-KakaoBankCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankCloneTests.release.xcconfig"; path = "Target Support Files/Pods-KakaoBankCloneTests/Pods-KakaoBankCloneTests.release.xcconfig"; sourceTree = "<group>"; };
+		B0017EC0B02C3FC03030D7EB /* Pods-KakaoBankClone-KakaoBankCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone-KakaoBankCloneUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C94CBAB88D8EA10A71C35533 /* Pods-KakaoBankCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankCloneTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankCloneTests/Pods-KakaoBankCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8F411C776A105B247B97FBB /* Pods-KakaoBankClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone.release.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37612E51FCED7E5EC69CD8D /* Pods_KakaoBankClone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45BFED7CA6B2ACA96A8EAAE /* Pods_KakaoBankCloneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +116,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9DB6893F405A81D1321244 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		076848192A7C9F5200812353 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0768481A2A7C9F6400812353 /* Enums.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		07AA674E2A7BB7C3009DB3F0 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +138,8 @@
 				07AA67702A7BB7C5009DB3F0 /* KakaoBankCloneTests */,
 				07AA677A2A7BB7C5009DB3F0 /* KakaoBankCloneUITests */,
 				07AA67582A7BB7C3009DB3F0 /* Products */,
+				08C2739B01DABA05D30D916E /* Pods */,
+				F719585E506FFBDDF73E5DA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,11 +158,14 @@
 			children = (
 				07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */,
 				07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */,
-				07AA675E2A7BB7C3009DB3F0 /* ViewController.swift */,
-				07AA67602A7BB7C3009DB3F0 /* Main.storyboard */,
 				07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */,
 				07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */,
 				07AA67682A7BB7C5009DB3F0 /* Info.plist */,
+				076848192A7C9F5200812353 /* Helper */,
+				07AA67A22A7BF16E009DB3F0 /* Extension */,
+				07AA678C2A7BC161009DB3F0 /* Model */,
+				07AA678B2A7BBA86009DB3F0 /* ViewModel */,
+				07AA678A2A7BBA7F009DB3F0 /* View */,
 			);
 			path = KakaoBankClone;
 			sourceTree = "<group>";
@@ -127,6 +187,98 @@
 			path = KakaoBankCloneUITests;
 			sourceTree = "<group>";
 		};
+		07AA678A2A7BBA7F009DB3F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07AA679F2A7BEF3F009DB3F0 /* Cell */,
+				07AA679E2A7BEF18009DB3F0 /* CustomView */,
+				07AA679D2A7BEF05009DB3F0 /* Controller */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		07AA678B2A7BBA86009DB3F0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
+				07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */,
+				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
+				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		07AA678C2A7BC161009DB3F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				076848242A7D306C00812353 /* AccountTopAdData.swift */,
+				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		07AA679D2A7BEF05009DB3F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */,
+				07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */,
+				07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */,
+				07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */,
+				07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		07AA679E2A7BEF18009DB3F0 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		07AA679F2A7BEF3F009DB3F0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
+				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
+				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		07AA67A22A7BF16E009DB3F0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */,
+				07AA67A52A7BF213009DB3F0 /* UIColor.swift */,
+				0768481C2A7CBA1300812353 /* UITabBar.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		08C2739B01DABA05D30D916E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */,
+				D8F411C776A105B247B97FBB /* Pods-KakaoBankClone.release.xcconfig */,
+				A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */,
+				B0017EC0B02C3FC03030D7EB /* Pods-KakaoBankClone-KakaoBankCloneUITests.release.xcconfig */,
+				C94CBAB88D8EA10A71C35533 /* Pods-KakaoBankCloneTests.debug.xcconfig */,
+				AE6BC9A24396FCDBAA6AA288 /* Pods-KakaoBankCloneTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F719585E506FFBDDF73E5DA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */,
+				05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */,
+				0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +286,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07AA67812A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankClone" */;
 			buildPhases = (
+				FC069EC2B2E7267BBE26A62E /* [CP] Check Pods Manifest.lock */,
 				07AA67532A7BB7C3009DB3F0 /* Sources */,
 				07AA67542A7BB7C3009DB3F0 /* Frameworks */,
 				07AA67552A7BB7C3009DB3F0 /* Resources */,
+				9F83BD300586918325D9137D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +305,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07AA67842A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneTests" */;
 			buildPhases = (
+				E0E3C22C2820582FB72EBA94 /* [CP] Check Pods Manifest.lock */,
 				07AA67692A7BB7C5009DB3F0 /* Sources */,
 				07AA676A2A7BB7C5009DB3F0 /* Frameworks */,
 				07AA676B2A7BB7C5009DB3F0 /* Resources */,
@@ -169,9 +324,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07AA67872A7BB7C5009DB3F0 /* Build configuration list for PBXNativeTarget "KakaoBankCloneUITests" */;
 			buildPhases = (
+				711848E527ABE1710B2A0FBF /* [CP] Check Pods Manifest.lock */,
 				07AA67732A7BB7C5009DB3F0 /* Sources */,
 				07AA67742A7BB7C5009DB3F0 /* Frameworks */,
 				07AA67752A7BB7C5009DB3F0 /* Resources */,
+				8032587B4CDE71B3AB85FD41 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -233,7 +390,6 @@
 			files = (
 				07AA67672A7BB7C5009DB3F0 /* LaunchScreen.storyboard in Resources */,
 				07AA67642A7BB7C5009DB3F0 /* Assets.xcassets in Resources */,
-				07AA67622A7BB7C3009DB3F0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,14 +409,134 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		711848E527ABE1710B2A0FBF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KakaoBankClone-KakaoBankCloneUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8032587B4CDE71B3AB85FD41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F83BD300586918325D9137D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0E3C22C2820582FB72EBA94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KakaoBankCloneTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC069EC2B2E7267BBE26A62E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KakaoBankClone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		07AA67532A7BB7C3009DB3F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07AA675F2A7BB7C3009DB3F0 /* ViewController.swift in Sources */,
+				07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */,
+				07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */,
+				07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */,
+				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
+				0768481D2A7CBA1300812353 /* UITabBar.swift in Sources */,
+				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
+				07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */,
+				076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */,
+				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
+				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
+				07AA67922A7BC1F6009DB3F0 /* MoreMenuViewController.swift in Sources */,
+				076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */,
+				07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */,
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
+				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
+				07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */,
+				07AA678E2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift in Sources */,
+				0768481B2A7C9F6400812353 /* Enums.swift in Sources */,
+				07AA67962A7BC215009DB3F0 /* ServiceMenuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +573,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		07AA67602A7BB7C3009DB3F0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				07AA67612A7BB7C3009DB3F0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -432,6 +700,7 @@
 		};
 		07AA67822A7BB7C5009DB3F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -440,11 +709,13 @@
 				DEVELOPMENT_TEAM = YJF2RZ2K47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KakaoBankClone/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "까까오뱅크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,14 +723,18 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		07AA67832A7BB7C5009DB3F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8F411C776A105B247B97FBB /* Pods-KakaoBankClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -468,11 +743,13 @@
 				DEVELOPMENT_TEAM = YJF2RZ2K47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KakaoBankClone/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "까까오뱅크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,14 +757,18 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		07AA67852A7BB7C5009DB3F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C94CBAB88D8EA10A71C35533 /* Pods-KakaoBankCloneTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +789,7 @@
 		};
 		07AA67862A7BB7C5009DB3F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE6BC9A24396FCDBAA6AA288 /* Pods-KakaoBankCloneTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -528,6 +810,7 @@
 		};
 		07AA67882A7BB7C5009DB3F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -546,6 +829,7 @@
 		};
 		07AA67892A7BB7C5009DB3F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0017EC0B02C3FC03030D7EB /* Pods-KakaoBankClone-KakaoBankCloneUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
