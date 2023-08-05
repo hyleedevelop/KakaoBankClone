@@ -21,33 +21,48 @@ class TabBarController: UITabBarController {
     
     // 탭바 설정
     private func setupTabBar() {
-        // iOS 15 업데이트 이후 TabBar, NavigationBar가 보이지 않는 문제 해결
+        // iOS 15 업데이트 이후 TabBar, NavigationBar가 제대로 보이지 않는 문제 해결
         if #available(iOS 15.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithDefaultBackground()
-            tabBarAppearance.backgroundColor = UIColor(named: "IBColor")
+            tabBarAppearance.backgroundColor = UIColor.white
+            
             UITabBar.appearance().standardAppearance = tabBarAppearance
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
         
-        self.tabBar.tintColor = .label
+        self.tabBar.tintColor = UIColor.black
+        self.tabBar.layer.borderColor = UIColor.systemGray5.cgColor
+        self.tabBar.layer.borderWidth = 0.3
+        self.tabBar.clipsToBounds = true
         
         // 계좌 탭 (홈)
         let vc1 = UINavigationController(rootViewController: AccountViewController())
-        //vc1.tabBarItem.title = "계좌"
-        vc1.tabBarItem.image = UIImage(systemName: "person.fill")
+        vc1.tabBarItem.image = UIImage(
+            systemName: "person.fill",
+            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
+        )?.withBaselineOffset(fromBottom: 14)
         
         // 서비스 탭
         let vc2 = UINavigationController(rootViewController: ServiceMenuViewController())
-        vc2.tabBarItem.image = UIImage(systemName: "square.grid.2x2.fill")
+        vc2.tabBarItem.image = UIImage(
+            systemName: "square.grid.2x2.fill",
+            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
+        )?.withBaselineOffset(fromBottom: 14)
         
         // 알림 탭
         let vc3 = UINavigationController(rootViewController: AlertViewController())
-        vc3.tabBarItem.image = UIImage(systemName: "bell.fill")
+        vc3.tabBarItem.image = UIImage(
+            systemName: "bell.fill",
+            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
+        )?.withBaselineOffset(fromBottom: 14)
         
         // 서비스 탭
         let vc4 = UINavigationController(rootViewController: MoreMenuViewController())
-        vc4.tabBarItem.image = UIImage(systemName: "ellipsis")
+        vc4.tabBarItem.image = UIImage(
+            systemName: "ellipsis",
+            withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
+        )?.withBaselineOffset(fromBottom: 7)
         
         self.viewControllers = [vc1, vc2, vc3, vc4]
         

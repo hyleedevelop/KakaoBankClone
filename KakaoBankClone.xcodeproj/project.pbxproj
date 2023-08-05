@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
-		0768481D2A7CBA1300812353 /* UITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481C2A7CBA1300812353 /* UITabBar.swift */; };
 		076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */; };
 		076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */; };
 		076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848242A7D306C00812353 /* AccountTopAdData.swift */; };
+		07755D0B2A7E3A790076253B /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0A2A7E3A790076253B /* Int.swift */; };
+		07755D0D2A7E72220076253B /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0C2A7E72220076253B /* AccountData.swift */; };
 		07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */; };
 		07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */; };
 		07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */; };
@@ -57,10 +58,11 @@
 /* Begin PBXFileReference section */
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		0768481C2A7CBA1300812353 /* UITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBar.swift; sourceTree = "<group>"; };
 		076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdTableViewCell.swift; sourceTree = "<group>"; };
 		076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddTableViewCell.swift; sourceTree = "<group>"; };
 		076848242A7D306C00812353 /* AccountTopAdData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdData.swift; sourceTree = "<group>"; };
+		07755D0A2A7E3A790076253B /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		07755D0C2A7E72220076253B /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoBankClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		07AA678C2A7BC161009DB3F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				07755D0C2A7E72220076253B /* AccountData.swift */,
 				076848242A7D306C00812353 /* AccountTopAdData.swift */,
 				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
 			);
@@ -251,7 +254,7 @@
 			children = (
 				07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */,
 				07AA67A52A7BF213009DB3F0 /* UIColor.swift */,
-				0768481C2A7CBA1300812353 /* UITabBar.swift */,
+				07755D0A2A7E3A790076253B /* Int.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -518,13 +521,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */,
+				07755D0D2A7E72220076253B /* AccountData.swift in Sources */,
 				07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */,
 				07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */,
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
-				0768481D2A7CBA1300812353 /* UITabBar.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
 				07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */,
+				07755D0B2A7E3A790076253B /* Int.swift in Sources */,
 				076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
@@ -715,7 +719,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -749,7 +753,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

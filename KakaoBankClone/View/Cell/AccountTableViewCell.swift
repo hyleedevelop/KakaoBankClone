@@ -22,11 +22,19 @@ class AccountTableViewCell: UITableViewCell {
     
     //MARK: - 계좌 정보 관련 속성
     
+    // 은행 로고
+    private let bankLogoImage: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(systemName: "b.circle")
+        view.tintColor = UIColor(themeColor: .white)
+        return view
+    }()
+    
     // 계좌 이름
     private let accountNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.textColor = UIColor(themeColor: .black)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -35,11 +43,21 @@ class AccountTableViewCell: UITableViewCell {
     // 계좌 잔고
     private let accountBalanceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
+        label.textColor = UIColor(themeColor: .black)
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
+    }()
+    
+    // 계좌 정보에 대한 스택뷰
+    private lazy var accountStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [self.accountNameLabel, self.accountBalanceLabel])
+        sv.axis = .vertical
+        sv.alignment = .leading
+        sv.distribution = .fill
+        sv.spacing = 5
+        return sv
     }()
     
     //MARK: - 버튼 관련 속성
@@ -47,7 +65,14 @@ class AccountTableViewCell: UITableViewCell {
     // 설정 버튼
     private let settingButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        //button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.setImage(
+            UIImage(
+                systemName: "ellipsis",
+                withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 15, weight: .ultraLight))
+            )?.withBaselineOffset(fromBottom: 0),
+            for: .normal
+        )
         return button
     }()
     
@@ -55,9 +80,8 @@ class AccountTableViewCell: UITableViewCell {
     private let cardButton: UIButton = {
         let button = UIButton()
         button.setTitle("카드", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        button.backgroundColor = UIColor(themeColor: .lightGray)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        button.backgroundColor = UIColor(themeColor: .transparentBlack)
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
         return button
@@ -67,9 +91,8 @@ class AccountTableViewCell: UITableViewCell {
     private let transferButton: UIButton = {
         let button = UIButton()
         button.setTitle("이체", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        button.backgroundColor = UIColor(themeColor: .lightGray)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        button.backgroundColor = UIColor(themeColor: .transparentBlack)
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
         return button
@@ -98,8 +121,8 @@ class AccountTableViewCell: UITableViewCell {
     // 세이프박스 이름
     private let safeBoxNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textColor = UIColor(themeColor: .black)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.textAlignment = .left
         label.numberOfLines = 1
         label.text = "세이프박스"
@@ -109,8 +132,8 @@ class AccountTableViewCell: UITableViewCell {
     // 세이프박스 잔고
     private let safeBoxBalanceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = UIColor(themeColor: .black)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -144,7 +167,7 @@ class AccountTableViewCell: UITableViewCell {
     
     // 오토레이아웃 설정
     private func setupAutoLayout() {
-        // 컨테이너 뷰 설정
+        // 컨테이너 뷰
         self.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
@@ -152,13 +175,31 @@ class AccountTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-5)
         }
         
-        // 계좌 정보 설정
-        self.containerView.addSubview(self.accountBalanceLabel)
-        self.accountBalanceLabel.snp.makeConstraints {
-            $0.top.left.equalToSuperview().offset(50)
+        // 설정 버튼
+        self.containerView.addSubview(self.settingButton)
+        self.settingButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
+            $0.height.equalTo(10)
         }
         
-        // 세이프박스 스택뷰 설정
+        // 은행 로고
+        self.containerView.addSubview(self.bankLogoImage)
+        self.bankLogoImage.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(20)
+            $0.top.equalTo(self.settingButton.snp.bottom)
+            $0.width.height.equalTo(35)
+        }
+        
+        // 계좌 정보 스택뷰
+        self.containerView.addSubview(self.accountStackView)
+        self.accountStackView.snp.makeConstraints {
+            $0.left.equalTo(self.bankLogoImage.snp.right).offset(5)
+            $0.centerY.equalTo(self.bankLogoImage.snp.centerY)
+            $0.height.equalTo(45)
+        }
+        
+        // 세이프박스 스택뷰
         self.containerView.addSubview(self.safeBoxStackView)
         self.safeBoxStackView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
@@ -166,36 +207,59 @@ class AccountTableViewCell: UITableViewCell {
             $0.height.equalTo(20)
         }
         
-        // 구분선 설정
+        // 구분선
         self.containerView.addSubview(self.separatorLine)
         self.separatorLine.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(self.safeBoxStackView.snp.top).offset(-15)
-            $0.height.equalTo(0.5)
+            $0.bottom.equalTo(self.safeBoxStackView.snp.top).offset(-20)
+            $0.height.equalTo(0.2)
         }
         
-        // 카드/이체 버튼 설정
+        // 카드/이체 버튼 스택뷰
         self.containerView.addSubview(self.buttonStackView)
         self.buttonStackView.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-20)
             $0.width.equalTo(105)
             $0.height.equalTo(30)
-            $0.bottom.equalTo(self.separatorLine.snp.top).offset(-15)
+            $0.bottom.equalTo(self.separatorLine.snp.top).offset(-20)
+        }
+        self.cardButton.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+        }
+        self.transferButton.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
         }
     }
 
     //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
-    // 컨테이너 뷰 색상 설정
-    func setContainerViewColor(color: UIColor) {
-        self.containerView.backgroundColor = color
+    // 계좌 잔고로 표시할 금액 설정
+    func setAccount(backgroundColor: UIColor, tintColor: UIColor, name: String, account: String, safeBox: String) {
+        self.containerView.backgroundColor = backgroundColor
+        
+        self.settingButton.tintColor = tintColor
+        self.cardButton.setTitleColor(tintColor, for: .normal)
+        self.transferButton.setTitleColor(tintColor, for: .normal)
+        
+        self.accountNameLabel.textColor = tintColor
+        self.accountBalanceLabel.textColor = tintColor
+        self.safeBoxNameLabel.textColor = tintColor
+        self.safeBoxBalanceLabel.textColor = tintColor
+        
+        self.accountNameLabel.text = name
+        self.accountBalanceLabel.text = account
+        self.safeBoxBalanceLabel.text = safeBox
     }
     
-    // 계좌 잔고로 표시할 금액 설정
-    func setBalance(account: Int, safeBox: Int) {
-        self.accountBalanceLabel.text = "\(account)원"
-        self.safeBoxBalanceLabel.text = "\(safeBox)원"
+    // 계좌 영역이 클릭되었을 때 실행할 메서드
+    func accountAreaTapped() {
+        print("계좌 이용 내역 화면으로 이동합니다.")
+    }
+    
+    // 세이프박스 영역이 클릭되었을 때 실행할 메서드
+    func safeBoxAreaTapped() {
+        print("세이프박스 화면으로 이동합니다.")
     }
     
 }

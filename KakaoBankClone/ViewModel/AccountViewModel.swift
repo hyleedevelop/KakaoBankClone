@@ -9,14 +9,74 @@ import UIKit
 
 final class AccountViewModel {
     
-    //MARK: - TableView 관련
+    //MARK: - 데이터
+    
+    let accountData: [AccountData] = [
+        AccountData(
+            backgroundColor: UIColor(themeColor: .yellow),
+            tintColor: UIColor(themeColor: .black),
+            name: "현금창고",
+            hasSafeBox: true,
+            accountBalance: 375_000,
+            safeBoxBalance: 5_000_000
+        ),
+        AccountData(
+            backgroundColor: UIColor(themeColor: .pink),
+            tintColor: UIColor(themeColor: .white),
+            name: "적금",
+            hasSafeBox: true,
+            accountBalance: 3_500_000,
+            safeBoxBalance: 0
+        ),
+        AccountData(
+            backgroundColor: UIColor(themeColor: .blue),
+            tintColor: UIColor(themeColor: .white),
+            name: "예금",
+            hasSafeBox: true,
+            accountBalance: 10_000_000,
+            safeBoxBalance: 0
+        ),
+        AccountData(
+            backgroundColor: UIColor(themeColor: .green),
+            tintColor: UIColor(themeColor: .white),
+            name: "저금통",
+            hasSafeBox: true,
+            accountBalance: 50_000,
+            safeBoxBalance: 0
+        ),
+    ]
+    
+    let accountTopAdData: [AccountTopAdData] = [
+        AccountTopAdData(
+            title: "뜨거운 여름, 쿨한 혜택!",
+            subtitle: "최대 6만원 혜택 챙기기",
+            image: UIImage(named: "krw-money")!
+        ),
+        AccountTopAdData(
+            title: "뜨거운 여름, 쿨한 혜택!",
+            subtitle: "최대 6만원 혜택 챙기기",
+            image: UIImage(named: "krw-money")!
+        ),
+        AccountTopAdData(
+            title: "뜨거운 여름, 쿨한 혜택!",
+            subtitle: "최대 6만원 혜택 챙기기",
+            image: UIImage(named: "krw-money")!
+        ),
+    ]
+    
+    //MARK: - 네비게이션 바 관련
+    
+    let myAccountButtonName: String = "내 계좌"
+    let myProfileImage: UIImage = UIImage(named: "flower")!
+    
+    //MARK: - 테이블뷰 관련
     
     // section의 개수
     let numberOfSections: Int = 3
     
     // section당 row의 개수
     func numberOfRowsInSection(at section: Int) -> Int {
-        return section == 1 ? 3 : 1
+        return section == 1 ? self.accountData.count : 1
     }
     
     // header 높이

@@ -24,12 +24,19 @@ final class MoreMenuViewController: UIViewController {
     private func setupNavigationBar() {
         // 커스텀 설정 적용
         self.navigationController?.applyCustomSettings(color: .white)
-        
-        // 좌측 상단에 위치한 타이틀 설정
-        self.navigationItem.makeLeftSideTitle(
-            title: NavigationBarTitle.account.rawValue, color: UIColor.black
-        )
         self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
+        
+        // 네비게이션 바 구성
+        let title = self.navigationItem.makeTitle(
+            title: NavigationBarTitle.account.rawValue,
+            color: UIColor(themeColor: .black)
+        )
+        let button = self.navigationItem.makeSettingButton(
+            title: "앱설정"
+        )
+        
+        self.navigationItem.leftBarButtonItems = [title]
+        self.navigationItem.rightBarButtonItems = [button]
     }
     
     // 뷰 설정

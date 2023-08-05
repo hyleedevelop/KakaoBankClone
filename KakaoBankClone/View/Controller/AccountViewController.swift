@@ -45,16 +45,21 @@ final class AccountViewController: UIViewController {
         self.navigationController?.applyCustomSettings(color: .white)
         self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
         
-        // 내 계좌 버튼 설정
-        let title = self.navigationItem.makeTitle(title: NavigationBarTitle.account.rawValue, color: UIColor.black)
-        let button = self.navigationItem.makeSettingButton(title: "내 계좌")
-        let image = self.navigationItem.makeProfileImage(image: UIImage(named: "flower")!)
-        let spacer1 = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        let spacer2 = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spacer1.width = 20
-        spacer2.width = 5
+        // 네비게이션 바 구성
+        let title = self.navigationItem.makeTitle(
+            title: NavigationBarTitle.account.rawValue,
+            color: UIColor(themeColor: .black)
+        )
+        let button = self.navigationItem.makeSettingButton(
+            title: self.viewModel.myAccountButtonName
+        )
+        let image = self.navigationItem.makeProfileImage(
+            image: self.viewModel.myProfileImage
+        )
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 5
         
-        self.navigationItem.leftBarButtonItems = [title, spacer2, button]
+        self.navigationItem.leftBarButtonItems = [title, spacer, button]
         self.navigationItem.rightBarButtonItems = [image]
     }
     
@@ -116,42 +121,81 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountTopAd.rawValue, for: indexPath)
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
+            
             cell.selectionStyle = .none
             cell.setAd(
-                title: "뜨거운 여름, 쿨한 혜택!",
-                subtitle: "최대 6만원 혜택 챙기기",
-                image: UIImage(named: "krw-money")!
+                title: self.viewModel.accountTopAdData[0].title,
+                subtitle: self.viewModel.accountTopAdData[0].subtitle,
+                image: self.viewModel.accountTopAdData[0].image
             )
+            
             return cell
-        }
-        
-        else if indexPath.section == 2 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountAdd.rawValue, for: indexPath)
-                    as? AccountAddTableViewCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            return cell
-        }
-        
-        else {
+            
+        case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.account.rawValue, for: indexPath)
                     as? AccountTableViewCell else { return UITableViewCell() }
+            let accountData = self.viewModel.accountData[indexPath.row]
+            
             cell.selectionStyle = .none
-            cell.setContainerViewColor(color: UIColor(themeColor: ThemeColor(rawValue: 3)!))
-            cell.setBalance(
-                account: Int.random(in: 0...100_000),
-                safeBox: Int.random(in: 0...1_000_000)
+            cell.setAccount(
+                backgroundColor: accountData.backgroundColor,
+                tintColor: accountData.tintColor,
+                name: indexPath.row == 0 ? accountData.name + " ★" : accountData.name,
+                account: accountData.accountBalance.commaSeparatedWon,
+                safeBox: accountData.safeBoxBalance.commaSeparatedWon
             )
+            
             return cell
+            
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountAdd.rawValue, for: indexPath)
+                    as? AccountAddTableViewCell else { return UITableViewCell() }
+            
+            cell.selectionStyle = .none
+            
+            return cell
+            
+        default:
+            return UITableViewCell()
         }
     }
     
     // 셀이 선택 되었을때 수행할 내용
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        switch indexPath.section {
+        case 0:
+            print("광고 페이지로 이동합니다.")
+            
+        case 1:
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.account.rawValue, for: indexPath) as? AccountTableViewCell,
+//                  let touchPoint = tableView.indexPathForSelectedRow
+//            else { fatalError() }
+            
+            // 특정 셀의 클릭된 지점(좌표) 가져오기
+            if let cell = tableView.cellForRow(at: indexPath) {
+                // 클릭된 지점은 tableView에서의 좌표이므로, 셀 내부의 좌표로 변환해야 합니다.
+                let touchPoint = tableView.convert(tableView.contentOffset, to: cell)
+                print("Section \(indexPath.section), Row \(indexPath.row) 클릭된 지점(좌표): \(touchPoint)")
+            }
+            
+//            // 셀에서 계좌 영역을 눌렀을 때
+//            if touchLocation.y < cellFrame.size.height / 2 {
+//                cell.accountAreaTapped()
+//            }
+//            // 셀에서 세이프박스 영역을 눌렀을 때
+//            else {
+//                cell.safeBoxAreaTapped()
+//            }
+            
+        case 2:
             print("계좌를 추가합니다.")
+            
+        default:
+            break
         }
     }
     

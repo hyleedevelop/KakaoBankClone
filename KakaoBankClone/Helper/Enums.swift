@@ -9,11 +9,15 @@ import UIKit
 
 //MARK: - 테마 색상
 
-enum ThemeColor: Int {
-    case black = 0
+enum ThemeColor {
+    case transparentBlack
+    case black
     case white
     case lightGray
+    case pink
     case yellow
+    case green
+    case blue
 }
 
 //MARK: - 셀 식별자

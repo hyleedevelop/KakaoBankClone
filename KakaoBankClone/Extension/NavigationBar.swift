@@ -28,9 +28,8 @@ extension UINavigationController {
         self.navigationBar.isTranslucent = true
         self.navigationBar.isHidden = false
         self.navigationBar.backgroundColor = UIColor.white
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 20, left: 10, bottom: 0, right: 10)
-        //self.additionalSafeAreaInsets.top = 20
-        //self.additionalSafeAreaInsets.bottom = 20
+        self.navigationBar.shadowImage = UIImage()
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 25, left: 10, bottom: 0, right: 10)
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -53,8 +52,7 @@ extension UINavigationItem {
         let label = UILabel()
         label.textColor = color
         label.text = title
-        //label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         
         let barButtonItem = UIBarButtonItem(customView: label)
         
@@ -65,8 +63,8 @@ extension UINavigationItem {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        button.backgroundColor = UIColor(themeColor: .lightGray)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        button.backgroundColor = UIColor(themeColor: .transparentBlack)
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
         
@@ -91,26 +89,6 @@ extension UINavigationItem {
         }
         
         return barButtonItem
-    }
-    
-}
-
-//MARK: - CALayer
-
-extension CALayer {
-    
-    // Sketch 스타일의 그림자를 생성하는 유틸리티 함수
-    func applyShadow(
-        color: UIColor = .black,
-        alpha: Float = 0.5,
-        x: CGFloat = 0,
-        y: CGFloat = 2,
-        blur: CGFloat = 4
-    ) {
-        shadowColor = color.cgColor
-        shadowOpacity = alpha
-        shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / 2.0
     }
     
 }

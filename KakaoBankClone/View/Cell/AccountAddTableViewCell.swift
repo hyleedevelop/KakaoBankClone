@@ -17,7 +17,7 @@ class AccountAddTableViewCell: UITableViewCell {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 20
-        view.backgroundColor = UIColor(themeColor: .lightGray)
+        view.backgroundColor = UIColor(themeColor: .transparentBlack)
         return view
     }()
     

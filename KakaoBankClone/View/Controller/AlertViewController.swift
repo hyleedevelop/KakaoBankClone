@@ -24,12 +24,15 @@ final class AlertViewController: UIViewController {
     private func setupNavigationBar() {
         // 커스텀 설정 적용
         self.navigationController?.applyCustomSettings(color: .white)
-        
-        // 좌측 상단에 위치한 타이틀 설정
-        self.navigationItem.makeLeftSideTitle(
-            title: NavigationBarTitle.alert.rawValue, color: UIColor.black
-        )
         self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
+        
+        // 네비게이션 바 구성
+        let title = self.navigationItem.makeTitle(
+            title: NavigationBarTitle.alert.rawValue,
+            color: UIColor(themeColor: .black)
+        )
+        
+        self.navigationItem.leftBarButtonItems = [title]
     }
     
     // 뷰 설정
