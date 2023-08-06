@@ -53,7 +53,8 @@ class AccountAddTableViewCell: UITableViewCell {
         // 컨테이너 뷰 설정
         self.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(5)
             $0.bottom.equalToSuperview().offset(-5)
         }

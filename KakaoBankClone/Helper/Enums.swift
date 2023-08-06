@@ -14,6 +14,7 @@ enum ThemeColor {
     case black
     case white
     case lightGray
+    case darkGray
     case pink
     case yellow
     case green
@@ -24,9 +25,13 @@ enum ThemeColor {
 
 enum CellIdentifier: String {
     case account = "AccountCell"
+    case accountWithoutSafeBox = "AccountWithoutSafeBoxCell"
     case accountTopAd = "AccountTopAdCell"
     case accountAdd = "AccountAddTableViewCell"
+    case serviceBigAd = "ServiceBigAdTableViewCell"
     case serviceMenu = "ServiceMenuCell"
+    case serviceMenuBar = "ServiceMenuBarCollectionViewCell"
+    case serviceList = "ServiceListTableViewCell"
     case alert = "AlertCell"
     case moreMenu = "MoreMenuCell"
 }

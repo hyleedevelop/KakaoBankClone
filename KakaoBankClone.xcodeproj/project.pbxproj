@@ -33,6 +33,12 @@
 		07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */; };
 		07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A52A7BF213009DB3F0 /* UIColor.swift */; };
 		07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */; };
+		07D9E36F2A7F7A6E000EDF9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D9E36E2A7F7A6D000EDF9B /* GoogleService-Info.plist */; };
+		07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */; };
+		07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */; };
+		07D9E3752A7FCF43000EDF9B /* ServiceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */; };
+		07D9E3772A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */; };
+		07D9E3792A7FE6DB000EDF9B /* ServiceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */; };
 		A37612E51FCED7E5EC69CD8D /* Pods_KakaoBankClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */; };
 		DE9DB6893F405A81D1321244 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */; };
 		E45BFED7CA6B2ACA96A8EAAE /* Pods_KakaoBankCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */; };
@@ -87,6 +93,12 @@
 		07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		07AA67A52A7BF213009DB3F0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		07D9E36E2A7F7A6D000EDF9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWithoutSafeBoxTableViewCell.swift; sourceTree = "<group>"; };
+		07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListTableViewCell.swift; sourceTree = "<group>"; };
+		07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceBigAdTableViewCell.swift; sourceTree = "<group>"; };
+		07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceData.swift; sourceTree = "<group>"; };
 		0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +174,7 @@
 				07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */,
 				07AA67632A7BB7C5009DB3F0 /* Assets.xcassets */,
 				07AA67652A7BB7C5009DB3F0 /* LaunchScreen.storyboard */,
+				07D9E36E2A7F7A6D000EDF9B /* GoogleService-Info.plist */,
 				07AA67682A7BB7C5009DB3F0 /* Info.plist */,
 				076848192A7C9F5200812353 /* Helper */,
 				07AA67A22A7BF16E009DB3F0 /* Extension */,
@@ -193,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				07AA679F2A7BEF3F009DB3F0 /* Cell */,
-				07AA679E2A7BEF18009DB3F0 /* CustomView */,
 				07AA679D2A7BEF05009DB3F0 /* Controller */,
 			);
 			path = View;
@@ -215,6 +227,7 @@
 			children = (
 				07755D0C2A7E72220076253B /* AccountData.swift */,
 				076848242A7D306C00812353 /* AccountTopAdData.swift */,
+				07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */,
 				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
 			);
 			path = Model;
@@ -232,19 +245,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		07AA679E2A7BEF18009DB3F0 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
-			sourceTree = "<group>";
-		};
 		07AA679F2A7BEF3F009DB3F0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
+				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
 				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
 				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
+				07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */,
+				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
+				07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -393,6 +403,7 @@
 			files = (
 				07AA67672A7BB7C5009DB3F0 /* LaunchScreen.storyboard in Resources */,
 				07AA67642A7BB7C5009DB3F0 /* Assets.xcassets in Resources */,
+				07D9E36F2A7F7A6E000EDF9B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,13 +538,18 @@
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
+				07D9E3792A7FE6DB000EDF9B /* ServiceData.swift in Sources */,
+				07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */,
 				07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */,
+				07D9E3752A7FCF43000EDF9B /* ServiceListTableViewCell.swift in Sources */,
 				07755D0B2A7E3A790076253B /* Int.swift in Sources */,
 				076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */,
+				07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
 				07AA67922A7BC1F6009DB3F0 /* MoreMenuViewController.swift in Sources */,
 				076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */,
+				07D9E3772A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift in Sources */,
 				07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */,
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
@@ -724,7 +740,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -758,7 +774,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyleedevelop.KakaoBankClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

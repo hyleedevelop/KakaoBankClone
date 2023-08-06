@@ -1,14 +1,14 @@
 //
-//  AccountTopAdTableViewCell.swift
+//  ServiceBigAdTableViewCell.swift
 //  KakaoBankClone
 //
-//  Created by Eric on 2023/08/04.
+//  Created by Eric on 2023/08/06.
 //
 
 import UIKit
 import SnapKit
 
-class AccountTopAdTableViewCell: UITableViewCell {
+class ServiceBigAdTableViewCell: UITableViewCell {
 
     //MARK: - 컨테이너 뷰 관련 속성
     
@@ -47,7 +47,7 @@ class AccountTopAdTableViewCell: UITableViewCell {
     private lazy var titleStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [self.titleLabel, self.subtitleLabel])
         sv.axis = .vertical
-        sv.spacing = 5
+        sv.spacing = 0
         return sv
     }()
     
@@ -58,38 +58,26 @@ class AccountTopAdTableViewCell: UITableViewCell {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    
+
     //MARK: - 생성자
     
-    // TableViewCell 생성자 셋팅 (1)
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
- 
-        self.setupUI()
+
         self.setupAutoLayout()
     }
     
-    // TableViewCell 생성자 셋팅 (2)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 메서드
-    
-    // UI 설정
-    private func setupUI() {
-        //self.backgroundColor = UIColor(themeColor: .white)
-    }
+    //MARK: - 내부 메서드
     
     // 오토레이아웃 설정
     private func setupAutoLayout() {
-        // 컨테이너 뷰 설정
         self.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview().offset(5)
-            $0.bottom.equalToSuperview().offset(-5)
+            $0.left.right.top.bottom.equalToSuperview()
         }
         
         // 스택뷰 설정
@@ -109,6 +97,8 @@ class AccountTopAdTableViewCell: UITableViewCell {
             $0.right.equalToSuperview().offset(-20)
         }
     }
+
+    //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
     // 광고 내용 설정
     func setAd(title: String, subtitle: String, image: UIImage) {

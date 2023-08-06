@@ -12,19 +12,30 @@ final class AccountViewController: UIViewController {
 
     //MARK: - UI 속성
     
+    // 계좌 테이블뷰
     private let accountTableView: UITableView = {
         let tv = UITableView()
-        //tv.backgroundColor = UIColor.white
         tv.register(AccountTopAdTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountTopAd.rawValue)
         tv.register(AccountTableViewCell.self, forCellReuseIdentifier: CellIdentifier.account.rawValue)
+        tv.register(AccountWithoutSafeBoxTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountWithoutSafeBox.rawValue)
         tv.register(AccountAddTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountAdd.rawValue)
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
         return tv
     }()
     
+    // 새로고침
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.backgroundColor = UIColor.white
+        control.tintColor = UIColor.black
+        control.addTarget(self, action: #selector(refreshTableView(refresh:)), for: .valueChanged)
+        return control
+    }()
+    
     //MARK: - 인스턴스
     
+    // 뷰모델의 인스턴스
     private let viewModel = AccountViewModel()
     
     //MARK: - 생명주기
@@ -73,8 +84,8 @@ final class AccountViewController: UIViewController {
         // 뷰 등록 및 오토레이아웃 설정
         self.view.addSubview(self.accountTableView)
         self.accountTableView.snp.makeConstraints {
-            $0.left.equalTo(self.view.safeAreaLayoutGuide).offset(10)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide)
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
@@ -82,6 +93,20 @@ final class AccountViewController: UIViewController {
         // 대리자 지정
         self.accountTableView.delegate = self
         self.accountTableView.dataSource = self
+        
+        // 하위뷰로 새로고침 등록
+        self.accountTableView.addSubview(self.refreshControl)
+    }
+    
+    // 새로고침 설정
+    @objc private func refreshTableView(refresh: UIRefreshControl) {
+        self.accountTableView.refreshControl = self.refreshControl
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.accountTableView.reloadData()
+            refresh.endRefreshing()
+        }
+
     }
 }
 
@@ -101,12 +126,12 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     
     // footer의 높이
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 2 ? self.viewModel.footerHeight : 0
+        return self.viewModel.footerHeight(at: section)
     }
     
     // footer view
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return section == 2 ? UIView() : nil
+        return self.viewModel.viewForFooterInSection(at: section)
     }
     
     // row의 개수
@@ -116,7 +141,8 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     
     // row의 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.viewModel.cellHeight(at: indexPath.section)
+        let accountData = self.viewModel.accountData[indexPath.row]
+        return self.viewModel.cellHeight(at: indexPath.section, safeBox: accountData.hasSafeBox)
     }
     
     // 셀에 표출할 내용
@@ -125,38 +151,46 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountTopAd.rawValue, for: indexPath)
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
-            
             cell.selectionStyle = .none
             cell.setAd(
                 title: self.viewModel.accountTopAdData[0].title,
                 subtitle: self.viewModel.accountTopAdData[0].subtitle,
                 image: self.viewModel.accountTopAdData[0].image
             )
-            
             return cell
             
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.account.rawValue, for: indexPath)
-                    as? AccountTableViewCell else { return UITableViewCell() }
             let accountData = self.viewModel.accountData[indexPath.row]
             
-            cell.selectionStyle = .none
-            cell.setAccount(
-                backgroundColor: accountData.backgroundColor,
-                tintColor: accountData.tintColor,
-                name: indexPath.row == 0 ? accountData.name + " ★" : accountData.name,
-                account: accountData.accountBalance.commaSeparatedWon,
-                safeBox: accountData.safeBoxBalance.commaSeparatedWon
-            )
-            
-            return cell
+            if accountData.hasSafeBox {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.account.rawValue, for: indexPath)
+                        as? AccountTableViewCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                cell.setAccount(
+                    backgroundColor: accountData.backgroundColor,
+                    tintColor: accountData.tintColor,
+                    name: indexPath.row == 0 ? accountData.name + " ★" : accountData.name,
+                    account: accountData.accountBalance.commaSeparatedWon,
+                    safeBox: accountData.safeBoxBalance.commaSeparatedWon
+                )
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountWithoutSafeBox.rawValue, for: indexPath)
+                        as? AccountWithoutSafeBoxTableViewCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                cell.setAccount(
+                    backgroundColor: accountData.backgroundColor,
+                    tintColor: accountData.tintColor,
+                    name: indexPath.row == 0 ? accountData.name + " ★" : accountData.name,
+                    account: accountData.accountBalance.commaSeparatedWon
+                )
+                return cell
+            }
             
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountAdd.rawValue, for: indexPath)
                     as? AccountAddTableViewCell else { return UITableViewCell() }
-            
             cell.selectionStyle = .none
-            
             return cell
             
         default:

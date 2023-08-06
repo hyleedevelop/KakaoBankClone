@@ -29,7 +29,7 @@ extension UINavigationController {
         self.navigationBar.isHidden = false
         self.navigationBar.backgroundColor = UIColor.white
         self.navigationBar.shadowImage = UIImage()
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 25, left: 10, bottom: 0, right: 10)
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -89,6 +89,27 @@ extension UINavigationItem {
         }
         
         return barButtonItem
+    }
+    
+    func makeTitleAndTabMenu(title: String, color: UIColor, collectionView: UICollectionView) -> UIStackView {
+        // vertical 스택뷰 생성
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        
+        // 레이블 생성
+        let label = UILabel()
+        label.textColor = color
+        label.text = title
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        
+        // 스택뷰에 레이블과 컬렉션뷰 추가
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(collectionView)
+        
+        return stackView
     }
     
 }
