@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MoreMenuViewController: UIViewController {
+final class MoreViewController: UIViewController {
 
     //MARK: - 생명주기
     

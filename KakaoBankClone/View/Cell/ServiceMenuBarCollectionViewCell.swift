@@ -10,6 +10,10 @@ import SnapKit
 
 class ServiceMenuBarCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - 식별자
+    
+    static let identifier = "ServiceMenuBarCollectionViewCell"
+    
     //MARK: - UI 속성
     
     // 서비스 이름
@@ -38,7 +42,7 @@ class ServiceMenuBarCollectionViewCell: UICollectionViewCell {
     
     private func setupAutoLayout() {
         // 서비스 이름
-        self.addSubview(self.serviceNameLabel)
+        self.contentView.addSubview(self.serviceNameLabel)
         self.serviceNameLabel.snp.makeConstraints {
             $0.top.left.equalToSuperview().offset(5)
             $0.bottom.right.equalToSuperview().offset(-5)

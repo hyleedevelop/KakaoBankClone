@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ServiceMenuViewController: UIViewController {
+final class ServiceViewController: UIViewController {
     
     //MARK: - UI 속성
     
@@ -19,7 +19,7 @@ final class ServiceMenuViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.minimumLineSpacing = 10
         let cv = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
-        cv.register(ServiceMenuBarCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier.serviceMenuBar.rawValue)
+        cv.register(ServiceMenuBarCollectionViewCell.self, forCellWithReuseIdentifier: ServiceMenuBarCollectionViewCell.identifier)
         cv.isScrollEnabled = true
         cv.showsHorizontalScrollIndicator = false
         cv.showsVerticalScrollIndicator = false
@@ -28,13 +28,15 @@ final class ServiceMenuViewController: UIViewController {
         return cv
     }()
     
+    
+    
     // 서비스 목록
     private let serviceListTableView: UITableView = {
         let tv = UITableView()
-        tv.register(ServiceBigAdTableViewCell.self, forCellReuseIdentifier: CellIdentifier.serviceBigAd.rawValue)
-        tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: CellIdentifier.serviceList.rawValue)
+        tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
+        tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
         tv.showsVerticalScrollIndicator = true
-        tv.separatorStyle = .singleLine
+        tv.separatorStyle = .none
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         return tv
     }()
@@ -42,7 +44,7 @@ final class ServiceMenuViewController: UIViewController {
     //MARK: - 인스턴스
     
     // 뷰모델의 인스턴스
-    private let viewModel = ServiceMenuViewModel()
+    private let viewModel = ServiceViewModel()
     
     //MARK: - 생명주기
     
@@ -96,16 +98,17 @@ final class ServiceMenuViewController: UIViewController {
 //            $0.top.equalTo(self.navigationController!.navigationBar).offset(10)
 //            $0.bottom.equalTo(self.navigationController!.navigationBar).offset(-10)
 //        }
-        
-        self.tabMenuCollectionView.delegate = self
-        self.tabMenuCollectionView.dataSource = self
+//
+//        self.tabMenuCollectionView.delegate = self
+//        self.tabMenuCollectionView.dataSource = self
     }
     
     // 테이블뷰 설정
     private func setupTableView() {
         self.view.addSubview(self.serviceListTableView)
         self.serviceListTableView.snp.makeConstraints {
-            $0.left.right.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
         }
         
         // 대리자 지정
@@ -115,13 +118,23 @@ final class ServiceMenuViewController: UIViewController {
 
 }
 
-//MARK: - UITableViewDataSource, UITableViewDelegate
+//MARK: - 테이블뷰 델리게이트 메서드
 
-extension ServiceMenuViewController: UITableViewDataSource, UITableViewDelegate {
+extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // section의 개수
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.viewModel.numberOfSections
+    }
+    
+    // row의 개수
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.numberOfRowsInSection(at: section)
+    }
+    
+    // row의 높이
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.viewModel.cellHeight(at: indexPath.section)
     }
     
     // header의 높이
@@ -139,38 +152,27 @@ extension ServiceMenuViewController: UITableViewDataSource, UITableViewDelegate 
         return self.viewModel.viewForFooterInSection(at: section)
     }
     
-    // row의 개수
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.numberOfRowsInSection(at: section)
-    }
-    
-    // row의 높이
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.viewModel.cellHeight(at: indexPath.section)
-    }
-    
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.serviceList.rawValue, for: indexPath)
-                    as? ServiceBigAdTableViewCell else { return UITableViewCell() }
+        if indexPath.section == 0 {  // 0번째 section: 상단 광고 컬렉션뷰
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
+                    as? ServiceTopAdTableViewCell else { return UITableViewCell() }
+            tableView.separatorStyle = .none
             cell.selectionStyle = .none
-            cell.setAd(
-                title: "쉐보레, 더 뉴 트레일블레이저",
-                subtitle: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.",
-                image: UIImage()
-            )
+            cell.setAd(model: self.viewModel.topAdData)
             return cell
         }
-        else {
-            let serviceData = self.viewModel.serviceData[indexPath.section-1][indexPath.row]
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.serviceList.rawValue, for: indexPath)
+        else {  // 나머지 section: 서비스 목록 테이블뷰
+            let data = self.viewModel.serviceListData[indexPath.section-1][indexPath.row]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceListTableViewCell.identifier, for: indexPath)
                     as? ServiceListTableViewCell else { return UITableViewCell() }
+            tableView.separatorStyle = .none
             cell.selectionStyle = .none
+            cell.accessoryType = data.hasInterest ? .none : .disclosureIndicator
             cell.setValue(
-                title: serviceData.title,
-                subtitle: serviceData.subtitle,
-                interest: serviceData.interest ?? ""
+                title: data.title,
+                subtitle: data.subtitle,
+                interest: data.interest ?? ""
             )
             return cell
         }
@@ -183,9 +185,9 @@ extension ServiceMenuViewController: UITableViewDataSource, UITableViewDelegate 
     
 }
 
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+//MARK: - 컬렉션뷰 델리게이트 메서드 (1)
 
-extension ServiceMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // section의 개수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -199,7 +201,7 @@ extension ServiceMenuViewController: UICollectionViewDataSource, UICollectionVie
     
     // 각 셀마다 실행할 내용
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.serviceMenuBar.rawValue, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuBarCollectionViewCell.identifier, for: indexPath)
                 as? ServiceMenuBarCollectionViewCell else { return UICollectionViewCell() }
         cell.serviceNameLabel.text = "전체"
         return cell
@@ -230,9 +232,9 @@ extension ServiceMenuViewController: UICollectionViewDataSource, UICollectionVie
     
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+//MARK: - 컬렉션뷰 델리게이트 메서드 (2)
 
-extension ServiceMenuViewController: UICollectionViewDelegateFlowLayout {
+extension ServiceViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 12, height: 30)

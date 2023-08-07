@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct AccountData {
+struct AccountModel {
     let backgroundColor: UIColor
     let tintColor: UIColor
     let name: String

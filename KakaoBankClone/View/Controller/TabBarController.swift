@@ -44,7 +44,7 @@ class TabBarController: UITabBarController {
         )?.withBaselineOffset(fromBottom: 14)
         
         // 서비스 탭
-        let vc2 = UINavigationController(rootViewController: ServiceMenuViewController())
+        let vc2 = UINavigationController(rootViewController: ServiceViewController())
         vc2.tabBarItem.image = UIImage(
             systemName: "square.grid.2x2.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
@@ -58,7 +58,7 @@ class TabBarController: UITabBarController {
         )?.withBaselineOffset(fromBottom: 14)
         
         // 서비스 탭
-        let vc4 = UINavigationController(rootViewController: MoreMenuViewController())
+        let vc4 = UINavigationController(rootViewController: MoreViewController())
         vc4.tabBarItem.image = UIImage(
             systemName: "ellipsis",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))

@@ -7,6 +7,13 @@
 
 import UIKit
 
+//MARK: - 데이터 모델
+
+enum ServiceCellModel {
+    case topAdCollectionView(model: [ServiceTopAdModel])
+    case listTableView(model: [[ServiceListModel]])
+}
+
 //MARK: - 테마 색상
 
 enum ThemeColor {
@@ -24,11 +31,8 @@ enum ThemeColor {
 //MARK: - 셀 식별자
 
 enum CellIdentifier: String {
-    case account = "AccountCell"
-    case accountWithoutSafeBox = "AccountWithoutSafeBoxCell"
-    case accountTopAd = "AccountTopAdCell"
-    case accountAdd = "AccountAddTableViewCell"
-    case serviceBigAd = "ServiceBigAdTableViewCell"
+    case serviceTopAdTableView = "ServiceTopAdTableViewCell"
+    case serviceTopAdCollectionView = "ServiceTopAdCollectionViewCell"
     case serviceMenu = "ServiceMenuCell"
     case serviceMenuBar = "ServiceMenuBarCollectionViewCell"
     case serviceList = "ServiceListTableViewCell"

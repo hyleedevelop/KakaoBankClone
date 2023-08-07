@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct AccountTopAdData {
+struct AccountTopAdModel {
     let title: String
     let subtitle: String
     let image: UIImage

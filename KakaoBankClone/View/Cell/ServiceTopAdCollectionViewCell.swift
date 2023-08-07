@@ -1,15 +1,19 @@
 //
-//  ServiceBigAdTableViewCell.swift
+//  ServiceTopAdCollectionViewCell.swift
 //  KakaoBankClone
 //
-//  Created by Eric on 2023/08/06.
+//  Created by Eric on 2023/08/07.
 //
 
 import UIKit
 import SnapKit
 
-class ServiceBigAdTableViewCell: UITableViewCell {
-
+class ServiceTopAdCollectionViewCell: UICollectionViewCell {
+    
+    //MARK: - 식별자
+    
+    static let identifier = "ServiceTopAdCollectionViewCell"
+    
     //MARK: - 컨테이너 뷰 관련 속성
     
     // 컨테이너 뷰
@@ -24,7 +28,7 @@ class ServiceBigAdTableViewCell: UITableViewCell {
     //MARK: - 제목 관련 속성
     
     // 제목
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
@@ -34,7 +38,7 @@ class ServiceBigAdTableViewCell: UITableViewCell {
     }()
     
     // 부제목
-    private let subtitleLabel: UILabel = {
+    let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
@@ -53,17 +57,18 @@ class ServiceBigAdTableViewCell: UITableViewCell {
     
     //MARK: - 이미지 관련 속성
     
-    private let adImage: UIImageView = {
+    let adImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
+        iv.tintColor = UIColor.black
         return iv
     }()
-
+    
     //MARK: - 생성자
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
         self.setupAutoLayout()
     }
     
@@ -73,9 +78,8 @@ class ServiceBigAdTableViewCell: UITableViewCell {
     
     //MARK: - 내부 메서드
     
-    // 오토레이아웃 설정
     private func setupAutoLayout() {
-        self.addSubview(self.containerView)
+        self.contentView.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
         }
@@ -97,13 +101,15 @@ class ServiceBigAdTableViewCell: UITableViewCell {
             $0.right.equalToSuperview().offset(-20)
         }
     }
-
-    //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
-    // 광고 내용 설정
-    func setAd(title: String, subtitle: String, image: UIImage) {
-        self.titleLabel.text = title
-        self.subtitleLabel.text = subtitle
-        self.adImage.image = image
+    //MARK: - 외부에서 호출하는 메서드
+    
+    func setupAd(with model: ServiceTopAdModel?) {
+        if let model = model {
+            self.backgroundColor = model.backgroundColor
+            self.titleLabel.text = model.title
+            self.subtitleLabel.text = model.subtitle
+            self.adImage.image = model.image
+        }
     }
 }

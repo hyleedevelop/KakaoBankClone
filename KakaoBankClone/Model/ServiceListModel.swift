@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ServiceData {
+struct ServiceListModel {
     let tintColor: UIColor
     let title: String
     let subtitle: String

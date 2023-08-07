@@ -11,8 +11,8 @@ final class AccountViewModel {
     
     //MARK: - 데이터
     
-    let accountData: [AccountData] = [
-        AccountData(
+    let accountData: [AccountModel] = [
+        AccountModel(
             backgroundColor: UIColor(themeColor: .yellow),
             tintColor: UIColor(themeColor: .black),
             name: "현금창고",
@@ -20,7 +20,7 @@ final class AccountViewModel {
             accountBalance: 375_000,
             safeBoxBalance: 5_000_000
         ),
-        AccountData(
+        AccountModel(
             backgroundColor: UIColor(themeColor: .pink),
             tintColor: UIColor(themeColor: .white),
             name: "적금",
@@ -28,7 +28,7 @@ final class AccountViewModel {
             accountBalance: 3_500_000,
             safeBoxBalance: 0
         ),
-        AccountData(
+        AccountModel(
             backgroundColor: UIColor(themeColor: .blue),
             tintColor: UIColor(themeColor: .white),
             name: "예금",
@@ -36,7 +36,7 @@ final class AccountViewModel {
             accountBalance: 10_000_000,
             safeBoxBalance: 0
         ),
-        AccountData(
+        AccountModel(
             backgroundColor: UIColor(themeColor: .green),
             tintColor: UIColor(themeColor: .white),
             name: "저금통",
@@ -46,18 +46,18 @@ final class AccountViewModel {
         ),
     ]
     
-    let accountTopAdData: [AccountTopAdData] = [
-        AccountTopAdData(
+    let accountTopAdData: [AccountTopAdModel] = [
+        AccountTopAdModel(
             title: "뜨거운 여름, 쿨한 혜택!",
             subtitle: "최대 6만원 혜택 챙기기",
             image: UIImage(named: "krw-money")!
         ),
-        AccountTopAdData(
+        AccountTopAdModel(
             title: "뜨거운 여름, 쿨한 혜택!",
             subtitle: "최대 6만원 혜택 챙기기",
             image: UIImage(named: "krw-money")!
         ),
-        AccountTopAdData(
+        AccountTopAdModel(
             title: "뜨거운 여름, 쿨한 혜택!",
             subtitle: "최대 6만원 혜택 챙기기",
             image: UIImage(named: "krw-money")!

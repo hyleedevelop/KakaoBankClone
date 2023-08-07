@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
+		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
 		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
 		076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */; };
 		076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */; };
-		076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848242A7D306C00812353 /* AccountTopAdData.swift */; };
+		076848252A7D306C00812353 /* AccountTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848242A7D306C00812353 /* AccountTopAdModel.swift */; };
 		07755D0B2A7E3A790076253B /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0A2A7E3A790076253B /* Int.swift */; };
-		07755D0D2A7E72220076253B /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0C2A7E72220076253B /* AccountData.swift */; };
+		07755D0D2A7E72220076253B /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0C2A7E72220076253B /* AccountModel.swift */; };
 		07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */; };
 		07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */; };
 		07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */; };
@@ -21,11 +23,11 @@
 		07AA67722A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */; };
 		07AA677C2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */; };
 		07AA677E2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */; };
-		07AA678E2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */; };
+		07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */; };
 		07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */; };
-		07AA67922A7BC1F6009DB3F0 /* MoreMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */; };
+		07AA67922A7BC1F6009DB3F0 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */; };
 		07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */; };
-		07AA67962A7BC215009DB3F0 /* ServiceMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */; };
+		07AA67962A7BC215009DB3F0 /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */; };
 		07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */; };
 		07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */; };
 		07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */; };
@@ -37,8 +39,8 @@
 		07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */; };
 		07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */; };
 		07D9E3752A7FCF43000EDF9B /* ServiceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */; };
-		07D9E3772A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */; };
-		07D9E3792A7FE6DB000EDF9B /* ServiceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */; };
+		07D9E3772A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */; };
+		07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */; };
 		A37612E51FCED7E5EC69CD8D /* Pods_KakaoBankClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */; };
 		DE9DB6893F405A81D1321244 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */; };
 		E45BFED7CA6B2ACA96A8EAAE /* Pods_KakaoBankCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */; };
@@ -63,12 +65,14 @@
 
 /* Begin PBXFileReference section */
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
+		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
 		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdTableViewCell.swift; sourceTree = "<group>"; };
 		076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddTableViewCell.swift; sourceTree = "<group>"; };
-		076848242A7D306C00812353 /* AccountTopAdData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdData.swift; sourceTree = "<group>"; };
+		076848242A7D306C00812353 /* AccountTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdModel.swift; sourceTree = "<group>"; };
 		07755D0A2A7E3A790076253B /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		07755D0C2A7E72220076253B /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
+		07755D0C2A7E72220076253B /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoBankClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,11 +85,11 @@
 		07AA67772A7BB7C5009DB3F0 /* KakaoBankCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakaoBankCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA677B2A7BB7C5009DB3F0 /* KakaoBankCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITests.swift; sourceTree = "<group>"; };
 		07AA677D2A7BB7C5009DB3F0 /* KakaoBankCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoBankCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuViewController.swift; sourceTree = "<group>"; };
+		07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
+		07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
-		07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuViewModel.swift; sourceTree = "<group>"; };
+		07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewModel.swift; sourceTree = "<group>"; };
 		07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuCellData.swift; sourceTree = "<group>"; };
@@ -97,8 +101,8 @@
 		07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWithoutSafeBoxTableViewCell.swift; sourceTree = "<group>"; };
 		07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
 		07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListTableViewCell.swift; sourceTree = "<group>"; };
-		07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceBigAdTableViewCell.swift; sourceTree = "<group>"; };
-		07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceData.swift; sourceTree = "<group>"; };
+		07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdTableViewCell.swift; sourceTree = "<group>"; };
+		07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListModel.swift; sourceTree = "<group>"; };
 		0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,7 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
-				07AA67952A7BC215009DB3F0 /* ServiceMenuViewModel.swift */,
+				07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */,
 				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
 				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
 			);
@@ -225,9 +229,10 @@
 		07AA678C2A7BC161009DB3F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				07755D0C2A7E72220076253B /* AccountData.swift */,
-				076848242A7D306C00812353 /* AccountTopAdData.swift */,
-				07D9E3782A7FE6DB000EDF9B /* ServiceData.swift */,
+				07755D0C2A7E72220076253B /* AccountModel.swift */,
+				076848242A7D306C00812353 /* AccountTopAdModel.swift */,
+				07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */,
+				072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */,
 				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
 			);
 			path = Model;
@@ -238,9 +243,9 @@
 			children = (
 				07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */,
 				07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */,
-				07AA678D2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift */,
+				07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */,
 				07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */,
-				07AA67912A7BC1F6009DB3F0 /* MoreMenuViewController.swift */,
+				07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -254,7 +259,8 @@
 				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
 				07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */,
 				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
-				07D9E3762A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift */,
+				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
+				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -532,31 +538,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */,
-				07755D0D2A7E72220076253B /* AccountData.swift in Sources */,
+				07755D0D2A7E72220076253B /* AccountModel.swift in Sources */,
 				07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */,
 				07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */,
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
-				07D9E3792A7FE6DB000EDF9B /* ServiceData.swift in Sources */,
+				07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */,
 				07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */,
 				07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */,
 				07D9E3752A7FCF43000EDF9B /* ServiceListTableViewCell.swift in Sources */,
 				07755D0B2A7E3A790076253B /* Int.swift in Sources */,
-				076848252A7D306C00812353 /* AccountTopAdData.swift in Sources */,
+				076848252A7D306C00812353 /* AccountTopAdModel.swift in Sources */,
 				07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
-				07AA67922A7BC1F6009DB3F0 /* MoreMenuViewController.swift in Sources */,
+				07AA67922A7BC1F6009DB3F0 /* MoreViewController.swift in Sources */,
 				076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */,
-				07D9E3772A7FD683000EDF9B /* ServiceBigAdTableViewCell.swift in Sources */,
+				07D9E3772A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift in Sources */,
 				07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */,
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
+				072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
 				07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */,
-				07AA678E2A7BC1BF009DB3F0 /* ServiceMenuViewController.swift in Sources */,
+				07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */,
+				072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */,
 				0768481B2A7C9F6400812353 /* Enums.swift in Sources */,
-				07AA67962A7BC215009DB3F0 /* ServiceMenuViewModel.swift in Sources */,
+				07AA67962A7BC215009DB3F0 /* ServiceViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

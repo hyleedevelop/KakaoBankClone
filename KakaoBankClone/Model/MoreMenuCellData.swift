@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoreCellData {
+struct MoreCellModel {
     let title: String
     let badge: BadgeType
 }

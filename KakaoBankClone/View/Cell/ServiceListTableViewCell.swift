@@ -10,6 +10,10 @@ import SnapKit
 
 class ServiceListTableViewCell: UITableViewCell {
 
+    //MARK: - 식별자
+    
+    static let identifier = "ServiceListTableViewCell"
+    
     //MARK: - UI 속성
     
     // 제목
@@ -66,7 +70,7 @@ class ServiceListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-
+        
         self.setupAutoLayout()
     }
     
@@ -78,7 +82,7 @@ class ServiceListTableViewCell: UITableViewCell {
     
     // 오토레이아웃 설정
     private func setupAutoLayout() {
-        self.addSubview(self.finalStackView)
+        self.contentView.addSubview(self.finalStackView)
         self.finalStackView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(25)
             $0.right.equalToSuperview().offset(-25)

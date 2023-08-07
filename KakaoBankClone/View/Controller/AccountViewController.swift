@@ -15,10 +15,22 @@ final class AccountViewController: UIViewController {
     // 계좌 테이블뷰
     private let accountTableView: UITableView = {
         let tv = UITableView()
-        tv.register(AccountTopAdTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountTopAd.rawValue)
-        tv.register(AccountTableViewCell.self, forCellReuseIdentifier: CellIdentifier.account.rawValue)
-        tv.register(AccountWithoutSafeBoxTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountWithoutSafeBox.rawValue)
-        tv.register(AccountAddTableViewCell.self, forCellReuseIdentifier: CellIdentifier.accountAdd.rawValue)
+        tv.register(
+            AccountTopAdTableViewCell.self,
+            forCellReuseIdentifier: AccountTopAdTableViewCell.identifier
+        )
+        tv.register(
+            AccountTableViewCell.self,
+            forCellReuseIdentifier: AccountTableViewCell.identifier
+        )
+        tv.register(
+            AccountWithoutSafeBoxTableViewCell.self,
+            forCellReuseIdentifier: AccountWithoutSafeBoxTableViewCell.identifier
+        )
+        tv.register(
+            AccountAddTableViewCell.self,
+            forCellReuseIdentifier: AccountAddTableViewCell.identifier
+        )
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
         return tv
@@ -84,10 +96,8 @@ final class AccountViewController: UIViewController {
         // 뷰 등록 및 오토레이아웃 설정
         self.view.addSubview(self.accountTableView)
         self.accountTableView.snp.makeConstraints {
-            $0.left.equalTo(self.view.safeAreaLayoutGuide)
-            $0.right.equalTo(self.view.safeAreaLayoutGuide)
+            $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         // 대리자 지정
@@ -149,7 +159,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountTopAd.rawValue, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTopAdTableViewCell.identifier, for: indexPath)
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setAd(
@@ -163,7 +173,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             let accountData = self.viewModel.accountData[indexPath.row]
             
             if accountData.hasSafeBox {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.account.rawValue, for: indexPath)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableViewCell.identifier, for: indexPath)
                         as? AccountTableViewCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 cell.setAccount(
@@ -175,7 +185,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                 )
                 return cell
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountWithoutSafeBox.rawValue, for: indexPath)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountWithoutSafeBoxTableViewCell.identifier, for: indexPath)
                         as? AccountWithoutSafeBoxTableViewCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 cell.setAccount(
@@ -188,7 +198,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
         case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.accountAdd.rawValue, for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountAddTableViewCell.identifier, for: indexPath)
                     as? AccountAddTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell

@@ -10,6 +10,10 @@ import SnapKit
 
 class AccountTopAdTableViewCell: UITableViewCell {
 
+    //MARK: - 식별자
+    
+    static let identifier = "AccountTopAdTableViewCell"
+    
     //MARK: - 컨테이너 뷰 관련 속성
     
     // 컨테이너 뷰
@@ -84,7 +88,7 @@ class AccountTopAdTableViewCell: UITableViewCell {
     // 오토레이아웃 설정
     private func setupAutoLayout() {
         // 컨테이너 뷰 설정
-        self.addSubview(self.containerView)
+        self.contentView.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
