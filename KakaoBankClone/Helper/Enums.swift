@@ -28,18 +28,6 @@ enum ThemeColor {
     case blue
 }
 
-//MARK: - 셀 식별자
-
-enum CellIdentifier: String {
-    case serviceTopAdTableView = "ServiceTopAdTableViewCell"
-    case serviceTopAdCollectionView = "ServiceTopAdCollectionViewCell"
-    case serviceMenu = "ServiceMenuCell"
-    case serviceMenuBar = "ServiceMenuBarCollectionViewCell"
-    case serviceList = "ServiceListTableViewCell"
-    case alert = "AlertCell"
-    case moreMenu = "MoreMenuCell"
-}
-
 //MARK: - 네비게이션 바 제목
 
 enum NavigationBarTitle: String {

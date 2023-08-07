@@ -35,6 +35,9 @@
 		07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */; };
 		07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A52A7BF213009DB3F0 /* UIColor.swift */; };
 		07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */; };
+		07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */; };
+		07CA4ED82A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */; };
+		07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED92A81400400F81E6F /* UITableViewCell.swift */; };
 		07D9E36F2A7F7A6E000EDF9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D9E36E2A7F7A6D000EDF9B /* GoogleService-Info.plist */; };
 		07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */; };
 		07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */; };
@@ -97,6 +100,9 @@
 		07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		07AA67A52A7BF213009DB3F0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
+		07CA4ED92A81400400F81E6F /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		07D9E36E2A7F7A6D000EDF9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWithoutSafeBoxTableViewCell.swift; sourceTree = "<group>"; };
 		07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -255,8 +261,9 @@
 			children = (
 				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
 				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
-				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
 				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
+				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
+				07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */,
 				07D9E3722A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift */,
 				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
 				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
@@ -271,6 +278,8 @@
 				07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */,
 				07AA67A52A7BF213009DB3F0 /* UIColor.swift */,
 				07755D0A2A7E3A790076253B /* Int.swift */,
+				07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */,
+				07CA4ED92A81400400F81E6F /* UITableViewCell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -540,6 +549,7 @@
 				07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */,
 				07755D0D2A7E72220076253B /* AccountModel.swift in Sources */,
 				07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */,
+				07CA4ED82A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift in Sources */,
 				07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */,
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
@@ -551,6 +561,7 @@
 				07755D0B2A7E3A790076253B /* Int.swift in Sources */,
 				076848252A7D306C00812353 /* AccountTopAdModel.swift in Sources */,
 				07D9E3732A7FB834000EDF9B /* ServiceMenuBarCollectionViewCell.swift in Sources */,
+				07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
 				07AA67922A7BC1F6009DB3F0 /* MoreViewController.swift in Sources */,
@@ -560,6 +571,7 @@
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
 				072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
+				07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */,
 				07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */,
 				07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */,
 				072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */,

@@ -14,54 +14,46 @@ class AccountTopAdTableViewCell: UITableViewCell {
     
     static let identifier = "AccountTopAdTableViewCell"
     
-    //MARK: - 컨테이너 뷰 관련 속성
+    //MARK: - 컬렉션뷰 관련 속성
     
-    // 컨테이너 뷰
-    private let containerView: UIView = {
-        let view = UIView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 20
-        view.backgroundColor = UIColor(themeColor: .transparentBlack)
-        return view
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.showsVerticalScrollIndicator = false
+        cv.showsHorizontalScrollIndicator = false
+        cv.isPagingEnabled = true
+        cv.register(
+            AccountTopAdCollectionViewCell.self,
+            forCellWithReuseIdentifier: AccountTopAdCollectionViewCell.identifier
+        )
+        cv.layer.cornerRadius = 15
+        cv.clipsToBounds = true
+        return cv
     }()
     
-    //MARK: - 제목 관련 속성
-    
-    // 제목
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        label.textAlignment = .left
-        label.numberOfLines = 1
-        return label
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.direction = .leftToRight
+        pc.currentPageIndicatorTintColor = UIColor(themeColor: .white)
+        pc.pageIndicatorTintColor = UIColor(themeColor: .darkGray)
+        pc.hidesForSinglePage = false
+        return pc
     }()
     
-    // 부제목
-    private let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        label.textAlignment = .left
-        label.numberOfLines = 1
-        return label
-    }()
+    private var nowPage = 0 {
+        didSet {
+            // 페이지를 수동으로 넘겼을 때 indicator가 현재 페이지를 나타내도록 설정
+            self.pageControl.currentPage = self.nowPage
+        }
+    }
     
-    // 제목과 부제목을 묶은 스택뷰
-    private lazy var titleStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [self.titleLabel, self.subtitleLabel])
-        sv.axis = .vertical
-        sv.spacing = 5
-        return sv
-    }()
+    //MARK: - 모델 관련 속성
     
-    //MARK: - 이미지 관련 속성
-    
-    private let adImage: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        return iv
-    }()
+    private var accountTopAdModel = [AccountTopAdModel]()
     
     //MARK: - 생성자
     
@@ -69,8 +61,9 @@ class AccountTopAdTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
  
-        self.setupUI()
-        self.setupAutoLayout()
+        self.setupCollectionView()
+        self.setupPageControl()
+        self.adAutoTransition()
     }
     
     // TableViewCell 생성자 셋팅 (2)
@@ -78,46 +71,101 @@ class AccountTopAdTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 메서드
+    //MARK: - 내부 메서드
     
-    // UI 설정
-    private func setupUI() {
-        //self.backgroundColor = UIColor(themeColor: .white)
-    }
-    
-    // 오토레이아웃 설정
-    private func setupAutoLayout() {
-        // 컨테이너 뷰 설정
-        self.contentView.addSubview(self.containerView)
-        self.containerView.snp.makeConstraints {
+    // 컬렉션뷰 설정
+    private func setupCollectionView() {
+        // 하위뷰로 등록 및 오토레이아웃 설정
+        self.contentView.addSubview(self.collectionView)
+        self.collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(5)
             $0.bottom.equalToSuperview().offset(-5)
         }
         
-        // 스택뷰 설정
-        self.containerView.addSubview(self.titleStackView)
-        self.titleStackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(25)
-            $0.right.equalToSuperview().offset(-25)
+        // 대리자 설정
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+    }
+
+    // 페이지컨트롤 설정
+    private func setupPageControl() {
+        // 하위뷰로 등록 및 오토레이아웃 설정
+        self.contentView.addSubview(self.pageControl)
+        self.pageControl.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(5)
+            $0.right.equalToSuperview().offset(20)
         }
-        
-        // 이미지 설정
-        self.containerView.addSubview(self.adImage)
-        self.adImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.bottom.equalToSuperview().offset(-10)
-            $0.width.equalTo(50)
-            $0.right.equalToSuperview().offset(-20)
+
+        // indicator의 점 크기 조절
+        self.pageControl.subviews.forEach {
+            $0.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         }
     }
     
-    // 광고 내용 설정
-    func setAd(title: String, subtitle: String, image: UIImage) {
-        self.titleLabel.text = title
-        self.subtitleLabel.text = subtitle
-        self.adImage.image = image
+    // 광고 컬렉션뷰 자동 전환
+    private func adAutoTransition() {
+        let _: Timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (Timer) in
+            self.nowPage += 1
+            if self.nowPage > self.accountTopAdModel.count-1 {
+                self.nowPage = 0
+            }
+            self.collectionView.scrollToItem(at: NSIndexPath(item: self.nowPage, section: 0) as IndexPath, at: .right, animated: true)
+            self.pageControl.currentPage = self.nowPage
+        }
     }
+    
+    //MARK: - 외부
+    
+    // 광고 설정
+    func setAd(model: [AccountTopAdModel]) {
+        self.accountTopAdModel = model
+        self.pageControl.numberOfPages = self.accountTopAdModel.count
+        self.collectionView.reloadData()
+    }
+    
+}
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+
+extension AccountTopAdTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+   
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.accountTopAdModel.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountTopAdCollectionViewCell.identifier, for: indexPath)
+                as? AccountTopAdCollectionViewCell else { return UICollectionViewCell() }
+        cell.setupAd(with: self.accountTopAdModel[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+
+extension AccountTopAdTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = scrollView.frame.width
+        self.nowPage = Int(scrollView.contentOffset.x / width)
+    }
+    
 }

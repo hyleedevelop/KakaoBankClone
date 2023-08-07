@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ServiceViewModel {
     
@@ -14,20 +15,20 @@ final class ServiceViewModel {
     let topAdData: [ServiceTopAdModel] = [
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .blue),
-            title: "광고1",
-            subtitle: "광고1 입니다.",
+            title: "쉐보레, 더 뉴 트레일블레이저",
+            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
             image: UIImage(systemName: "star")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .green),
-            title: "광고2",
-            subtitle: "광고2 입니다.",
+            title: "쉐보레, 더 뉴 트레일블레이저",
+            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
             image: UIImage(systemName: "star")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .yellow),
-            title: "광고3",
-            subtitle: "광고3 입니다.",
+            title: "쉐보레, 더 뉴 트레일블레이저",
+            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
             image: UIImage(systemName: "star")!
         ),
     ]
@@ -89,7 +90,9 @@ final class ServiceViewModel {
             hasInterest: true,
             interest: "연 7.00%"
         )
+        
     ], [
+        
         ServiceListModel(
             tintColor: UIColor(themeColor: .green),
             title: "프렌즈 체크카드",
@@ -111,12 +114,52 @@ final class ServiceViewModel {
             hasInterest: false,
             interest: nil
         ),
+        
+    ], [
+        
+        ServiceListModel(
+            tintColor: UIColor(themeColor: .blue),
+            title: "비상금대출",
+            subtitle: "현금 필요할 때 유용하게",
+            hasInterest: true,
+            interest: "연 4.69%"
+        ),
+        ServiceListModel(
+            tintColor: UIColor(themeColor: .blue),
+            title: "마이너스 통장대출",
+            subtitle: "이자는 사용한 만큼만",
+            hasInterest: true,
+            interest: "연 5.44%"
+        ),
+        ServiceListModel(
+            tintColor: UIColor(themeColor: .blue),
+            title: "신용대출/중신용대출",
+            subtitle: "목돈이 필요할 땐 쉽고 빠르게",
+            hasInterest: true,
+            interest: "연 4.44%"
+        ),
+        ServiceListModel(
+            tintColor: UIColor(themeColor: .blue),
+            title: "전월세보증금 대출",
+            subtitle: "어떤 집이든, 꼭 맞는 전세대출을",
+            hasInterest: true,
+            interest: "연 3.40%"
+        ),
+        ServiceListModel(
+            tintColor: UIColor(themeColor: .blue),
+            title: "주택담보대출",
+            subtitle: "낮은 금리로 연립, 다세대까지",
+            hasInterest: true,
+            interest: "연 3.97%"
+        ),
     ]]
+    
+    private let categoryName: [String] = ["예적금", "카드", "대출"]
     
     //MARK: - 테이블뷰 관련
     
     // section의 개수
-    let numberOfSections: Int = 3
+    lazy var numberOfSections: Int = 1 + self.serviceListData.count
     
     // section당 row의 개수
     func numberOfRowsInSection(at section: Int) -> Int {
@@ -124,11 +167,13 @@ final class ServiceViewModel {
     }
     
     // header 높이
-    let headerHeight: CGFloat = 40
+    func headerHeight(at section: Int) -> CGFloat {
+        return section == 0 ? 0 : 40
+    }
     
     // footer 높이
     func footerHeight(at section: Int) -> CGFloat {
-        return 40
+        return section == 0 ? 50 : 150
     }
     
     // cell 높이
@@ -136,9 +181,47 @@ final class ServiceViewModel {
         return section == 0 ? 310 : 90
     }
     
+    // custom header view
+    func viewForHeaderInSection(tableView: UITableView, at section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        } else {
+            let titleLabel = UILabel(
+                frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
+            )
+            titleLabel.textAlignment = .left
+            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            titleLabel.textColor = UIColor.black
+            titleLabel.text = self.categoryName[section-1]
+            
+            let headerView = UIView()
+            headerView.addSubview(titleLabel)
+            
+            return headerView
+        }
+    }
+    
     // custom footer view
     func viewForFooterInSection(at section: Int) -> UIView? {
-        return UIView()
+        if section == 0 {
+            return nil
+        } else {
+            let containerView = UIView()
+            containerView.backgroundColor = UIColor(themeColor: .pink)
+            containerView.layer.cornerRadius = 15
+            containerView.clipsToBounds = true
+            
+            let footerView = UIView()
+            footerView.addSubview(containerView)
+            containerView.snp.makeConstraints {
+                $0.left.equalToSuperview().offset(20)
+                $0.right.equalToSuperview().offset(-20)
+                $0.top.equalToSuperview().offset(20)
+                $0.height.equalTo(60)
+            }
+            
+            return footerView
+        }
     }
     
 }

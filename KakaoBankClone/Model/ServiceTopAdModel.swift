@@ -10,6 +10,6 @@ import UIKit
 struct ServiceTopAdModel {
     let backgroundColor: UIColor
     let title: String
-    let subtitle: String
+    let subtitle: NSAttributedString
     let image: UIImage
 }

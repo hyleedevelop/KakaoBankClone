@@ -49,7 +49,6 @@ class ServiceListTableViewCell: UITableViewCell {
     // 이자
     private let interestLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(themeColor: .green)
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -91,13 +90,26 @@ class ServiceListTableViewCell: UITableViewCell {
         }
     }
 
-    //MARK: - 뷰컨트롤러에서 호출하는 메서드
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        // section header의 구분선만 제거하기
+        let width = subviews[0].frame.width
+        for view in subviews where view != contentView {
+            if view.frame.width == width {
+                view.removeFromSuperview()
+            }
+        }
+    }
+    
+    //MARK: - 외부에서 호출하는 메서드
     
     // 레이블에 표시할 값 설정
-    func setValue(title: String, subtitle: String, interest: String) {
+    func setValue(title: String, subtitle: String, interest: String, color: UIColor) {
         self.titleLabel.text = title
         self.subtitleLabel.text = subtitle
         self.interestLabel.text = interest
+        self.interestLabel.textColor = color
     }
 
 }

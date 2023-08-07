@@ -28,16 +28,14 @@ final class ServiceViewController: UIViewController {
         return cv
     }()
     
-    
-    
     // 서비스 목록
     private let serviceListTableView: UITableView = {
-        let tv = UITableView()
+        let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
         tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
         tv.showsVerticalScrollIndicator = true
-        tv.separatorStyle = .none
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+        //tv.separatorStyle = .none
         return tv
     }()
     
@@ -87,6 +85,7 @@ final class ServiceViewController: UIViewController {
     // 뷰 설정
     private func setupView() {
         self.view.backgroundColor = UIColor(themeColor: .white)
+        self.serviceListTableView.backgroundColor = UIColor.clear
     }
     
     // 컬렉션뷰 설정
@@ -139,7 +138,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // header의 높이
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.viewModel.headerHeight
+        return self.viewModel.headerHeight(at: section)
     }
     
     // footer의 높이
@@ -147,17 +146,25 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
         return self.viewModel.footerHeight(at: section)
     }
     
+    // header view
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.viewModel.viewForHeaderInSection(tableView: tableView, at: section)
+    }
+    
     // footer view
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return self.viewModel.viewForFooterInSection(at: section)
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.removeSectionSeparators()
+//    }
     
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {  // 0번째 section: 상단 광고 컬렉션뷰
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
                     as? ServiceTopAdTableViewCell else { return UITableViewCell() }
-            tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.topAdData)
             return cell
@@ -166,14 +173,20 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
             let data = self.viewModel.serviceListData[indexPath.section-1][indexPath.row]
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceListTableViewCell.identifier, for: indexPath)
                     as? ServiceListTableViewCell else { return UITableViewCell() }
-            tableView.separatorStyle = .none
             cell.selectionStyle = .none
             cell.accessoryType = data.hasInterest ? .none : .disclosureIndicator
             cell.setValue(
                 title: data.title,
                 subtitle: data.subtitle,
-                interest: data.interest ?? ""
+                interest: data.interest ?? "",
+                color: data.tintColor
             )
+            
+//            let bottomBorder = CALayer()
+//            bottomBorder.frame = CGRect(x: 0.0, y: cell.contentView.frame.size.height, width: cell.contentView.frame.size.width, height: 0.5)
+//            bottomBorder.backgroundColor = UIColor(white: 0.8, alpha: 1.0).cgColor
+//            cell.contentView.layer.addSublayer(bottomBorder)
+            
             return cell
         }
     }

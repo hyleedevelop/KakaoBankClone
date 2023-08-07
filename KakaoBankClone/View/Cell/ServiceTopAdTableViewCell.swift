@@ -19,8 +19,8 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        //layout.itemSize = CGSize(width: 200, height: 300)
-        //layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsVerticalScrollIndicator = false
@@ -28,25 +28,26 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         cv.isPagingEnabled = true
         cv.register(
             ServiceTopAdCollectionViewCell.self,
-            forCellWithReuseIdentifier: CellIdentifier.serviceTopAdCollectionView.rawValue
+            forCellWithReuseIdentifier: ServiceTopAdCollectionViewCell.identifier
         )
-        cv.layer.cornerRadius = 20
+        cv.layer.cornerRadius = 10
         cv.clipsToBounds = true
         return cv
     }()
     
     private let pageControl: UIPageControl = {
         let pc = UIPageControl()
-        pc.numberOfPages = 3
         pc.direction = .leftToRight
         pc.currentPageIndicatorTintColor = UIColor(themeColor: .white)
         pc.pageIndicatorTintColor = UIColor(themeColor: .darkGray)
+        pc.hidesForSinglePage = false
         return pc
     }()
     
-    private var currentPage = 0 {
+    private var nowPage = 0 {
         didSet {
-            self.pageControl.currentPage = currentPage
+            // 페이지를 수동으로 넘겼을 때 indicator가 현재 페이지를 나타내도록 설정
+            self.pageControl.currentPage = self.nowPage
         }
     }
 
@@ -61,6 +62,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
 
         self.setupCollectionView()
         self.setupPageControl()
+        //self.adAutoTransition()
     }
     
     required init?(coder: NSCoder) {
@@ -69,32 +71,67 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     
     //MARK: - 내부 메서드
     
+    // 컬렉션뷰 설정
     private func setupCollectionView() {
+        // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(10)
-            $0.right.equalToSuperview().offset(-10)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(10)
             $0.bottom.equalToSuperview().offset(-10)
         }
         
+        // 대리자 설정
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
 
+    // 페이지컨트롤 설정
     private func setupPageControl() {
+        // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.pageControl)
         self.pageControl.snp.makeConstraints {
-            $0.top.equalTo(self.collectionView).offset(10)
-            $0.right.equalTo(self.collectionView).offset(10)
+            $0.top.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(0)
+        }
+
+        // indicator의 점 크기 조절
+        self.pageControl.subviews.forEach {
+            $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        }
+    }
+    
+    // 광고 컬렉션뷰 자동 전환
+    private func adAutoTransition() {
+        let _: Timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (Timer) in
+            self.nowPage += 1
+            if self.nowPage > self.serviceTopAdModel.count-1 {
+                self.nowPage = 0
+            }
+            self.collectionView.scrollToItem(at: NSIndexPath(item: self.nowPage, section: 0) as IndexPath, at: .right, animated: true)
+            self.pageControl.currentPage = self.nowPage
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // section header의 구분선만 제거하기
+        let width = subviews[0].frame.width
+        for view in subviews where view != contentView {
+            if view.frame.width == width {
+                view.removeFromSuperview()
+            }
         }
     }
     
     //MARK: - 외부에서 호출하는 메서드
     
-    // 광고 내용 설정
+    // 광고 설정
     func setAd(model: [ServiceTopAdModel]) {
         self.serviceTopAdModel = model
+        self.pageControl.numberOfPages = self.serviceTopAdModel.count
         self.collectionView.reloadData()
     }
 
@@ -113,8 +150,8 @@ extension ServiceTopAdTableViewCell: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceTopAdCollectionViewCell.identifier, for: indexPath) as? ServiceTopAdCollectionViewCell else { return UICollectionViewCell() }
-        cell.backgroundColor = UIColor.red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceTopAdCollectionViewCell.identifier, for: indexPath)
+                as? ServiceTopAdCollectionViewCell else { return UICollectionViewCell() }
         cell.setupAd(with: self.serviceTopAdModel[indexPath.row])
         return cell
     }
@@ -129,11 +166,16 @@ extension ServiceTopAdTableViewCell: UICollectionViewDelegate, UICollectionViewD
 
 extension ServiceTopAdTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
-        self.currentPage = Int(scrollView.contentOffset.x / width)
+        self.nowPage = Int(scrollView.contentOffset.x / width)
     }
+    
 }

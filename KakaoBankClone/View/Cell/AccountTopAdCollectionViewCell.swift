@@ -1,33 +1,35 @@
 //
-//  ServiceTopAdCollectionViewCell.swift
+//  AccountTopAdCollectionViewCell.swift
 //  KakaoBankClone
 //
 //  Created by Eric on 2023/08/07.
 //
 
 import UIKit
-import SnapKit
 
-class ServiceTopAdCollectionViewCell: UICollectionViewCell {
+class AccountTopAdCollectionViewCell: UICollectionViewCell {
     
     //MARK: - 식별자
     
-    static let identifier = "ServiceTopAdCollectionViewCell"
+    static let identifier = "AccountTopAdCollectionViewCell"
     
     //MARK: - 컨테이너 뷰 관련 속성
     
     // 컨테이너 뷰
     private let containerView: UIView = {
         let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 0
+        view.backgroundColor = UIColor(themeColor: .transparentBlack)
         return view
     }()
     
     //MARK: - 제목 관련 속성
     
     // 제목
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.white
+        label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -35,12 +37,12 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     }()
     
     // 부제목
-    let subtitleLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .left
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         return label
     }()
     
@@ -48,35 +50,36 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     private lazy var titleStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [self.titleLabel, self.subtitleLabel])
         sv.axis = .vertical
-        sv.spacing = 6
+        sv.spacing = 5
         return sv
     }()
     
     //MARK: - 이미지 관련 속성
     
-    let adImage: UIImageView = {
+    private let adImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = UIColor.black
         return iv
     }()
     
     //MARK: - 생성자
     
+    // 컬렉션뷰 생성자 셋팅 (1)
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.setupAutoLayout()
     }
     
+    // 컬렉션뷰 생성자 셋팅 (2)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 내부 메서드
-    
+    //MARK: - 메서드
+    // 오토레이아웃 설정
     private func setupAutoLayout() {
-        // 컨테이너뷰 설정
+        // 컨테이너 뷰 설정
         self.contentView.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
@@ -85,7 +88,7 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
         // 스택뷰 설정
         self.containerView.addSubview(self.titleStackView)
         self.titleStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(30)
+            $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().offset(25)
             $0.right.equalToSuperview().offset(-25)
         }
@@ -93,22 +96,22 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
         // 이미지 설정
         self.containerView.addSubview(self.adImage)
         self.adImage.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(150)
+            $0.top.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-10)
+            $0.width.equalTo(50)
+            $0.right.equalToSuperview().offset(-20)
         }
     }
     
     //MARK: - 외부에서 호출하는 메서드
     
     // 광고 설정
-    func setupAd(with model: ServiceTopAdModel?) {
+    func setupAd(with model: AccountTopAdModel?) {
         if let model = model {
-            self.backgroundColor = model.backgroundColor
             self.titleLabel.text = model.title
-            self.subtitleLabel.attributedText = model.subtitle
+            self.subtitleLabel.text = model.subtitle
             self.adImage.image = model.image
         }
     }
+    
 }
