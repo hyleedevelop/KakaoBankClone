@@ -95,7 +95,7 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
         self.adImage.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.right.equalToSuperview()
-            $0.width.equalTo(150)
+            $0.width.equalTo(200)
             $0.height.equalTo(150)
         }
     }

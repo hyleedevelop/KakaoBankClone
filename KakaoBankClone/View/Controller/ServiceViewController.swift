@@ -90,16 +90,7 @@ final class ServiceViewController: UIViewController {
     
     // 컬렉션뷰 설정
     private func setupCollectionView() {
-//        self.navigationController!.navigationBar.addSubview(self.tabMenuCollectionView)
-//        self.tabMenuCollectionView.snp.makeConstraints {
-//            $0.left.equalTo(self.navigationController!.navigationBar).offset(10)
-//            $0.right.equalTo(self.navigationController!.navigationBar).offset(-10)
-//            $0.top.equalTo(self.navigationController!.navigationBar).offset(10)
-//            $0.bottom.equalTo(self.navigationController!.navigationBar).offset(-10)
-//        }
-//
-//        self.tabMenuCollectionView.delegate = self
-//        self.tabMenuCollectionView.dataSource = self
+
     }
     
     // 테이블뷰 설정
@@ -166,7 +157,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
                     as? ServiceTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setAd(model: self.viewModel.topAdData)
+            cell.setAd(model: self.viewModel.getTopAdData)
             return cell
         }
         else {  // 나머지 section: 서비스 목록 테이블뷰

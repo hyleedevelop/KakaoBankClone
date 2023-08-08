@@ -9,22 +9,32 @@ import UIKit
 
 final class AccountViewModel {
     
+    //MARK: - 생성자
+    
+    init() {
+        // 상단 광고 컬렉션뷰에서 무한 스크롤 구현을 위해 앞과 뒤에 데이터를 추가 -> () 표시된 부분
+        // 기존: 1 - 2 - 3
+        // 변경: (3) - 1 - 2 - 3 - (1)
+        self.accountTopAdData.insert(self.accountTopAdData[self.accountTopAdData.count-1], at: 0)
+        self.accountTopAdData.append(self.accountTopAdData[1])
+    }
+    
     //MARK: - 데이터
     
-    let accountTopAdData: [AccountTopAdModel] = [
+    var accountTopAdData: [AccountTopAdModel] = [
         AccountTopAdModel(
             title: "뜨거운 여름, 쿨한 혜택!",
             subtitle: "최대 6만원 혜택 챙기기",
             image: UIImage(named: "krw-money")!
         ),
         AccountTopAdModel(
-            title: "뜨거운 여름, 쿨한 혜택!",
-            subtitle: "최대 6만원 혜택 챙기기",
+            title: "유학 생활 필수 거래외국환은행",
+            subtitle: "카카오뱅크로 찜하면 무조건 3만원",
             image: UIImage(named: "krw-money")!
         ),
         AccountTopAdModel(
-            title: "뜨거운 여름, 쿨한 혜택!",
-            subtitle: "최대 6만원 혜택 챙기기",
+            title: "안전 여행하면 환급되는 보험?",
+            subtitle: "해외여행보험료 10% 돌려받기",
             image: UIImage(named: "krw-money")!
         ),
     ]
@@ -63,6 +73,11 @@ final class AccountViewModel {
             safeBoxBalance: 0
         ),
     ]
+    
+    // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
+    var getTopAdData: [AccountTopAdModel] {
+        return self.accountTopAdData
+    }
     
     //MARK: - 네비게이션 바 관련
     

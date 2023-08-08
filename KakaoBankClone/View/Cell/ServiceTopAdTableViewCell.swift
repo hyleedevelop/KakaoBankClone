@@ -22,6 +22,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsVerticalScrollIndicator = false
         cv.showsHorizontalScrollIndicator = false
@@ -44,12 +45,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         return pc
     }()
     
-    private var nowPage = 0 {
-        didSet {
-            // 페이지를 수동으로 넘겼을 때 indicator가 현재 페이지를 나타내도록 설정
-            self.pageControl.currentPage = self.nowPage
-        }
-    }
+    private var nowPage = 0
 
     //MARK: - 모델 관련 속성
     
@@ -104,9 +100,10 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     
     // 광고 컬렉션뷰 자동 전환
     private func adAutoTransition() {
-        let _: Timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (Timer) in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
             self.nowPage += 1
-            if self.nowPage > self.serviceTopAdModel.count-1 {
+            //if self.nowPage > self.serviceTopAdModel.count - 1 {
+            if self.nowPage > self.serviceTopAdModel.count - 3 {
                 self.nowPage = 0
             }
             self.collectionView.scrollToItem(at: NSIndexPath(item: self.nowPage, section: 0) as IndexPath, at: .right, animated: true)
@@ -131,8 +128,9 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     // 광고 설정
     func setAd(model: [ServiceTopAdModel]) {
         self.serviceTopAdModel = model
-        self.pageControl.numberOfPages = self.serviceTopAdModel.count
+        self.pageControl.numberOfPages = self.serviceTopAdModel.count - 2
         self.collectionView.reloadData()
+        self.collectionView.scrollToItem(at: [0, 1], at: .left, animated: false)
     }
 
 }
@@ -174,8 +172,28 @@ extension ServiceTopAdTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let width = scrollView.frame.width
-        self.nowPage = Int(scrollView.contentOffset.x / width)
+        let intValue = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        
+        // 컬렉션뷰의 아이템 스크롤 설정
+        switch intValue {
+        case 0:
+            let last = self.serviceTopAdModel.count - 2
+            self.collectionView.scrollToItem(at: [0, last], at: .left, animated: false)
+        case self.serviceTopAdModel.count - 1:
+            self.collectionView.scrollToItem(at: [0, 1], at: .left, animated: false)
+        default:
+            break
+        }
+        
+        // 페이지컨트롤의 현재페이지 번호 설정
+        switch intValue {
+        case 3:
+            self.pageControl.currentPage = 0
+        case 4:
+            self.pageControl.currentPage = 1
+        default:
+            self.pageControl.currentPage = intValue
+        }
     }
     
 }

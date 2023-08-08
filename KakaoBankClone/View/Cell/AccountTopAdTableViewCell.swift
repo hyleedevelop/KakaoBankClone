@@ -44,12 +44,7 @@ class AccountTopAdTableViewCell: UITableViewCell {
         return pc
     }()
     
-    private var nowPage = 0 {
-        didSet {
-            // 페이지를 수동으로 넘겼을 때 indicator가 현재 페이지를 나타내도록 설정
-            self.pageControl.currentPage = self.nowPage
-        }
-    }
+    private var nowPage = 0
     
     //MARK: - 모델 관련 속성
     
@@ -106,9 +101,10 @@ class AccountTopAdTableViewCell: UITableViewCell {
     
     // 광고 컬렉션뷰 자동 전환
     private func adAutoTransition() {
-        let _: Timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { (Timer) in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
             self.nowPage += 1
-            if self.nowPage > self.accountTopAdModel.count-1 {
+            //if self.nowPage > self.accountTopAdModel.count - 1 {
+            if self.nowPage > self.accountTopAdModel.count - 3 {
                 self.nowPage = 0
             }
             self.collectionView.scrollToItem(at: NSIndexPath(item: self.nowPage, section: 0) as IndexPath, at: .right, animated: true)
@@ -116,13 +112,15 @@ class AccountTopAdTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK: - 외부
+    //MARK: - 외부에서 호출되는 메서드
     
     // 광고 설정
     func setAd(model: [AccountTopAdModel]) {
         self.accountTopAdModel = model
-        self.pageControl.numberOfPages = self.accountTopAdModel.count
+        self.pageControl.numberOfPages = self.accountTopAdModel.count - 2
         self.collectionView.reloadData()
+        // 무한 스크롤 구현에 필요한 코드
+        self.collectionView.scrollToItem(at: [0, 1], at: .left, animated: false)
     }
     
 }
@@ -163,9 +161,30 @@ extension AccountTopAdTableViewCell: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
+    // 무한 스크롤 구현에 필요한 코드
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let width = scrollView.frame.width
-        self.nowPage = Int(scrollView.contentOffset.x / width)
+        let intValue = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        
+        // 컬렉션뷰의 아이템 스크롤 설정
+        switch intValue {
+        case 0:
+            let last = self.accountTopAdModel.count - 2
+            self.collectionView.scrollToItem(at: [0, last], at: .left, animated: false)
+        case self.accountTopAdModel.count - 1:
+            self.collectionView.scrollToItem(at: [0, 1], at: .left, animated: false)
+        default:
+            break
+        }
+        
+        // 페이지컨트롤의 현재페이지 번호 설정
+        switch intValue {
+        case 3:
+            self.pageControl.currentPage = 0
+        case 4:
+            self.pageControl.currentPage = 1
+        default:
+            self.pageControl.currentPage = intValue
+        }
     }
     
 }

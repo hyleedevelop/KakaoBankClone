@@ -162,7 +162,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTopAdTableViewCell.identifier, for: indexPath)
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.setAd(model: self.viewModel.accountTopAdData)
+            cell.setAd(model: self.viewModel.getTopAdData)
             return cell
             
         case 1:

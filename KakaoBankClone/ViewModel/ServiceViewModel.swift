@@ -10,26 +10,36 @@ import SnapKit
 
 final class ServiceViewModel {
     
-    //MARK: - 데이터
+    //MARK: - 생성자
     
-    let topAdData: [ServiceTopAdModel] = [
+    init() {
+        // 상단 광고 컬렉션뷰에서 무한 스크롤 구현을 위해 앞과 뒤에 데이터를 추가 -> () 표시된 부분
+        // 기존: 1 - 2 - 3
+        // 변경: (3) - 1 - 2 - 3 - (1)
+        self.serviceTopAdData.insert(self.serviceTopAdData[self.serviceTopAdData.count-1], at: 0)
+        self.serviceTopAdData.append(self.serviceTopAdData[1])
+    }
+    
+    //MARK: - 데이터 관련
+    
+    private var serviceTopAdData: [ServiceTopAdModel] = [
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .blue),
             title: "쉐보레, 더 뉴 트레일블레이저",
-            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
-            image: UIImage(systemName: "star")!
+            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요").withLineSpacing(3),
+            image: UIImage(systemName: "car.side.fill")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .green),
-            title: "쉐보레, 더 뉴 트레일블레이저",
-            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
-            image: UIImage(systemName: "star")!
+            title: "유병자를 위한 보험",
+            subtitle: NSAttributedString(string: "삼성화재 다이렉트\nSmart 유병자\n간편보험").withLineSpacing(3),
+            image: UIImage(systemName: "stethoscope")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .yellow),
-            title: "쉐보레, 더 뉴 트레일블레이저",
-            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요.").withLineSpacing(3),
-            image: UIImage(systemName: "star")!
+            title: "돈이 되는 꿀팁",
+            subtitle: NSAttributedString(string: "돌아온 휴가 시즌\n기차 30% 할인\n받는 방법은?").withLineSpacing(3),
+            image: UIImage(systemName: "train.side.rear.car")!
         ),
     ]
     
@@ -155,6 +165,11 @@ final class ServiceViewModel {
     ]]
     
     private let categoryName: [String] = ["예적금", "카드", "대출"]
+    
+    // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
+    var getTopAdData: [ServiceTopAdModel] {
+        return self.serviceTopAdData
+    }
     
     //MARK: - 테이블뷰 관련
     
