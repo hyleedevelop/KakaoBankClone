@@ -22,7 +22,6 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsVerticalScrollIndicator = false
         cv.showsHorizontalScrollIndicator = false
@@ -88,8 +87,8 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.pageControl)
         self.pageControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(0)
+            $0.top.equalToSuperview().offset(35)
+            $0.right.equalToSuperview().offset(5)
         }
 
         // indicator의 점 크기 조절

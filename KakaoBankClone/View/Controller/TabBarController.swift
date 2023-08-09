@@ -41,41 +41,33 @@ class TabBarController: UITabBarController {
         vc1.tabBarItem.image = UIImage(
             systemName: "person.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 14)
+        )?.withBaselineOffset(fromBottom: 16)
         
         // 서비스 탭
         let vc2 = UINavigationController(rootViewController: ServiceViewController())
         vc2.tabBarItem.image = UIImage(
             systemName: "square.grid.2x2.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 14)
+        )?.withBaselineOffset(fromBottom: 16)
         
         // 알림 탭
         let vc3 = UINavigationController(rootViewController: AlertViewController())
         vc3.tabBarItem.image = UIImage(
             systemName: "bell.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 14)
+        )?.withBaselineOffset(fromBottom: 16)
         
         // 서비스 탭
         let vc4 = UINavigationController(rootViewController: MoreViewController())
         vc4.tabBarItem.image = UIImage(
             systemName: "ellipsis",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 7)
+        )?.withBaselineOffset(fromBottom: 8)
         
         self.viewControllers = [vc1, vc2, vc3, vc4]
         
         // 앱을 처음 실행했을 때 화면에 보여줄 탭
         self.selectedIndex = 0  // ⚠️ 개발하는 과정에서 상황에 맞게 변경
     }
-
-    // 탭 바의 높이를 조절
-    private func adjustTabBarHeight(tabBar: UITabBar, height: CGFloat) {
-        tabBar.itemPositioning = .centered
-        tabBar.itemSpacing = height - tabBar.frame.height
-    }
-
-    
     
 }

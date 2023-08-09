@@ -65,7 +65,7 @@ final class AccountViewController: UIViewController {
     // 네비게이션 바 설정
     private func setupNavigationBar() {
         // 커스텀 설정 적용
-        self.navigationController?.applyCustomSettings(color: .white)
+        self.navigationController?.applyCustomSettings(color: .white, topInset: 25)
         self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
         
         // 네비게이션 바 구성

@@ -12,24 +12,14 @@ final class ServiceViewController: UIViewController {
     
     //MARK: - UI 속성
     
-    // 탭 메뉴 컬렉션뷰
-    private let tabMenuCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 10
-        flowLayout.minimumLineSpacing = 10
-        let cv = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
-        cv.register(ServiceMenuBarCollectionViewCell.self, forCellWithReuseIdentifier: ServiceMenuBarCollectionViewCell.identifier)
-        cv.isScrollEnabled = true
-        cv.showsHorizontalScrollIndicator = false
-        cv.showsVerticalScrollIndicator = false
-        cv.collectionViewLayout = flowLayout
-        cv.backgroundColor = UIColor.red
-        return cv
-    }()
+    // sticky 헤더뷰
+    let serviceHeaderView = ServiceHeaderView()
+    let minHeight: CGFloat = 170
+    let maxHeight: CGFloat = 170
+    var currentHeightConstraint = NSLayoutConstraint()
     
     // 서비스 목록
-    private let serviceListTableView: UITableView = {
+    private var serviceListTableView: UITableView = {
         let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
         tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
@@ -37,7 +27,11 @@ final class ServiceViewController: UIViewController {
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         //tv.separatorStyle = .none
         return tv
-    }()
+    }() {
+        didSet {
+            self.serviceListTableView.contentInset = UIEdgeInsets(top: self.maxHeight, left: 0, bottom: 0, right: 0)
+        }
+    }
     
     //MARK: - 인스턴스
     
@@ -51,7 +45,7 @@ final class ServiceViewController: UIViewController {
     
         self.setupNavigationBar()
         self.setupView()
-        self.setupCollectionView()
+        self.setupHeaderView()
         self.setupTableView()
     }
 
@@ -59,51 +53,38 @@ final class ServiceViewController: UIViewController {
     
     // 네비게이션 바 설정
     private func setupNavigationBar() {
-        // 커스텀 설정 적용
-        self.navigationController?.applyCustomSettings(color: .white)
-        self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
-
-        // 네비게이션 바 구성
-        let title = self.navigationItem.makeTitle(
-            title: NavigationBarTitle.serviceMenu.rawValue,
-            color: UIColor(themeColor: .black)
-        )
-        
-        self.navigationItem.leftBarButtonItems = [title]
-        
-//        // 네비게이션 바 구성
-//        let stackView = self.navigationItem.makeTitleAndTabMenu(
-//            title: NavigationBarTitle.serviceMenu.rawValue,
-//            color: UIColor(themeColor: .black),
-//            collectionView: self.tabMenuCollectionView
-//        )
-//
-//        // 스택뷰를 내비게이션 바의 타이틀뷰로 설정
-//        self.navigationItem.titleView = stackView
+        //self.navigationController?.applyCustomSettings(color: .white, topInset: 25)
+        //self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
+        self.navigationController?.navigationBar.isHidden = true
+        //self.navigationController?.hidesBarsOnSwipe = false
+        //self.navigationItem.title = "상품/서비스"
     }
     
     // 뷰 설정
     private func setupView() {
         self.view.backgroundColor = UIColor(themeColor: .white)
-        self.serviceListTableView.backgroundColor = UIColor.clear
     }
     
-    // 컬렉션뷰 설정
-    private func setupCollectionView() {
-
+    // sticky 헤더뷰 설정
+    private func setupHeaderView() {
+        self.view.addSubview(self.serviceHeaderView)
+        self.serviceHeaderView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(self.maxHeight)
+        }
     }
     
     // 테이블뷰 설정
     private func setupTableView() {
         self.view.addSubview(self.serviceListTableView)
         self.serviceListTableView.snp.makeConstraints {
+            $0.top.equalTo(self.serviceHeaderView.snp.bottom)
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
         }
         
-        // 대리자 지정
         self.serviceListTableView.delegate = self
         self.serviceListTableView.dataSource = self
+        self.serviceListTableView.backgroundColor = UIColor(themeColor: .white)
     }
 
 }
@@ -139,17 +120,28 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // header view
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.viewModel.viewForHeaderInSection(tableView: tableView, at: section)
+        if section == 0 {
+            return nil
+        } else {
+            let titleLabel = UILabel(
+                frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
+            )
+            titleLabel.textAlignment = .left
+            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            titleLabel.textColor = UIColor.black
+            titleLabel.text = self.viewModel.categoryName[section-1]
+            
+            let headerView = UIView()
+            headerView.addSubview(titleLabel)
+            
+            return headerView
+        }
     }
     
     // footer view
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return self.viewModel.viewForFooterInSection(at: section)
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.removeSectionSeparators()
-//    }
     
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,6 +179,37 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
 
     }
     
+    // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentContentOffset: CGFloat = scrollView.contentOffset.y  // 현재 content offset 값
+        let thresholdContentOffset: CGFloat = 100.0  // 기준 content offset 값
+        let minimumHeight: CGFloat = 50.0  // 최소한의 height 값
+        //var serviceHeaderViewHeight: CGFloat = max(thresholdContentOffset - currentContentOffset, minimumTopInset)
+        
+        //if currentContentOffset <= thresholdContentOffset { print(#function, currentContentOffset) }
+        if currentContentOffset > 0 { print(#function, currentContentOffset) }
+
+        self.serviceHeaderView.tabTitleLabel.textColor = UIColor(
+            white: 0.0,
+            alpha: 1 - min((thresholdContentOffset/minimumHeight) * currentContentOffset/thresholdContentOffset, 1)
+        )
+        
+//        if currentContentOffset < 0 {
+//            self.serviceHeaderView.snp.makeConstraints {
+//                $0.height.equalTo(max(abs(currentContentOffset), minimumHeight))
+//            }
+//        } else {
+//            self.serviceHeaderView.snp.makeConstraints {
+//                $0.height.equalTo(minimumHeight)
+//            }
+//        }
+        
+//        self.navigationController?.applyCustomSettings(
+//            color: .white,
+//            topInset: min(max(minimumTopInset - currentContentOffset, 0), thresholdContentOffset)
+//        )
+    }
+    
 }
 
 //MARK: - 컬렉션뷰 델리게이트 메서드 (1)
@@ -203,35 +226,22 @@ extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDel
         return 3
     }
     
-    // 각 셀마다 실행할 내용
+    // 각 아이템마다 실행할 내용
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuBarCollectionViewCell.identifier, for: indexPath)
-                as? ServiceMenuBarCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
+                as? ServiceMenuCollectionViewCell else { return UICollectionViewCell() }
         cell.serviceNameLabel.text = "전체"
         return cell
     }
     
-    // 셀이 선택되었을 때 실행할 내용
+    // 아이템이 선택되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! ThemeCollectionViewCell
-//
-//        // 기존에 표출되고 있던 annotation을 없애고 선택한 타입의 annotation을 새롭게 표출
-//        self.removeAnnotations()
-//        for index in 0..<InfoType.allCases.count {
-//            isAnnotationMarked[index] = false
-//        }
-//
-//        if !self.isAnnotationMarked[indexPath.row] {
-//            self.addAnnotationsOnTheMapView(with: InfoType(rawValue: indexPath.row)!)
-//        }
-//
-//        self.viewModel.changeCellUI(cell: cell, selected: true)
+
     }
     
-    // 셀이 해제되었을 때 실행할 내용
+    // 아이템이 해제되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! ThemeCollectionViewCell
-//        self.viewModel.changeCellUI(cell: cell, selected: false)
+
     }
     
 }

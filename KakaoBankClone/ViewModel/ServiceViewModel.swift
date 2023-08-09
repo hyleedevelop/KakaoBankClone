@@ -164,7 +164,7 @@ final class ServiceViewModel {
         ),
     ]]
     
-    private let categoryName: [String] = ["예적금", "카드", "대출"]
+    let categoryName: [String] = ["예적금", "카드", "대출"]
     
     // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
     var getTopAdData: [ServiceTopAdModel] {
@@ -193,28 +193,28 @@ final class ServiceViewModel {
     
     // cell 높이
     func cellHeight(at section: Int) -> CGFloat {
-        return section == 0 ? 310 : 90
+        return section == 0 ? 300 : 90
     }
     
     // custom header view
-    func viewForHeaderInSection(tableView: UITableView, at section: Int) -> UIView? {
-        if section == 0 {
-            return nil
-        } else {
-            let titleLabel = UILabel(
-                frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
-            )
-            titleLabel.textAlignment = .left
-            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-            titleLabel.textColor = UIColor.black
-            titleLabel.text = self.categoryName[section-1]
-            
-            let headerView = UIView()
-            headerView.addSubview(titleLabel)
-            
-            return headerView
-        }
-    }
+//    func viewForHeaderInSection(tableView: UITableView, at section: Int) -> UIView? {
+//        if section == 0 {
+//            return nil
+//        } else {
+//            let titleLabel = UILabel(
+//                frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
+//            )
+//            titleLabel.textAlignment = .left
+//            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+//            titleLabel.textColor = UIColor.black
+//            titleLabel.text = self.categoryName[section-1]
+//
+//            let headerView = UIView()
+//            headerView.addSubview(titleLabel)
+//
+//            return headerView
+//        }
+//    }
     
     // custom footer view
     func viewForFooterInSection(at section: Int) -> UIView? {

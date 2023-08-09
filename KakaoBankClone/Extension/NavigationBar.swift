@@ -13,13 +13,13 @@ import SnapKit
 extension UINavigationController {
     
     // 커스텀 설정
-    func applyCustomSettings(color: ThemeColor) {
+    func applyCustomSettings(color: ThemeColor, topInset: CGFloat) {
         let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.shadowColor = UIColor.clear  // 경계선
+        standardAppearance.shadowColor = UIColor.red  // 경계선
         standardAppearance.backgroundColor = UIColor(themeColor: color)
         
         let scrollEdgeAppearance = UINavigationBarAppearance()
-        scrollEdgeAppearance.shadowColor = UIColor.clear  // 경계선
+        scrollEdgeAppearance.shadowColor = UIColor.red  // 경계선
         scrollEdgeAppearance.backgroundColor = UIColor(themeColor: color)
         
         self.navigationBar.standardAppearance = standardAppearance
@@ -29,7 +29,7 @@ extension UINavigationController {
         self.navigationBar.isHidden = false
         self.navigationBar.backgroundColor = UIColor.white
         self.navigationBar.shadowImage = UIImage()
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0)
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -44,7 +44,7 @@ extension UINavigationItem {
         let titleLabel = UILabel()
         titleLabel.textColor = color
         titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         self.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
     }
     
@@ -91,25 +91,47 @@ extension UINavigationItem {
         return barButtonItem
     }
     
-    func makeTitleAndTabMenu(title: String, color: UIColor, collectionView: UICollectionView) -> UIStackView {
+    func makeMenu(collectionView: UICollectionView) -> UIBarButtonItem {
+        let barButtonItem = UIBarButtonItem(customView: collectionView)
+        barButtonItem.customView?.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(50)
+        }
+        
+        return barButtonItem
+    }
+    
+    func makeTitleAndMenu(title: String, color: UIColor, collectionView: UICollectionView) -> UIView {
         // vertical 스택뷰 생성
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.distribution = .fill
+        stackView.spacing = 0
+        //stackView.distribution = .equalSpacing
         stackView.alignment = .leading
-        
+
         // 레이블 생성
         let label = UILabel()
         label.textColor = color
         label.text = title
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        
-        // 스택뷰에 레이블과 컬렉션뷰 추가
         stackView.addArrangedSubview(label)
+
+        // CollectionView 생성 및 추가
+        collectionView.backgroundColor = UIColor.red
         stackView.addArrangedSubview(collectionView)
+
+        let customView = UIView()
+        customView.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.top.bottom.left.right.equalTo(customView)
+        }
         
-        return stackView
+        label.snp.makeConstraints {
+            $0.left.equalTo(stackView.snp.left)
+            //$0.right.equalTo(stackView.snp.centerX)
+        }
+
+        return customView
     }
     
 }

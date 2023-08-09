@@ -14,6 +14,14 @@ enum ServiceCellModel {
     case listTableView(model: [[ServiceListModel]])
 }
 
+//MARK: - 상품/서비스 화면의 컬렉션뷰
+
+enum ServiceCollectionView {
+    case menu
+    case topAd
+    case footerAd
+}
+
 //MARK: - 테마 색상
 
 enum ThemeColor {
