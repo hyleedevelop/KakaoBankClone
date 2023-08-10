@@ -73,7 +73,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         self.collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().offset(-10)
         }
         
@@ -87,7 +87,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.pageControl)
         self.pageControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(25)
             $0.right.equalToSuperview().offset(5)
         }
 

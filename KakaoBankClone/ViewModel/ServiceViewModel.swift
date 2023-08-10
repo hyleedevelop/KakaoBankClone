@@ -193,7 +193,7 @@ final class ServiceViewModel {
     
     // cell 높이
     func cellHeight(at section: Int) -> CGFloat {
-        return section == 0 ? 300 : 90
+        return section == 0 ? 310 : 90
     }
     
     // custom header view

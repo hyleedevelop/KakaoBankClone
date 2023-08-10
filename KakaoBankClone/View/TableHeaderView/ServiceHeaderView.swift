@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol ServiceHeaderViewDelegate: AnyObject {
+    func didSelectCollectionViewItem(at section: Int)
+}
+
 class ServiceHeaderView: UIView {
     
     //MARK: - UI 속성
@@ -30,8 +34,8 @@ class ServiceHeaderView: UIView {
         return cv
     }()
     
-    // 탭 메뉴 컬렉션뷰의 높이
-    private let serviceMenuCollectionViewHeight: CGFloat = 33
+    // 델리게이트 속성
+    weak var delegate: ServiceHeaderViewDelegate?
     
     // 화면 제목
     let tabTitleLabel: UILabel = {
@@ -101,7 +105,7 @@ extension ServiceHeaderView: UICollectionViewDelegate, UICollectionViewDataSourc
     
     // section 내 아이템의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return 4
     }
     
     // 각 아이템마다 실행할 내용
@@ -109,23 +113,32 @@ extension ServiceHeaderView: UICollectionViewDelegate, UICollectionViewDataSourc
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
                 as? ServiceMenuCollectionViewCell else { return UICollectionViewCell() }
         cell.serviceNameLabel.textColor = UIColor(white: 0.5, alpha: 1.0)
-        cell.serviceNameLabel.text = "전체"
+        switch indexPath.row {
+        case 0: cell.serviceNameLabel.text = "전체"
+        case 1: cell.serviceNameLabel.text = "예적금"
+        case 2: cell.serviceNameLabel.text = "카드"
+        case 3: cell.serviceNameLabel.text = "대출"
+        default: break
+        }
         return cell
     }
     
     // 아이템이 선택되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
-                as? ServiceMenuCollectionViewCell else { fatalError() }
-        cell.serviceNameLabel.textColor = UIColor(white: 0.0, alpha: 1.0)
-        print(#function, indexPath.row)
+        //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
+        //        as? ServiceMenuCollectionViewCell else { fatalError() }
+        //cell.serviceNameLabel.textColor = UIColor(white: 0.0, alpha: 1.0)
+        print(#function, indexPath.item)
+        
+        delegate?.didSelectCollectionViewItem(at: indexPath.item)
+        
     }
     
     // 아이템이 해제되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
                 as? ServiceMenuCollectionViewCell else { fatalError() }
-        cell.serviceNameLabel.textColor = UIColor(white: 0.5, alpha: 1.0)
+        //cell.serviceNameLabel.textColor = UIColor(white: 0.5, alpha: 1.0)
     }
     
 }
@@ -134,7 +147,7 @@ extension ServiceHeaderView: UICollectionViewDelegateFlowLayout {
     
     // 각 셀의 사이즈 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: ServiceViewLayout.menuCollectionViewHeight)
+        return CGSize(width: 55, height: ServiceViewLayout.menuCollectionViewHeight)
     }
     
 }

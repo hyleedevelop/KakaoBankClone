@@ -111,4 +111,5 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
             self.adImage.image = model.image
         }
     }
+    
 }

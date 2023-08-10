@@ -15,35 +15,19 @@ final class ServiceViewController: UIViewController {
     // 헤더뷰(컬렉션뷰를 담고 있는 뷰)
     private let serviceHeaderView: ServiceHeaderView = {
         let view = ServiceHeaderView()
-        view.isHidden = false
-        return view
-    }()
-    
-//    // sticky 헤더뷰(컬렉션뷰를 담고 있는 뷰)
-//    private let stickyServiceHeaderView: ServiceHeaderView = {
-//        let view = ServiceHeaderView()
-//        view.isHidden = true
-//        return view
-//    }()
-    
-    // 스택뷰
-    private let stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.alignment = .fill
-        view.distribution = .fill
-        view.spacing = 20
         return view
     }()
     
     // 서비스 목록
-    private let serviceListTableView: UITableView = {
+    let serviceListTableView: UITableView = {
         let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
         tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
         tv.showsVerticalScrollIndicator = true
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         tv.backgroundColor = UIColor(themeColor: .white)
+        tv.layer.borderColor = UIColor.blue.cgColor
+        tv.layer.borderWidth = 0.5
         return tv
     }()
     
@@ -61,7 +45,6 @@ final class ServiceViewController: UIViewController {
         self.setupView()
         self.setupHeaderView()
         self.setupTableView()
-        self.setupStackView()
     }
 
     //MARK: - 메서드
@@ -78,25 +61,25 @@ final class ServiceViewController: UIViewController {
     
     // 헤더뷰 설정
     private func setupHeaderView() {
+        self.view.addSubview(self.serviceHeaderView)
         self.serviceHeaderView.snp.makeConstraints {
+            $0.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
             $0.height.equalTo(ServiceViewLayout.transparentTitleOffset)
         }
+        
+        self.serviceHeaderView.delegate = self
     }
     
     // 테이블뷰 설정
     private func setupTableView() {
+        self.view.addSubview(self.serviceListTableView)
+        self.serviceListTableView.snp.makeConstraints {
+            $0.top.equalTo(self.serviceHeaderView.snp.bottom).offset(10)
+            $0.bottom.left.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
         self.serviceListTableView.delegate = self
         self.serviceListTableView.dataSource = self
-    }
-    
-    // 스택뷰 설정
-    private func setupStackView() {
-        self.view.addSubview(self.stackView)
-        self.stackView.addArrangedSubview(self.serviceHeaderView)
-        self.stackView.addArrangedSubview(self.serviceListTableView)
-        self.stackView.snp.makeConstraints {
-            $0.edges.equalTo(self.view.safeAreaLayoutGuide)
-        }
     }
 }
 
@@ -159,7 +142,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {  // 0번째 section: 상단 광고 컬렉션뷰
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
                     as? ServiceTopAdTableViewCell else { return UITableViewCell() }
-            cell.backgroundColor = UIColor.green
+            //cell.backgroundColor = UIColor.green
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.getTopAdData)
             return cell
@@ -182,88 +165,56 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // 셀이 선택 되었을때 수행할 내용
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        print(#function, indexPath)
     }
     
     // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // scrollView.contentOffset.y: 현재 테이블뷰의 스크롤의 y 위치
-        // ServiceViewLayout.stickyHeaderOffset: 헤더뷰가 고정되기 시작하는 스크롤의 y 위치
+        // 현재 테이블뷰의 스크롤의 위치
+        let currentOffset: CGFloat = scrollView.contentOffset.y
+        // 헤더뷰가 고정되기 시작하는 스크롤의 위치
+        let stickyOffset: CGFloat = ServiceViewLayout.stickyHeaderOffset
+        // 타이틀이 완전히 투명해질 때 스크롤의 위치
+        let transparentOffset: CGFloat = ServiceViewLayout.transparentTitleOffset
         
-        if scrollView.contentOffset.y > 0 { print(#function, scrollView.contentOffset.y) }
+        //print(#function, currentOffset)
         
         // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
         self.serviceHeaderView.tabTitleLabel.textColor = UIColor(
             white: 0.0,
-            alpha: 1 - (scrollView.contentOffset.y/ServiceViewLayout.transparentTitleOffset)
+            alpha: 1 - (currentOffset/transparentOffset)
         )
         
-        // 스크롤한 정도에 따라 스택뷰의 top 제약조건이 변하도록 설정
-        self.stackView.snp.updateConstraints {
-            switch scrollView.contentOffset.y {
-            case (ServiceViewLayout.stickyHeaderOffset...):
-                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-ServiceViewLayout.stickyHeaderOffset*0.6)
-            case (0..<ServiceViewLayout.stickyHeaderOffset):
-                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-scrollView.contentOffset.y*0.6)
-            case (..<0):
-                $0.top.equalTo(self.view.safeAreaLayoutGuide)
-            default:
-                break
+        // 스크롤 정도에 따라 헤더뷰의 오토레이아웃이 변하도록 설정
+        switch currentOffset {
+        case (stickyOffset...):  // 스크롤 처음 상태보다 아래로 내림 + 타이틀이 완전히 사라진 구간
+            self.serviceHeaderView.snp.updateConstraints {
+                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-stickyOffset*0.6)
             }
+        case (0..<stickyOffset):  // 스크롤 처음 상태보다 아래로 내림 + 타이틀이 희미해지는 구간
+            self.serviceHeaderView.snp.updateConstraints {
+                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-currentOffset*0.6)
+            }
+            
+        case (..<0):  // 스크롤 처음 상태보다 위로 올림
+            self.serviceHeaderView.snp.updateConstraints {
+                $0.top.equalTo(self.view.safeAreaLayoutGuide)
+            }
+        default:
+            break
         }
     }
     
 }
 
-//MARK: - 컬렉션뷰 델리게이트 메서드 (1)
+//MARK: - 헤더뷰에 대한 커스텀 델리게이트 메서드
 
-extension ServiceViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ServiceViewController: ServiceHeaderViewDelegate {
     
-    // section의 개수
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    // section 내 아이템의 개수
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    // 각 아이템마다 실행할 내용
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServiceMenuCollectionViewCell.identifier, for: indexPath)
-                as? ServiceMenuCollectionViewCell else { return UICollectionViewCell() }
-        cell.serviceNameLabel.text = "전체"
-        return cell
-    }
-    
-    // 아이템이 선택되었을 때 실행할 내용
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-    }
-    
-    // 아이템이 해제되었을 때 실행할 내용
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-
-    }
-    
-}
-
-//MARK: - 컬렉션뷰 델리게이트 메서드 (2)
-
-extension ServiceViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 12, height: 30)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: 12, height: 30)
-    }
-    
-    // 각 셀의 사이즈 설정
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 30)
+    // 메뉴 컬렉션뷰의 아이템을 눌렀을 때 테이블뷰의 특정 section으로 이동하기
+    func didSelectCollectionViewItem(at section: Int) {
+        let indexPath = IndexPath(row: 0, section: section)
+        self.serviceListTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
 }
