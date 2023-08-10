@@ -20,7 +20,7 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
     let serviceNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.monospacedSystemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label

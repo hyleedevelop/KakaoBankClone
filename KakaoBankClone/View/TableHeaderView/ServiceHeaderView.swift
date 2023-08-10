@@ -66,28 +66,28 @@ class ServiceHeaderView: UIView {
         self.backgroundColor = UIColor(themeColor: .white)
     }
     
+    // 화면 상단 제목 설정
+    private func setupTabTitleLabel() {
+        self.addSubview(self.tabTitleLabel)
+        self.tabTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.left.equalToSuperview().offset(25)
+        }
+    }
+    
     // 컬렉션뷰 설정
     private func setupCollectionView() {
         self.serviceMenuCollectionView.delegate = self
         self.serviceMenuCollectionView.dataSource = self
     }
     
-    // 화면 상단 제목 설정
-    private func setupTabTitleLabel() {
-        self.addSubview(self.tabTitleLabel)
-        self.tabTitleLabel.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(25)
-            $0.top.equalToSuperview().offset(90)
-        }
-    }
-    
     // 메뉴 컬렉션뷰 설정
     private func setupMenuCollectionView() {
         self.addSubview(self.serviceMenuCollectionView)
         self.serviceMenuCollectionView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
             $0.top.equalTo(self.tabTitleLabel.snp.bottom).offset(20)
-            $0.height.equalTo(Constants.ServiceViewLayout.headerViewHeight)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(ServiceViewLayout.menuCollectionViewHeight)
         }
     }
 }
@@ -134,7 +134,7 @@ extension ServiceHeaderView: UICollectionViewDelegateFlowLayout {
     
     // 각 셀의 사이즈 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: Constants.ServiceViewLayout.headerViewHeight)
+        return CGSize(width: 80, height: ServiceViewLayout.menuCollectionViewHeight)
     }
     
 }

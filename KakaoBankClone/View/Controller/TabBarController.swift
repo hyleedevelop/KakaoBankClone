@@ -67,7 +67,7 @@ class TabBarController: UITabBarController {
         self.viewControllers = [vc1, vc2, vc3, vc4]
         
         // 앱을 처음 실행했을 때 화면에 보여줄 탭
-        self.selectedIndex = 0  // ⚠️ 개발하는 과정에서 상황에 맞게 변경
+        self.selectedIndex = 1  // ⚠️ 개발하는 과정에서 상황에 맞게 변경
     }
     
 }

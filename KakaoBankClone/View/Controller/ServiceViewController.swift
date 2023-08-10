@@ -12,26 +12,40 @@ final class ServiceViewController: UIViewController {
     
     //MARK: - UI 속성
     
-    // sticky 헤더뷰
-    let serviceHeaderView = ServiceHeaderView()
-    let minHeight: CGFloat = 170
-    let maxHeight: CGFloat = 170
-    var currentHeightConstraint = NSLayoutConstraint()
+    // 헤더뷰(컬렉션뷰를 담고 있는 뷰)
+    private let serviceHeaderView: ServiceHeaderView = {
+        let view = ServiceHeaderView()
+        view.isHidden = false
+        return view
+    }()
+    
+//    // sticky 헤더뷰(컬렉션뷰를 담고 있는 뷰)
+//    private let stickyServiceHeaderView: ServiceHeaderView = {
+//        let view = ServiceHeaderView()
+//        view.isHidden = true
+//        return view
+//    }()
+    
+    // 스택뷰
+    private let stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
+        view.spacing = 20
+        return view
+    }()
     
     // 서비스 목록
-    private var serviceListTableView: UITableView = {
+    private let serviceListTableView: UITableView = {
         let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
         tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
         tv.showsVerticalScrollIndicator = true
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
-        //tv.separatorStyle = .none
+        tv.backgroundColor = UIColor(themeColor: .white)
         return tv
-    }() {
-        didSet {
-            self.serviceListTableView.contentInset = UIEdgeInsets(top: self.maxHeight, left: 0, bottom: 0, right: 0)
-        }
-    }
+    }()
     
     //MARK: - 인스턴스
     
@@ -47,17 +61,14 @@ final class ServiceViewController: UIViewController {
         self.setupView()
         self.setupHeaderView()
         self.setupTableView()
+        self.setupStackView()
     }
 
     //MARK: - 메서드
     
     // 네비게이션 바 설정
     private func setupNavigationBar() {
-        //self.navigationController?.applyCustomSettings(color: .white, topInset: 25)
-        //self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
         self.navigationController?.navigationBar.isHidden = true
-        //self.navigationController?.hidesBarsOnSwipe = false
-        //self.navigationItem.title = "상품/서비스"
     }
     
     // 뷰 설정
@@ -65,28 +76,28 @@ final class ServiceViewController: UIViewController {
         self.view.backgroundColor = UIColor(themeColor: .white)
     }
     
-    // sticky 헤더뷰 설정
+    // 헤더뷰 설정
     private func setupHeaderView() {
-        self.view.addSubview(self.serviceHeaderView)
         self.serviceHeaderView.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(self.maxHeight)
+            $0.height.equalTo(ServiceViewLayout.transparentTitleOffset)
         }
     }
     
     // 테이블뷰 설정
     private func setupTableView() {
-        self.view.addSubview(self.serviceListTableView)
-        self.serviceListTableView.snp.makeConstraints {
-            $0.top.equalTo(self.serviceHeaderView.snp.bottom)
-            $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        
         self.serviceListTableView.delegate = self
         self.serviceListTableView.dataSource = self
-        self.serviceListTableView.backgroundColor = UIColor(themeColor: .white)
     }
-
+    
+    // 스택뷰 설정
+    private func setupStackView() {
+        self.view.addSubview(self.stackView)
+        self.stackView.addArrangedSubview(self.serviceHeaderView)
+        self.stackView.addArrangedSubview(self.serviceListTableView)
+        self.stackView.snp.makeConstraints {
+            $0.edges.equalTo(self.view.safeAreaLayoutGuide)
+        }
+    }
 }
 
 //MARK: - 테이블뷰 델리게이트 메서드
@@ -148,6 +159,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {  // 0번째 section: 상단 광고 컬렉션뷰
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
                     as? ServiceTopAdTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = UIColor.green
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.getTopAdData)
             return cell
@@ -164,12 +176,6 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
                 interest: data.interest ?? "",
                 color: data.tintColor
             )
-            
-//            let bottomBorder = CALayer()
-//            bottomBorder.frame = CGRect(x: 0.0, y: cell.contentView.frame.size.height, width: cell.contentView.frame.size.width, height: 0.5)
-//            bottomBorder.backgroundColor = UIColor(white: 0.8, alpha: 1.0).cgColor
-//            cell.contentView.layer.addSublayer(bottomBorder)
-            
             return cell
         }
     }
@@ -181,33 +187,30 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentContentOffset: CGFloat = scrollView.contentOffset.y  // 현재 content offset 값
-        let thresholdContentOffset: CGFloat = 100.0  // 기준 content offset 값
-        let minimumHeight: CGFloat = 50.0  // 최소한의 height 값
-        //var serviceHeaderViewHeight: CGFloat = max(thresholdContentOffset - currentContentOffset, minimumTopInset)
+        // scrollView.contentOffset.y: 현재 테이블뷰의 스크롤의 y 위치
+        // ServiceViewLayout.stickyHeaderOffset: 헤더뷰가 고정되기 시작하는 스크롤의 y 위치
         
-        //if currentContentOffset <= thresholdContentOffset { print(#function, currentContentOffset) }
-        if currentContentOffset > 0 { print(#function, currentContentOffset) }
-
+        if scrollView.contentOffset.y > 0 { print(#function, scrollView.contentOffset.y) }
+        
+        // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
         self.serviceHeaderView.tabTitleLabel.textColor = UIColor(
             white: 0.0,
-            alpha: 1 - min((thresholdContentOffset/minimumHeight) * currentContentOffset/thresholdContentOffset, 1)
+            alpha: 1 - (scrollView.contentOffset.y/ServiceViewLayout.transparentTitleOffset)
         )
         
-//        if currentContentOffset < 0 {
-//            self.serviceHeaderView.snp.makeConstraints {
-//                $0.height.equalTo(max(abs(currentContentOffset), minimumHeight))
-//            }
-//        } else {
-//            self.serviceHeaderView.snp.makeConstraints {
-//                $0.height.equalTo(minimumHeight)
-//            }
-//        }
-        
-//        self.navigationController?.applyCustomSettings(
-//            color: .white,
-//            topInset: min(max(minimumTopInset - currentContentOffset, 0), thresholdContentOffset)
-//        )
+        // 스크롤한 정도에 따라 스택뷰의 top 제약조건이 변하도록 설정
+        self.stackView.snp.updateConstraints {
+            switch scrollView.contentOffset.y {
+            case (ServiceViewLayout.stickyHeaderOffset...):
+                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-ServiceViewLayout.stickyHeaderOffset*0.6)
+            case (0..<ServiceViewLayout.stickyHeaderOffset):
+                $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(-scrollView.contentOffset.y*0.6)
+            case (..<0):
+                $0.top.equalTo(self.view.safeAreaLayoutGuide)
+            default:
+                break
+            }
+        }
     }
     
 }
