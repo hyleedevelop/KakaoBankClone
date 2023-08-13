@@ -21,16 +21,9 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
         label.font = UIFont.monospacedSystemFont(ofSize: 15, weight: .semibold)
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.numberOfLines = 1
         return label
-    }()
-    
-    // 메뉴 이름 아래의 막대
-    let underBarView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(themeColor: .black)
-        return view
     }()
     
     //MARK: - 생성자
@@ -38,8 +31,10 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.layer.borderColor = UIColor.brown.cgColor
+        self.layer.borderWidth = 1
+        
         self.setupServiceNameLabel()
-        self.setupUnderBarView()
     }
     
     required init?(coder: NSCoder) {
@@ -54,17 +49,7 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
         self.serviceNameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview()
-        }
-    }
-    
-    // 메뉴 이름 아래의 막대 설정
-    private func setupUnderBarView() {
-        self.contentView.addSubview(self.underBarView)
-        self.underBarView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(2)
-            $0.width.equalTo(20)
+            //$0.edges.equalToSuperview()
         }
     }
     

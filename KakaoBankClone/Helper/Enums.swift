@@ -55,8 +55,8 @@ enum BadgeType {
 //MARK: - 상품/서비스 화면의 레이아웃 관련 설정값
 
 enum ServiceViewLayout {
-    //static let topViewHeight: CGFloat = 56
-    static let menuCollectionViewHeight: CGFloat = 33
-    static let transparentTitleOffset: CGFloat = 100
-    static let stickyHeaderOffset: CGFloat = 120
+    static let topSafeAreaHeight: CGFloat = 59
+    static let menuCollectionViewHeight: CGFloat = 45
+    static let headerMinHeight: CGFloat = 75
+    static let headerMaxHeight: CGFloat = 130
 }

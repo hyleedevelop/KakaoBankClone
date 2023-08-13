@@ -164,7 +164,7 @@ final class ServiceViewModel {
         ),
     ]]
     
-    let categoryName: [String] = ["예적금", "카드", "대출"]
+    let categoryName: [String] = ["전체", "예적금", "카드", "대출", "테스트1", "테스트2", "테스트3"]
     
     // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
     var getTopAdData: [ServiceTopAdModel] {
@@ -193,7 +193,7 @@ final class ServiceViewModel {
     
     // cell 높이
     func cellHeight(at section: Int) -> CGFloat {
-        return section == 0 ? 310 : 90
+        return section == 0 ? 300 : 90
     }
     
     // custom header view
@@ -237,6 +237,27 @@ final class ServiceViewModel {
             
             return footerView
         }
+    }
+ 
+    //MARK: - 컬렉션뷰 관련
+
+    // section의 개수
+    let numberOfSectionsInCollectionView: Int = 1
+    
+    // item의 개수
+    lazy var numberOfItemsInSections: Int = self.categoryName.count
+    
+    // item의 셀 높이
+    func sizeForItemAt(at item: Int) -> CGSize {
+        return CGSize(
+            width: CGFloat(self.categoryName[item].count * 15),
+            height: CGFloat(ServiceViewLayout.menuCollectionViewHeight - 10)
+        )
+    }
+
+    // item의 메뉴 제목
+    func titleForItemAt(at item: Int) -> String {
+        return self.categoryName[item]
     }
     
 }

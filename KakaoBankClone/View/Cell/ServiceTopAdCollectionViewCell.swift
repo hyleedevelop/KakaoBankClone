@@ -66,7 +66,9 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.setupAutoLayout()
+        self.setupContainerView()
+        self.setupStackView()
+        self.setupImageView()
     }
     
     required init?(coder: NSCoder) {
@@ -75,23 +77,30 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     
     //MARK: - 내부 메서드
     
-    private func setupAutoLayout() {
-        // 컨테이너뷰 설정
+    // 컨테이너뷰 설정
+    private func setupContainerView() {
         self.contentView.addSubview(self.containerView)
+        
         self.containerView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
         }
-        
-        // 스택뷰 설정
+    }
+     
+    // 스택뷰 설정
+    private func setupStackView() {
         self.containerView.addSubview(self.titleStackView)
+        
         self.titleStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(25)
             $0.right.equalToSuperview().offset(-25)
         }
+    }
         
-        // 이미지 설정
+    // 이미지 설정
+    private func setupImageView() {
         self.containerView.addSubview(self.adImage)
+        
         self.adImage.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.right.equalToSuperview()

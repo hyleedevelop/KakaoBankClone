@@ -57,7 +57,6 @@ class ServiceTopAdTableViewCell: UITableViewCell {
 
         self.setupCollectionView()
         self.setupPageControl()
-        //self.adAutoTransition()
     }
     
     required init?(coder: NSCoder) {
@@ -68,45 +67,31 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     
     // 컬렉션뷰 설정
     private func setupCollectionView() {
-        // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.collectionView)
+        
         self.collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-10)
         }
         
-        // 대리자 설정
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
 
     // 페이지컨트롤 설정
     private func setupPageControl() {
-        // 하위뷰로 등록 및 오토레이아웃 설정
         self.contentView.addSubview(self.pageControl)
+        
         self.pageControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(25)
+            $0.top.equalToSuperview().offset(5)
             $0.right.equalToSuperview().offset(5)
         }
 
         // indicator의 점 크기 조절
         self.pageControl.subviews.forEach {
             $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-        }
-    }
-    
-    // 광고 컬렉션뷰 자동 전환
-    private func adAutoTransition() {
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-            self.nowPage += 1
-            //if self.nowPage > self.serviceTopAdModel.count - 1 {
-            if self.nowPage > self.serviceTopAdModel.count - 3 {
-                self.nowPage = 0
-            }
-            self.collectionView.scrollToItem(at: NSIndexPath(item: self.nowPage, section: 0) as IndexPath, at: .right, animated: true)
-            self.pageControl.currentPage = self.nowPage
         }
     }
     
@@ -153,15 +138,12 @@ extension ServiceTopAdTableViewCell: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
-    
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension ServiceTopAdTableViewCell: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
