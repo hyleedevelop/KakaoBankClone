@@ -19,8 +19,8 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
     // 메뉴 이름
     let serviceNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(themeColor: .black)
-        label.font = UIFont.monospacedSystemFont(ofSize: 15, weight: .semibold)
+        label.textColor = UIColor(white: 0.5, alpha: 1.0)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .center
         label.numberOfLines = 1
         return label
@@ -31,8 +31,8 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.borderColor = UIColor.brown.cgColor
-        self.layer.borderWidth = 1
+        //self.layer.borderColor = UIColor.brown.cgColor
+        //self.layer.borderWidth = 0
         
         self.setupServiceNameLabel()
     }
@@ -41,7 +41,7 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - 메서드
+    //MARK: - 내부 메서드
     
     // 메뉴 이름 설정
     private func setupServiceNameLabel() {
@@ -49,7 +49,6 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
         self.serviceNameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview()
-            //$0.edges.equalToSuperview()
         }
     }
     

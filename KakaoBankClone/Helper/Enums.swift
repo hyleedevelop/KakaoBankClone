@@ -56,7 +56,7 @@ enum BadgeType {
 
 enum ServiceViewLayout {
     static let topSafeAreaHeight: CGFloat = 59
-    static let menuCollectionViewHeight: CGFloat = 45
-    static let headerMinHeight: CGFloat = 75
+    static let menuCollectionViewHeight: CGFloat = 40
+    static let headerMinHeight: CGFloat = 70
     static let headerMaxHeight: CGFloat = 130
 }
