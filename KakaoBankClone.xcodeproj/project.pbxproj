@@ -149,6 +149,185 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		075FBE7B2A8B3F2900A82EC1 /* 2.ServiceScreen */ = {
+			isa = PBXGroup;
+			children = (
+				075FBE7C2A8B3F4400A82EC1 /* Model */,
+				075FBE7E2A8B3F5100A82EC1 /* ViewModel */,
+				075FBE7D2A8B3F4C00A82EC1 /* View */,
+			);
+			path = 2.ServiceScreen;
+			sourceTree = "<group>";
+		};
+		075FBE7C2A8B3F4400A82EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */,
+				072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		075FBE7D2A8B3F4C00A82EC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */,
+				07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */,
+				075FBE802A8B3F8A00A82EC1 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		075FBE7E2A8B3F5100A82EC1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		075FBE802A8B3F8A00A82EC1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				07D9E3722A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift */,
+				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
+				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
+				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		075FBE812A8B3FB300A82EC1 /* 3.AlertScreen */ = {
+			isa = PBXGroup;
+			children = (
+				075FBE882A8B40F300A82EC1 /* Model */,
+				075FBE892A8B40F900A82EC1 /* ViewModel */,
+				075FBE8A2A8B40FC00A82EC1 /* View */,
+			);
+			path = 3.AlertScreen;
+			sourceTree = "<group>";
+		};
+		075FBE822A8B3FDF00A82EC1 /* 1.AccountScreen */ = {
+			isa = PBXGroup;
+			children = (
+				075FBE852A8B40C300A82EC1 /* Model */,
+				075FBE862A8B40D100A82EC1 /* View */,
+			);
+			path = 1.AccountScreen;
+			sourceTree = "<group>";
+		};
+		075FBE832A8B3FF600A82EC1 /* 0.Shared */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */,
+			);
+			path = 0.Shared;
+			sourceTree = "<group>";
+		};
+		075FBE842A8B404E00A82EC1 /* 4.MoreScreen */ = {
+			isa = PBXGroup;
+			children = (
+				075FBE8D2A8B411D00A82EC1 /* Model */,
+				075FBE8C2A8B411A00A82EC1 /* ViewModel */,
+				075FBE8B2A8B411500A82EC1 /* View */,
+			);
+			path = 4.MoreScreen;
+			sourceTree = "<group>";
+		};
+		075FBE852A8B40C300A82EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07755D0C2A7E72220076253B /* AccountModel.swift */,
+				076848242A7D306C00812353 /* AccountTopAdModel.swift */,
+				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		075FBE862A8B40D100A82EC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */,
+				075FBE872A8B40DA00A82EC1 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		075FBE872A8B40DA00A82EC1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
+				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
+				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
+				07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */,
+				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		075FBE882A8B40F300A82EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		075FBE892A8B40F900A82EC1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		075FBE8A2A8B40FC00A82EC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */,
+				075FBE8F2A8B413100A82EC1 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		075FBE8B2A8B411500A82EC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */,
+				075FBE8E2A8B412800A82EC1 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		075FBE8C2A8B411A00A82EC1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		075FBE8D2A8B411D00A82EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		075FBE8E2A8B412800A82EC1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		075FBE8F2A8B413100A82EC1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		076848192A7C9F5200812353 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,9 +369,11 @@
 				07AA67682A7BB7C5009DB3F0 /* Info.plist */,
 				076848192A7C9F5200812353 /* Helper */,
 				07AA67A22A7BF16E009DB3F0 /* Extension */,
-				07AA678C2A7BC161009DB3F0 /* Model */,
-				07AA678B2A7BBA86009DB3F0 /* ViewModel */,
-				07AA678A2A7BBA7F009DB3F0 /* View */,
+				075FBE832A8B3FF600A82EC1 /* 0.Shared */,
+				075FBE822A8B3FDF00A82EC1 /* 1.AccountScreen */,
+				075FBE7B2A8B3F2900A82EC1 /* 2.ServiceScreen */,
+				075FBE812A8B3FB300A82EC1 /* 3.AlertScreen */,
+				075FBE842A8B404E00A82EC1 /* 4.MoreScreen */,
 			);
 			path = KakaoBankClone;
 			sourceTree = "<group>";
@@ -214,67 +395,6 @@
 			path = KakaoBankCloneUITests;
 			sourceTree = "<group>";
 		};
-		07AA678A2A7BBA7F009DB3F0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				07F30D632A83AA6B001D96FC /* TableHeaderView */,
-				07AA679F2A7BEF3F009DB3F0 /* Cell */,
-				07AA679D2A7BEF05009DB3F0 /* Controller */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		07AA678B2A7BBA86009DB3F0 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
-				07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */,
-				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
-				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		07AA678C2A7BC161009DB3F0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				07755D0C2A7E72220076253B /* AccountModel.swift */,
-				076848242A7D306C00812353 /* AccountTopAdModel.swift */,
-				07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */,
-				072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */,
-				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		07AA679D2A7BEF05009DB3F0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */,
-				07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */,
-				07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */,
-				07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */,
-				07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		07AA679F2A7BEF3F009DB3F0 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
-				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
-				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
-				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
-				07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */,
-				07D9E3722A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift */,
-				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
-				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
-				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		07AA67A22A7BF16E009DB3F0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,14 +405,6 @@
 				07CA4ED92A81400400F81E6F /* UITableViewCell.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		07F30D632A83AA6B001D96FC /* TableHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */,
-			);
-			path = TableHeaderView;
 			sourceTree = "<group>";
 		};
 		08C2739B01DABA05D30D916E /* Pods */ = {
