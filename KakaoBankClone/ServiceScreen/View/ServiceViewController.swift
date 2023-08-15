@@ -8,16 +8,12 @@
 import UIKit
 import SnapKit
 
-protocol ServiceMenuCollectionViewDelegate: AnyObject {
-    func didSelectCollectionViewItem(at item: Int)
-}
-
 final class ServiceViewController: UIViewController {
     
     //MARK: - UI 속성
     
-    // 헤더뷰(컬렉션뷰를 담고 있는 뷰)
-    private let serviceHeaderView: ServiceHeaderView = {
+    // 화면 최상단의 헤더뷰
+    private let headerView: ServiceHeaderView = {
         let view = ServiceHeaderView()
         view.layer.borderColor = UIColor.red.cgColor
         view.layer.borderWidth = 0
@@ -25,13 +21,16 @@ final class ServiceViewController: UIViewController {
     }()
     
     // 탭 메뉴 컬렉션뷰
-    private let serviceMenuCollectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: CGRect(), collectionViewLayout: flowLayout)
-        cv.register(ServiceMenuCollectionViewCell.self, forCellWithReuseIdentifier: ServiceMenuCollectionViewCell.identifier)
+        cv.register(
+            ServiceMenuCollectionViewCell.self,
+            forCellWithReuseIdentifier: ServiceMenuCollectionViewCell.identifier
+        )
         cv.isScrollEnabled = true
         cv.showsHorizontalScrollIndicator = false
         cv.showsVerticalScrollIndicator = false
@@ -55,10 +54,16 @@ final class ServiceViewController: UIViewController {
     }()
     
     // 서비스 목록
-    private let serviceListTableView: UITableView = {
+    private let tableView: UITableView = {
         let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
-        tv.register(ServiceTopAdTableViewCell.self, forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier)
-        tv.register(ServiceListTableViewCell.self, forCellReuseIdentifier: ServiceListTableViewCell.identifier)
+        tv.register(
+            ServiceTopAdTableViewCell.self,
+            forCellReuseIdentifier: ServiceTopAdTableViewCell.identifier
+        )
+        tv.register(
+            ServiceListTableViewCell.self,
+            forCellReuseIdentifier: ServiceListTableViewCell.identifier
+        )
         tv.showsVerticalScrollIndicator = true
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         tv.backgroundColor = UIColor(themeColor: .white)
@@ -67,10 +72,7 @@ final class ServiceViewController: UIViewController {
         return tv
     }()
     
-    //MARK: - 델리게이트 및 인스턴스
-    
-    // 델리게이트 속성
-    weak var delegate: ServiceMenuCollectionViewDelegate?
+    //MARK: - 인스턴스
     
     // 뷰모델의 인스턴스
     private let viewModel = ServiceViewModel()
@@ -94,38 +96,38 @@ final class ServiceViewController: UIViewController {
         self.view.backgroundColor = UIColor(themeColor: .white)
     }
     
-    // 하위 뷰 등록
+    // 하위 뷰 추가
     private func addSubview() {
-        self.view.addSubview(self.serviceListTableView)
-        self.view.addSubview(self.serviceHeaderView)
-        self.view.addSubview(self.serviceMenuCollectionView)
-        self.serviceMenuCollectionView.addSubview(self.highlightBar)
+        self.view.addSubview(self.tableView)
+        self.view.addSubview(self.headerView)
+        self.view.addSubview(self.collectionView)
+        self.collectionView.addSubview(self.highlightBar)
     }
     
-    // 오토레이아웃 설정
+    // 레이아웃 설정
     private func setupLayout() {
         // 테이블뷰
-        self.serviceListTableView.snp.makeConstraints {
+        self.tableView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.bottom.left.right.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         // 헤더뷰
-        self.serviceHeaderView.snp.makeConstraints {
+        self.headerView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
-            $0.height.equalTo(ServiceViewLayout.headerMaxHeight)
+            $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
         }
         
         // 메뉴 컬렉션뷰
-        self.serviceMenuCollectionView.snp.makeConstraints {
-            $0.top.equalTo(self.serviceHeaderView.snp.bottom)
+        self.collectionView.snp.makeConstraints {
+            $0.top.equalTo(self.headerView.snp.bottom)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
-            $0.height.equalTo(ServiceViewLayout.menuCollectionViewHeight)
+            $0.height.equalTo(ServiceLayoutValues.menuCollectionViewHeight)
         }
         
-        self.serviceListTableView.contentOffset.y = -ServiceViewLayout.headerMaxHeight  // 테이블뷰 스크롤의 초기 위치
-        self.serviceListTableView.contentInset.top = ServiceViewLayout.headerMaxHeight  // 테이블뷰 꼭대기의 내부간격
+        self.tableView.contentOffset.y = -ServiceLayoutValues.headerMaxHeight  // 테이블뷰 스크롤의 초기 위치
+        self.tableView.contentInset.top = ServiceLayoutValues.headerMaxHeight  // 테이블뷰 꼭대기의 내부간격
         
         // 강조 막대
         let minX = self.viewModel.sizeForheaderAndFooter.width + 7.5
@@ -134,21 +136,21 @@ final class ServiceViewController: UIViewController {
         self.highlightBar.snp.makeConstraints {
             $0.left.equalToSuperview().offset(minX)
             $0.right.equalToSuperview().offset(maxX)
-            $0.top.equalTo(self.serviceMenuCollectionView.snp.bottom).offset(38)
+            $0.top.equalTo(self.collectionView.snp.bottom).offset(33)
             $0.height.equalTo(2)
         }
     }
     
     // 대리자 설정
     private func setupDelegate() {
-        self.serviceListTableView.delegate = self
-        self.serviceListTableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
-        self.serviceMenuCollectionView.delegate = self
-        self.serviceMenuCollectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
     
         // 초기화 시 선택되어 있을 셀 지정하기
-        self.serviceMenuCollectionView.selectItem(
+        self.collectionView.selectItem(
             at: IndexPath(item: 0, section: 0),
             animated: true,
             scrollPosition: .centeredHorizontally
@@ -189,24 +191,24 @@ extension ServiceViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // frame은 컬렉션뷰 내부 좌표계에 대한 값을 가지므로 frame 속성을 이용해 minX, maxX에 접근하면 안된다.
         // 따라서 컬렉션뷰의 좌표계로 변환하고 여기서의 minX, maxX를 구해야 한다.
-        guard let selectedCell = self.serviceMenuCollectionView.cellForItem(at: indexPath) else { return }
+        guard let selectedCell = self.collectionView.cellForItem(at: indexPath) else { return }
         let minX = selectedCell.convert(selectedCell.bounds, to: collectionView).minX + 7.5
         let maxX = selectedCell.convert(selectedCell.bounds, to: collectionView).maxX - 7.5
         
         UIView.animate(withDuration: 0.3) {
             // 컬렉션뷰의 스크롤을 최대한 화면 중앙으로 이동시키기
-            self.serviceMenuCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             // 메뉴 하단의 강조 막대 움직이기
             self.highlightBar.snp.updateConstraints {
                 $0.left.equalToSuperview().offset(minX)
                 $0.right.equalToSuperview().offset(maxX)
             }
             // 하위뷰의 레이아웃 즉시 업데이트
-            self.serviceMenuCollectionView.layoutIfNeeded()
+            self.collectionView.layoutIfNeeded()
         }
         
         // 테이블뷰 스크롤을 특정 위치로 이동시키기
-        self.serviceListTableView.scrollToRow(at: IndexPath(row: 0, section: indexPath.item), at: .top, animated: true)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: indexPath.item), at: .top, animated: true)
         
         // 햅틱 반응
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -314,49 +316,49 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
-        guard scrollView == self.serviceListTableView else { return }
+        guard scrollView == self.tableView else { return }
         
         // 현재 테이블뷰의 스크롤의 위치
         let currentOffset: CGFloat = -scrollView.contentOffset.y
         // 다이내믹한 오토레이아웃 설정을 위한 스크롤뷰 오프셋의 최소 기준값
-        let minimum: CGFloat = ServiceViewLayout.headerMinHeight + ServiceViewLayout.topSafeAreaHeight
+        let minimum: CGFloat = ServiceLayoutValues.headerMinHeight + ServiceLayoutValues.topSafeAreaHeight
         // 다이내믹한 오토레이아웃 설정을 위한 스크롤뷰 오프셋의 최대 기준값
-        let maximum: CGFloat = ServiceViewLayout.headerMaxHeight + ServiceViewLayout.topSafeAreaHeight
+        let maximum: CGFloat = ServiceLayoutValues.headerMaxHeight + ServiceLayoutValues.topSafeAreaHeight
         // 현재 제목의 투명도
         let currentTitleAlpha = 1 - ((maximum - currentOffset) / (maximum - minimum))
         
         // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
-        self.serviceHeaderView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
+        self.headerView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
         
         // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
         // 1) 헤더뷰 높이가 최대값으로 유지되는 구간
         if currentOffset >= maximum {
             //print("1) 헤더뷰 높이가 최대값으로 유지되는 구간")
-            self.serviceHeaderView.alpha = 1
-            self.serviceMenuCollectionView.alpha = 1
-            self.serviceMenuCollectionView.layer.shadowOpacity = 0
-            self.serviceHeaderView.snp.updateConstraints {
-                $0.height.equalTo(ServiceViewLayout.headerMaxHeight)
+            self.headerView.alpha = 1
+            self.collectionView.alpha = 1
+            self.collectionView.layer.shadowOpacity = 0
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
             }
         }
         // 2) 헤더뷰 높이가 변하는 구간
         else if currentOffset < maximum && currentOffset >= minimum {
             //print("2) 헤더뷰 높이가 변하는 구간")
-            self.serviceHeaderView.alpha = 1
-            self.serviceMenuCollectionView.alpha = 1
-            self.serviceMenuCollectionView.layer.shadowOpacity = 0
-            self.serviceHeaderView.snp.updateConstraints {
-                $0.height.equalTo(currentOffset-ServiceViewLayout.topSafeAreaHeight)
+            self.headerView.alpha = 1
+            self.collectionView.alpha = 1
+            self.collectionView.layer.shadowOpacity = 0
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(currentOffset-ServiceLayoutValues.topSafeAreaHeight)
             }
         }
         // 3) 헤더뷰 높이가 최소값으로 유지되는 구간
         else {
             //print("3) 헤더뷰 높이가 최소값으로 유지되는 구간")
-            self.serviceHeaderView.alpha = 0.98
-            self.serviceMenuCollectionView.alpha = 0.98
-            self.serviceMenuCollectionView.layer.shadowOpacity = 0.1
-            self.serviceHeaderView.snp.updateConstraints {
-                $0.height.equalTo(ServiceViewLayout.headerMinHeight)
+            self.headerView.alpha = 0.98
+            self.collectionView.alpha = 0.98
+            self.collectionView.layer.shadowOpacity = 0.1
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(ServiceLayoutValues.headerMinHeight)
             }
         }
         
@@ -366,17 +368,6 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
 //        if currentOffset < -200 {
 //            self.serviceMenuCollectionView.selectItem(at: IndexPath(item: 1, section: 0), animated: true, scrollPosition: .centeredHorizontally)
 //        }
-    }
-    
-}
-
-//MARK: - 헤더뷰에 대한 커스텀 델리게이트 메서드
-
-extension ServiceViewController: ServiceMenuCollectionViewDelegate {
-    
-    // 메뉴 컬렉션뷰의 아이템을 눌렀을 때 테이블뷰의 특정 section으로 이동하기
-    func didSelectCollectionViewItem(at item: Int) {
-
     }
     
 }

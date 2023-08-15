@@ -22,55 +22,27 @@ final class AccountViewModel {
     //MARK: - 데이터
     
     var accountTopAdData: [AccountTopAdModel] = [
-        AccountTopAdModel(
-            title: "뜨거운 여름, 쿨한 혜택!",
-            subtitle: "최대 6만원 혜택 챙기기",
-            image: UIImage(named: "krw-money")!
-        ),
-        AccountTopAdModel(
-            title: "유학 생활 필수 거래외국환은행",
-            subtitle: "카카오뱅크로 찜하면 무조건 3만원",
-            image: UIImage(named: "krw-money")!
-        ),
-        AccountTopAdModel(
-            title: "안전 여행하면 환급되는 보험?",
-            subtitle: "해외여행보험료 10% 돌려받기",
-            image: UIImage(named: "krw-money")!
-        ),
+        AccountTopAdModel(title: "뜨거운 여름, 쿨한 혜택!", subtitle: "최대 6만원 혜택 챙기기", image: UIImage(named: "krw-money")!),
+        AccountTopAdModel(title: "유학 생활 필수 거래외국환은행", subtitle: "카카오뱅크로 찜하면 무조건 3만원", image: UIImage(named: "krw-money")!),
+        AccountTopAdModel(title: "안전 여행하면 환급되는 보험?", subtitle: "해외여행보험료 10% 돌려받기", image: UIImage(named: "krw-money")!),
     ]
     
     let accountData: [AccountModel] = [
         AccountModel(
-            backgroundColor: UIColor(themeColor: .yellow),
-            tintColor: UIColor(themeColor: .black),
-            name: "현금창고",
-            hasSafeBox: true,
-            accountBalance: 375_000,
-            safeBoxBalance: 5_000_000
+            backgroundColor: UIColor(themeColor: .yellow), tintColor: UIColor(themeColor: .black),
+            name: "현금창고", hasSafeBox: true, accountBalance: 375_000, safeBoxBalance: 5_000_000
         ),
         AccountModel(
-            backgroundColor: UIColor(themeColor: .pink),
-            tintColor: UIColor(themeColor: .white),
-            name: "적금",
-            hasSafeBox: false,
-            accountBalance: 3_500_000,
-            safeBoxBalance: 0
+            backgroundColor: UIColor(themeColor: .pink), tintColor: UIColor(themeColor: .white),
+            name: "적금", hasSafeBox: false, accountBalance: 3_500_000, safeBoxBalance: 0
         ),
         AccountModel(
-            backgroundColor: UIColor(themeColor: .blue),
-            tintColor: UIColor(themeColor: .white),
-            name: "예금",
-            hasSafeBox: false,
-            accountBalance: 10_000_000,
-            safeBoxBalance: 0
+            backgroundColor: UIColor(themeColor: .blue), tintColor: UIColor(themeColor: .white),
+            name: "예금", hasSafeBox: false, accountBalance: 10_000_000, safeBoxBalance: 0
         ),
         AccountModel(
-            backgroundColor: UIColor(themeColor: .green),
-            tintColor: UIColor(themeColor: .white),
-            name: "저금통",
-            hasSafeBox: false,
-            accountBalance: 50_000,
-            safeBoxBalance: 0
+            backgroundColor: UIColor(themeColor: .green), tintColor: UIColor(themeColor: .white),
+            name: "저금통", hasSafeBox: false, accountBalance: 50_000, safeBoxBalance: 0
         ),
     ]
     
@@ -106,10 +78,10 @@ final class AccountViewModel {
     func cellHeight(at section: Int, safeBox: Bool) -> CGFloat {
         if section == 1 {
             // 계좌 셀의 경우 세이프박스가 있으면 200, 없으면 120
-            return safeBox == true ? 200 : 105
+            return safeBox == true ? 190 : 105
         } else {
             // 그 외의 나머지 셀은 75
-            return 75
+            return 70
         }
     }
     

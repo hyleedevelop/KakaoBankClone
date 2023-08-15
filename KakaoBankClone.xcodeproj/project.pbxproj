@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
 		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
+		075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */; };
+		075FBE932A8B434800A82EC1 /* AlertHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */; };
+		075FBE952A8B436D00A82EC1 /* MoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */; };
+		075FBE972A8B5C4200A82EC1 /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE962A8B5C4200A82EC1 /* AlertTableViewCell.swift */; };
+		075FBE992A8B5C4D00A82EC1 /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */; };
+		075FBEA02A8B78B800A82EC1 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE9F2A8B78B800A82EC1 /* TransferViewController.swift */; };
+		075FBEA22A8B78C500A82EC1 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA12A8B78C500A82EC1 /* TransferViewModel.swift */; };
+		075FBEA42A8B792000A82EC1 /* ReceiverAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA32A8B792000A82EC1 /* ReceiverAccountModel.swift */; };
+		075FBEA62A8BA23500A82EC1 /* TransferListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA52A8BA23500A82EC1 /* TransferListTableViewCell.swift */; };
+		075FBEA82A8BA34E00A82EC1 /* TransferHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA72A8BA34E00A82EC1 /* TransferHeaderView.swift */; };
+		075FBEAA2A8BA57D00A82EC1 /* TransferNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA92A8BA57D00A82EC1 /* TransferNavigationView.swift */; };
 		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
 		076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */; };
 		076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */; };
@@ -71,6 +82,17 @@
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
+		075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
+		075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHeaderView.swift; sourceTree = "<group>"; };
+		075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreHeaderView.swift; sourceTree = "<group>"; };
+		075FBE962A8B5C4200A82EC1 /* AlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
+		075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
+		075FBE9F2A8B78B800A82EC1 /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		075FBEA12A8B78C500A82EC1 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
+		075FBEA32A8B792000A82EC1 /* ReceiverAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverAccountModel.swift; sourceTree = "<group>"; };
+		075FBEA52A8BA23500A82EC1 /* TransferListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListTableViewCell.swift; sourceTree = "<group>"; };
+		075FBEA72A8BA34E00A82EC1 /* TransferHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferHeaderView.swift; sourceTree = "<group>"; };
+		075FBEA92A8BA57D00A82EC1 /* TransferNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferNavigationView.swift; sourceTree = "<group>"; };
 		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdTableViewCell.swift; sourceTree = "<group>"; };
 		076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddTableViewCell.swift; sourceTree = "<group>"; };
@@ -149,14 +171,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		075FBE7B2A8B3F2900A82EC1 /* 2.ServiceScreen */ = {
+		075FBE7B2A8B3F2900A82EC1 /* ServiceScreen */ = {
 			isa = PBXGroup;
 			children = (
 				075FBE7C2A8B3F4400A82EC1 /* Model */,
 				075FBE7E2A8B3F5100A82EC1 /* ViewModel */,
 				075FBE7D2A8B3F4C00A82EC1 /* View */,
 			);
-			path = 2.ServiceScreen;
+			path = ServiceScreen;
 			sourceTree = "<group>";
 		};
 		075FBE7C2A8B3F4400A82EC1 /* Model */ = {
@@ -171,9 +193,12 @@
 		075FBE7D2A8B3F4C00A82EC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */,
 				07AA678D2A7BC1BF009DB3F0 /* ServiceViewController.swift */,
-				075FBE802A8B3F8A00A82EC1 /* Cell */,
+				07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */,
+				07D9E3722A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift */,
+				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
+				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
+				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,52 +211,42 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		075FBE802A8B3F8A00A82EC1 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				07D9E3722A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift */,
-				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
-				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
-				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		075FBE812A8B3FB300A82EC1 /* 3.AlertScreen */ = {
+		075FBE812A8B3FB300A82EC1 /* AlertScreen */ = {
 			isa = PBXGroup;
 			children = (
 				075FBE882A8B40F300A82EC1 /* Model */,
 				075FBE892A8B40F900A82EC1 /* ViewModel */,
 				075FBE8A2A8B40FC00A82EC1 /* View */,
 			);
-			path = 3.AlertScreen;
+			path = AlertScreen;
 			sourceTree = "<group>";
 		};
-		075FBE822A8B3FDF00A82EC1 /* 1.AccountScreen */ = {
+		075FBE822A8B3FDF00A82EC1 /* AccountScreen */ = {
 			isa = PBXGroup;
 			children = (
 				075FBE852A8B40C300A82EC1 /* Model */,
+				075FBE9C2A8B77B500A82EC1 /* ViewModel */,
 				075FBE862A8B40D100A82EC1 /* View */,
 			);
-			path = 1.AccountScreen;
+			path = AccountScreen;
 			sourceTree = "<group>";
 		};
-		075FBE832A8B3FF600A82EC1 /* 0.Shared */ = {
+		075FBE832A8B3FF600A82EC1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
 				07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */,
 			);
-			path = 0.Shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
-		075FBE842A8B404E00A82EC1 /* 4.MoreScreen */ = {
+		075FBE842A8B404E00A82EC1 /* MoreScreen */ = {
 			isa = PBXGroup;
 			children = (
 				075FBE8D2A8B411D00A82EC1 /* Model */,
 				075FBE8C2A8B411A00A82EC1 /* ViewModel */,
 				075FBE8B2A8B411500A82EC1 /* View */,
 			);
-			path = 4.MoreScreen;
+			path = MoreScreen;
 			sourceTree = "<group>";
 		};
 		075FBE852A8B40C300A82EC1 /* Model */ = {
@@ -239,7 +254,6 @@
 			children = (
 				07755D0C2A7E72220076253B /* AccountModel.swift */,
 				076848242A7D306C00812353 /* AccountTopAdModel.swift */,
-				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,27 +262,19 @@
 			isa = PBXGroup;
 			children = (
 				07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */,
-				075FBE872A8B40DA00A82EC1 /* Cell */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		075FBE872A8B40DA00A82EC1 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
+				075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */,
 				07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */,
+				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
 				076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */,
 				076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */,
 				07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */,
-				07D9E3702A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift */,
 			);
-			path = Cell;
+			path = View;
 			sourceTree = "<group>";
 		};
 		075FBE882A8B40F300A82EC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +282,7 @@
 		075FBE892A8B40F900A82EC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -284,7 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				07AA678F2A7BC1D7009DB3F0 /* AlertViewController.swift */,
-				075FBE8F2A8B413100A82EC1 /* Cell */,
+				075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */,
+				075FBE962A8B5C4200A82EC1 /* AlertTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,7 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */,
-				075FBE8E2A8B412800A82EC1 /* Cell */,
+				075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */,
+				075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +310,7 @@
 		075FBE8C2A8B411A00A82EC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -308,24 +318,54 @@
 		075FBE8D2A8B411D00A82EC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
+				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		075FBE8E2A8B412800A82EC1 /* Cell */ = {
+		075FBE9A2A8B778200A82EC1 /* TransferScreen */ = {
 			isa = PBXGroup;
 			children = (
-				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
+				075FBE9E2A8B77C700A82EC1 /* Model */,
+				075FBE9D2A8B77C200A82EC1 /* ViewModel */,
+				075FBE9B2A8B77AA00A82EC1 /* View */,
 			);
-			path = Cell;
+			path = TransferScreen;
 			sourceTree = "<group>";
 		};
-		075FBE8F2A8B413100A82EC1 /* Cell */ = {
+		075FBE9B2A8B77AA00A82EC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				075FBE9F2A8B78B800A82EC1 /* TransferViewController.swift */,
+				075FBEA92A8BA57D00A82EC1 /* TransferNavigationView.swift */,
+				075FBEA72A8BA34E00A82EC1 /* TransferHeaderView.swift */,
+				075FBEA52A8BA23500A82EC1 /* TransferListTableViewCell.swift */,
 			);
-			path = Cell;
+			path = View;
+			sourceTree = "<group>";
+		};
+		075FBE9C2A8B77B500A82EC1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		075FBE9D2A8B77C200A82EC1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				075FBEA12A8B78C500A82EC1 /* TransferViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		075FBE9E2A8B77C700A82EC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				075FBEA32A8B792000A82EC1 /* ReceiverAccountModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		076848192A7C9F5200812353 /* Helper */ = {
@@ -369,11 +409,12 @@
 				07AA67682A7BB7C5009DB3F0 /* Info.plist */,
 				076848192A7C9F5200812353 /* Helper */,
 				07AA67A22A7BF16E009DB3F0 /* Extension */,
-				075FBE832A8B3FF600A82EC1 /* 0.Shared */,
-				075FBE822A8B3FDF00A82EC1 /* 1.AccountScreen */,
-				075FBE7B2A8B3F2900A82EC1 /* 2.ServiceScreen */,
-				075FBE812A8B3FB300A82EC1 /* 3.AlertScreen */,
-				075FBE842A8B404E00A82EC1 /* 4.MoreScreen */,
+				075FBE832A8B3FF600A82EC1 /* Shared */,
+				075FBE822A8B3FDF00A82EC1 /* AccountScreen */,
+				075FBE9A2A8B778200A82EC1 /* TransferScreen */,
+				075FBE7B2A8B3F2900A82EC1 /* ServiceScreen */,
+				075FBE812A8B3FB300A82EC1 /* AlertScreen */,
+				075FBE842A8B404E00A82EC1 /* MoreScreen */,
 			);
 			path = KakaoBankClone;
 			sourceTree = "<group>";
@@ -677,27 +718,38 @@
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
+				075FBEA42A8B792000A82EC1 /* ReceiverAccountModel.swift in Sources */,
 				07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */,
 				07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */,
+				075FBEA62A8BA23500A82EC1 /* TransferListTableViewCell.swift in Sources */,
 				07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */,
 				07D9E3752A7FCF43000EDF9B /* ServiceListTableViewCell.swift in Sources */,
 				07755D0B2A7E3A790076253B /* Int.swift in Sources */,
 				076848252A7D306C00812353 /* AccountTopAdModel.swift in Sources */,
 				07D9E3732A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift in Sources */,
+				075FBEAA2A8BA57D00A82EC1 /* TransferNavigationView.swift in Sources */,
 				07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */,
+				075FBEA22A8B78C500A82EC1 /* TransferViewModel.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
+				075FBE972A8B5C4200A82EC1 /* AlertTableViewCell.swift in Sources */,
 				07AA67922A7BC1F6009DB3F0 /* MoreViewController.swift in Sources */,
 				076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */,
 				07F30D652A83AAF1001D96FC /* ServiceHeaderView.swift in Sources */,
+				075FBE992A8B5C4D00A82EC1 /* MoreTableViewCell.swift in Sources */,
 				07D9E3772A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift in Sources */,
 				07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */,
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
 				072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
+				075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */,
+				075FBEA02A8B78B800A82EC1 /* TransferViewController.swift in Sources */,
 				07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */,
+				075FBE932A8B434800A82EC1 /* AlertHeaderView.swift in Sources */,
 				07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */,
 				07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */,
+				075FBE952A8B436D00A82EC1 /* MoreHeaderView.swift in Sources */,
+				075FBEA82A8BA34E00A82EC1 /* TransferHeaderView.swift in Sources */,
 				072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */,
 				0768481B2A7C9F6400812353 /* Enums.swift in Sources */,
 				07AA67962A7BC215009DB3F0 /* ServiceViewModel.swift in Sources */,

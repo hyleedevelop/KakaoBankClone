@@ -283,7 +283,7 @@ final class ServiceViewModel {
     func sizeForItemAt(at item: Int) -> CGSize {
         let labelWidth = self.calculateLabelWidth(for: self.categoryName[item])
         let cellWidth = labelWidth + 10  // Adding 10 for left and right spacing
-        return CGSize(width: cellWidth, height: ServiceViewLayout.menuCollectionViewHeight - 10)
+        return CGSize(width: cellWidth, height: ServiceLayoutValues.menuCollectionViewHeight - 10)
     }
     
     // 컬렉션뷰 셀에 들어가는 레이블의 넓이 계산
@@ -301,7 +301,7 @@ final class ServiceViewModel {
     
     // header와 footer의 크기
     var sizeForheaderAndFooter: CGSize {
-        return CGSize(width: 20, height: ServiceViewLayout.menuCollectionViewHeight)
+        return CGSize(width: 20, height: ServiceLayoutValues.menuCollectionViewHeight)
     }
     
     // 셀의 선택/해제 여부에 따른 UI 변경

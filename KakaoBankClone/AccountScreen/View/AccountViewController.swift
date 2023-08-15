@@ -12,8 +12,20 @@ final class AccountViewController: UIViewController {
 
     //MARK: - UI 속성
     
+    // 화면 최상단의 헤더뷰
+    private let headerView: AccountHeaderView = {
+        let view = AccountHeaderView()
+        view.layer.borderColor = UIColor.red.cgColor
+        view.layer.borderWidth = 0
+        view.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
+        view.layer.shadowOpacity = 0.0
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 2
+        return view
+    }()
+    
     // 계좌 테이블뷰
-    private let accountTableView: UITableView = {
+    private let tableView: UITableView = {
         let tv = UITableView()
         tv.register(
             AccountTopAdTableViewCell.self,
@@ -54,73 +66,82 @@ final class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        self.setupNavigationBar()
+        
         self.setupView()
-        self.setupTableView()
+        self.addSubview()
+        self.setupLayout()
+        self.setupDelegate()
     }
 
     //MARK: - 메서드
     
-    // 네비게이션 바 설정
-    private func setupNavigationBar() {
-        // 커스텀 설정 적용
-        self.navigationController?.applyCustomSettings(color: .white, topInset: 25)
-        self.navigationItem.titleView?.backgroundColor = UIColor(themeColor: .white)
-        
-        // 네비게이션 바 구성
-        let title = self.navigationItem.makeTitle(
-            title: NavigationBarTitle.account.rawValue,
-            color: UIColor(themeColor: .black)
-        )
-        let button = self.navigationItem.makeSettingButton(
-            title: self.viewModel.myAccountButtonName
-        )
-        let image = self.navigationItem.makeProfileImage(
-            image: self.viewModel.myProfileImage
-        )
-        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spacer.width = 5
-        
-        self.navigationItem.leftBarButtonItems = [title, spacer, button]
-        self.navigationItem.rightBarButtonItems = [image]
-    }
-    
     // 뷰 설정
     private func setupView() {
+        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(themeColor: .white)
     }
     
-    // 테이블뷰 설정
-    private func setupTableView() {
-        // 뷰 등록 및 오토레이아웃 설정
-        self.view.addSubview(self.accountTableView)
-        self.accountTableView.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
-        }
-        
-        // 대리자 지정
-        self.accountTableView.delegate = self
-        self.accountTableView.dataSource = self
-        
-        // 하위뷰로 새로고침 등록
-        self.accountTableView.addSubview(self.refreshControl)
+    // 하위 뷰 추가
+    private func addSubview() {
+        self.view.addSubview(self.tableView)
+        self.view.addSubview(self.headerView)
+        self.tableView.addSubview(self.refreshControl)
     }
     
-    // 새로고침 설정
+    // 레이아웃 설정
+    private func setupLayout() {
+        // 헤더뷰
+        self.headerView.snp.makeConstraints {
+            $0.top.equalTo(self.view)
+            $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
+        }
+        
+        // 테이블뷰
+        self.tableView.snp.makeConstraints {
+            $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.equalTo(self.headerView.snp.bottom)
+        }
+        
+        self.tableView.contentInset.top = 10  // 테이블뷰 꼭대기의 내부간격
+    }
+    
+    // 대리자 설정
+    private func setupDelegate() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
+    //MARK: - objc 메서드
+    
+    // 테이블뷰 새로고침 시 실행할 내용 설정
     @objc private func refreshTableView(refresh: UIRefreshControl) {
-        self.accountTableView.refreshControl = self.refreshControl
+        self.tableView.refreshControl = self.refreshControl
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.accountTableView.reloadData()
+            self.tableView.reloadData()
             refresh.endRefreshing()
         }
-
     }
+    
+    @objc private func buttonTapped(_ button: UIButton) {
+        // 계산결과 VC 인스턴스 생성
+        let vc = TransferViewController()
+        // 계산결과 VC에 Navigation VC 넣기
+        let nav = UINavigationController(rootViewController: vc)
+        
+        // Bottom Sheet 관련 설정
+        nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = .coverVertical
+        nav.isModalInPresentation = true  // true이면 쓸어내리기 불가능
+        
+        // 화면 전환
+        self.present(nav, animated: true, completion: nil)
+    }
+    
 }
 
-//MARK: - UITableViewDataSource, UITableViewDelegate
+//MARK: - 테이블뷰 델리게이트 메서드
 
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -171,6 +192,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             if accountData.hasSafeBox {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableViewCell.identifier, for: indexPath)
                         as? AccountTableViewCell else { return UITableViewCell() }
+                
                 cell.selectionStyle = .none
                 cell.setAccount(
                     backgroundColor: accountData.backgroundColor,
@@ -179,10 +201,13 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     account: accountData.accountBalance.commaSeparatedWon,
                     safeBox: accountData.safeBoxBalance.commaSeparatedWon
                 )
+                cell.transferButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
+                
                 return cell
             } else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountWithoutSafeBoxTableViewCell.identifier, for: indexPath)
                         as? AccountWithoutSafeBoxTableViewCell else { return UITableViewCell() }
+                
                 cell.selectionStyle = .none
                 cell.setAccount(
                     backgroundColor: accountData.backgroundColor,
@@ -190,13 +215,16 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     name: indexPath.row == 0 ? accountData.name + " ★" : accountData.name,
                     account: accountData.accountBalance.commaSeparatedWon
                 )
+                
                 return cell
             }
             
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountAddTableViewCell.identifier, for: indexPath)
                     as? AccountAddTableViewCell else { return UITableViewCell() }
+            
             cell.selectionStyle = .none
+            
             return cell
             
         default:
@@ -237,6 +265,29 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             break
         }
+    }
+    
+    // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
+        guard scrollView == self.tableView else { return }
+        
+        // 현재 테이블뷰의 스크롤의 위치
+        let currentOffset: CGFloat = -scrollView.contentOffset.y
+        // 스크롤뷰 오프셋의 기준값
+        let thresholdOffset: CGFloat = 10
+        
+        // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
+        if currentOffset >= thresholdOffset {
+            self.headerView.alpha = 1
+            self.headerView.layer.shadowOpacity = 0
+        }
+        else {
+            self.headerView.alpha = 0.98
+            self.headerView.layer.shadowOpacity = 0.1
+        }
+        
+        //print(currentOffset)
     }
     
 }
