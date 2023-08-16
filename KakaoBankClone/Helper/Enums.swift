@@ -51,6 +51,7 @@ enum ButtonTitle: String {
     case myAccount = "내 계좌"
     case appSetting = "앱설정"
     case close = "닫기"
+    case login = "로그인"
 }
 
 //MARK: - 셀 제목 옆에 붙는 배지 타입

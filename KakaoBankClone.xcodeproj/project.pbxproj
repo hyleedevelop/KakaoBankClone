@@ -46,6 +46,7 @@
 		07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */; };
 		07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A52A7BF213009DB3F0 /* UIColor.swift */; };
 		07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */; };
+		07B85F502A8CECF000619D11 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B85F4F2A8CECF000619D11 /* LoginViewController.swift */; };
 		07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */; };
 		07CA4ED82A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */; };
 		07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CA4ED92A81400400F81E6F /* UITableViewCell.swift */; };
@@ -123,6 +124,7 @@
 		07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		07AA67A52A7BF213009DB3F0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		07AA67A72A7BFB85009DB3F0 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		07B85F4F2A8CECF000619D11 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		07CA4ED72A810AC700F81E6F /* AccountTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		07CA4ED92A81400400F81E6F /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				076848192A7C9F5200812353 /* Helper */,
 				07AA67A22A7BF16E009DB3F0 /* Extension */,
 				075FBE832A8B3FF600A82EC1 /* Shared */,
+				07B85F4E2A8CECDE00619D11 /* LoginScreen */,
 				075FBE822A8B3FDF00A82EC1 /* AccountScreen */,
 				075FBE9A2A8B778200A82EC1 /* TransferScreen */,
 				075FBE7B2A8B3F2900A82EC1 /* ServiceScreen */,
@@ -446,6 +449,14 @@
 				07CA4ED92A81400400F81E6F /* UITableViewCell.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		07B85F4E2A8CECDE00619D11 /* LoginScreen */ = {
+			isa = PBXGroup;
+			children = (
+				07B85F4F2A8CECF000619D11 /* LoginViewController.swift */,
+			);
+			path = LoginScreen;
 			sourceTree = "<group>";
 		};
 		08C2739B01DABA05D30D916E /* Pods */ = {
@@ -742,6 +753,7 @@
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
 				072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
+				07B85F502A8CECF000619D11 /* LoginViewController.swift in Sources */,
 				075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */,
 				075FBEA02A8B78B800A82EC1 /* TransferViewController.swift in Sources */,
 				07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */,
