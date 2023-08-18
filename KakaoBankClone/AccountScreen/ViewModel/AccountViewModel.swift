@@ -18,8 +18,6 @@ final class AccountViewModel {
         // 변경: (3) - 1 - 2 - 3 - (1)
         self.accountTopAdData.insert(self.accountTopAdData[self.accountTopAdData.count-1], at: 0)
         self.accountTopAdData.append(self.accountTopAdData[1])
-        
-        //self.loadAccountDataFromServer()
     }
     
     //MARK: - Firestore 및 데이터
@@ -32,83 +30,99 @@ final class AccountViewModel {
     
     // Firestore에서 사용자 데이터 가져오기
     func fetchAccountDataFromServer(userID: String, completion: @escaping ([AccountModel]) -> Void) {
-        self.firestore.collection(userID).addSnapshotListener { querySnapshot, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            self.accountData = []
-            
-            for document in querySnapshot!.documents {
+        // 실시간으로 자료를 업데이트 하고 데이터 가져오기 (addSnapshotListener)
+        self.firestore
+            .collection("users")
+            .order(by: "userID", descending: false)
+            .whereField("userID", isEqualTo: userID)
+            .addSnapshotListener { querySnapshot, error in
+                // 가져오는데 실패한 경우
+                if let error = error {
+                    print(error.localizedDescription)
+                }
                 
-                guard let userName = document.data()["userName"] as? String,
-                      let accountName = document.data()["accountName"] as? String,
-                      let accountNumber = document.data()["accountNumber"] as? String,
-                      let accountBalance = document.data()["accountBalance"] as? Int,
-                      let hasSafeBox = document.data()["hasSafeBox"] as? Bool,
-                      let safeBoxBalance = document.data()["safeBoxBalance"] as? Int else { return }
+                // 가져오는데 성공한 경우
+                for document in querySnapshot!.documents {
+                    guard let userName = document.data()["userName"] as? String,
+                          let userID = document.data()["userID"] as? String,
+                          let accountName = document.data()["accountName"] as? String,
+                          let accountNumber = document.data()["accountNumber"] as? String,
+                          let accountBalance = document.data()["accountBalance"] as? Int,
+                          let hasSafeBox = document.data()["hasSafeBox"] as? Bool,
+                          let safeBoxBalance = document.data()["safeBoxBalance"] as? Int else { return }
+                    
+                    // 데이터 배열에 추가 (1)
+                    self.accountData.append(
+                        AccountModel(
+                            backgroundColor: UIColor(themeColor: .yellow),
+                            tintColor: UIColor(themeColor: .black),
+                            userID: userID,
+                            userName: userName,
+                            accountName: accountName,
+                            accountNumber: accountNumber,
+                            accountBalance: accountBalance,
+                            hasSafeBox: hasSafeBox,
+                            safeBoxBalance: safeBoxBalance
+                        )
+                    )
+                }
                 
+                let isTheFirstUser = UserDefaults.standard.userID == "user1"
+                
+                // 데이터 배열에 추가 (2)
                 self.accountData.append(
                     AccountModel(
-                        backgroundColor: UIColor(themeColor: .yellow),
-                        tintColor: UIColor(themeColor: .black),
-                        userName: userName,
-                        accountName: accountName,
-                        accountNumber: accountNumber,
-                        accountBalance: accountBalance,
-                        hasSafeBox: hasSafeBox,
-                        safeBoxBalance: safeBoxBalance
+                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .pink : .blue),
+                        tintColor: UIColor(themeColor: .white),
+                        userID: userID,
+                        userName: UserDefaults.standard.userID,
+                        accountName: "적금",
+                        accountNumber: "222-222-222",
+                        accountBalance: isTheFirstUser ? 3_500_000 : 1_200_000,
+                        hasSafeBox: false,
+                        safeBoxBalance: 0
                     )
                 )
+                self.accountData.append(
+                    AccountModel(
+                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .blue : .green),
+                        tintColor: UIColor(themeColor: .white),
+                        userID: userID,
+                        userName: UserDefaults.standard.userID,
+                        accountName: "예금",
+                        accountNumber: "333-333-333",
+                        accountBalance: isTheFirstUser ? 10_000_000 : 5_000_000,
+                        hasSafeBox: false,
+                        safeBoxBalance: 0
+                    )
+                )
+                self.accountData.append(
+                    AccountModel(
+                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .green : .pink),
+                        tintColor: UIColor(themeColor: .white),
+                        userID: userID,
+                        userName: UserDefaults.standard.userID,
+                        accountName: "저금통",
+                        accountNumber: "444-444-444",
+                        accountBalance: isTheFirstUser ? 50_000 : 800_000,
+                        hasSafeBox: false,
+                        safeBoxBalance: 0
+                    )
+                )
+                
+                completion(self.accountData)
             }
-            
-            let isTheFirstUser = UserDefaults.standard.userID == "user1"
-            
-            self.accountData.append(
-                AccountModel(
-                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .pink : .blue),
-                    tintColor: UIColor(themeColor: .white),
-                    userName: UserDefaults.standard.userID,
-                    accountName: "적금",
-                    accountNumber: "222-222-222",
-                    accountBalance: isTheFirstUser ? 3_500_000 : 1_200_000,
-                    hasSafeBox: false,
-                    safeBoxBalance: 0
-                )
-            )
-            self.accountData.append(
-                AccountModel(
-                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .blue : .green),
-                    tintColor: UIColor(themeColor: .white),
-                    userName: UserDefaults.standard.userID,
-                    accountName: "예금",
-                    accountNumber: "333-333-333",
-                    accountBalance: isTheFirstUser ? 10_000_000 : 5_000_000,
-                    hasSafeBox: false,
-                    safeBoxBalance: 0
-                )
-            )
-            self.accountData.append(
-                AccountModel(
-                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .green : .pink),
-                    tintColor: UIColor(themeColor: .white),
-                    userName: UserDefaults.standard.userID,
-                    accountName: "저금통",
-                    accountNumber: "444-444-444",
-                    accountBalance: isTheFirstUser ? 50_000 : 800_000,
-                    hasSafeBox: false,
-                    safeBoxBalance: 0
-                )
-            )
-            
-            completion(self.accountData)
-        }
-
+        
     }
     
     // 사용자 데이터에 접근
-    func getAccountData(at index: Int) -> AccountModel {
-        return self.accountData[index]
+    func getUserName(userID: String) -> String {
+        return self.accountData.first(where: { $0.userID == userID })?.userName ?? "익명"
+    }
+    
+    // 세이프박스 포함 여부 확인
+    func isAccountIncludeSafeBox(at index: Int) -> Bool {
+        return self.accountData[index].hasSafeBox
     }
     
     var accountTopAdData: [AccountTopAdModel] = [

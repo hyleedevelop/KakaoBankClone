@@ -5,8 +5,7 @@
 //  Created by Eric on 2023/08/18.
 //
 
-import UIKit
-import FirebaseFirestore
+import Foundation
 
 extension UserDefaults {
     

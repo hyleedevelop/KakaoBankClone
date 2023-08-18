@@ -46,20 +46,40 @@ final class TransferViewController: UIViewController {
         return tv
     }()
     
-    //MARK: - 인스턴스
+    // 계좌번호 직접입력 버튼
+    let closeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(ButtonTitle.close.rawValue, for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        button.backgroundColor = UIColor(themeColor: .white)
+        return button
+    }()
+    
+    //MARK: - 인스턴스 및 데이터 속성
     
     // 뷰모델의 인스턴스
     private let viewModel = TransferViewModel()
+    
+    // 계좌 데이터
+    private var db = [ReceiverAccountModel]()
     
     //MARK: - 생명주기
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Firestore에서 DB를 가져오기 전에 실행할 내용
         self.setupView()
-        self.addSubview()
-        self.setupLayout()
-        self.setupDelegate()
+        
+        // Firestore에서 DB를 가져온 후에 실행할 내용
+        self.viewModel.fetchReceiverAccountDataFromServer() { db in
+            self.db = db
+                
+            self.addSubview()
+            self.setupLayout()
+            self.setupDelegate()
+        }
     }
 
     //MARK: - 메서드
@@ -127,24 +147,30 @@ extension TransferViewController: NavigationViewDelegate {
 
 extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.viewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return self.viewModel.numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return self.viewModel.heightForRow
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = self.db[indexPath.row]
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TransferListTableViewCell.identifier, for: indexPath)
                 as? TransferListTableViewCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
         cell.applyCellUI(
-            image: UIImage(systemName: "circle.fill")!,
+            image: data.bankIcon,
             type: BankType.woori,
-            name: "김철수",
-            number: "1234567890"
+            name: data.receiverName,
+            number: data.receiverAccountNumber
         )
         
         return cell

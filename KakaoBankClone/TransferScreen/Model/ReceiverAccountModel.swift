@@ -9,6 +9,6 @@ import UIKit
 
 struct ReceiverAccountModel {
     let bankIcon: UIImage
-    let accountName: String
-    let accountNumber: String
+    let receiverName: String
+    let receiverAccountNumber: String
 }

@@ -85,18 +85,19 @@ enum ServiceLayoutValues {
 enum BankType: String {
     case woori = "우리은행"
     case nonghyup = "농협은행"
-    case hana = "하나은행"
     case kookmin = "국민은행"
 }
 
 //MARK: - 사용자 계정
 
-enum UserID: String {
+enum UserID: String, CaseIterable {
     case user1 = "user1"
     case user2 = "user2"
+    case user3 = "user3"
 }
 
 enum UserPassword: String {
     case user1 = "user1user1"
     case user2 = "user2user2"
+    case user3 = "user3user3"
 }

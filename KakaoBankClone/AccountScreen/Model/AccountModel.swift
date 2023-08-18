@@ -10,6 +10,7 @@ import UIKit
 struct AccountModel {
     let backgroundColor: UIColor
     let tintColor: UIColor
+    let userID: String
     let userName: String
     let accountName: String
     let accountNumber: String

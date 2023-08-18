@@ -107,7 +107,7 @@ final class AccountViewController: UIViewController {
             $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
         }
         
-        self.headerView.setTitle(title: UserDefaults.standard.userID)
+        self.headerView.setTitle(title: self.viewModel.getUserName(userID: UserDefaults.standard.userID))
         
         // 테이블뷰
         self.tableView.snp.makeConstraints {
@@ -184,8 +184,10 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
 
     // row의 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let accountData = self.viewModel.getAccountData(at: indexPath.row)
-        return self.viewModel.cellHeight(at: indexPath.section, safeBox: accountData.hasSafeBox)
+        return self.viewModel.cellHeight(
+            at: indexPath.section,
+            safeBox: self.viewModel.isAccountIncludeSafeBox(at: indexPath.row)
+        )
     }
 
     // 셀에 표출할 내용
@@ -199,36 +201,39 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
 
         case 1:
-            //let accountData = self.viewModel.getAccountData(at: indexPath.row)
-            let accountData = self.db[indexPath.row]
+            let data = self.db[indexPath.row]
 
-            if accountData.hasSafeBox {
+            // 계좌가 세이프박스를 포함하는 경우
+            if data.hasSafeBox {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTableViewCell.identifier, for: indexPath)
                         as? AccountTableViewCell else { return UITableViewCell() }
 
                 cell.selectionStyle = .none
                 cell.setAccount(
-                    backgroundColor: accountData.backgroundColor,
-                    tintColor: accountData.tintColor,
-                    accountName: indexPath.row == 0 ? accountData.accountName + " ★" : accountData.accountName,
-                    accountNumber: accountData.accountNumber,
-                    accountBalance: accountData.accountBalance.commaSeparatedWon,
-                    safeBoxBalance: accountData.safeBoxBalance.commaSeparatedWon
+                    backgroundColor: data.backgroundColor,
+                    tintColor: data.tintColor,
+                    accountName: indexPath.row == 0 ? data.accountName + " ★" : data.accountName,
+                    accountNumber: data.accountNumber,
+                    accountBalance: data.accountBalance.commaSeparatedWon,
+                    safeBoxBalance: data.safeBoxBalance.commaSeparatedWon
                 )
                 cell.transferButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
                 cell.playTableViewCellAnimation(sequence: indexPath.row)
 
                 return cell
-            } else {
+            }
+            
+            // 계좌가 세이프박스를 포함하지 않는 경우
+            else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountWithoutSafeBoxTableViewCell.identifier, for: indexPath)
                         as? AccountWithoutSafeBoxTableViewCell else { return UITableViewCell() }
 
                 cell.selectionStyle = .none
                 cell.setAccount(
-                    backgroundColor: accountData.backgroundColor,
-                    tintColor: accountData.tintColor,
-                    accountName: indexPath.row == 0 ? accountData.accountName + " ★" : accountData.accountName,
-                    safeBoxBalance: accountData.accountBalance.commaSeparatedWon
+                    backgroundColor: data.backgroundColor,
+                    tintColor: data.tintColor,
+                    accountName: indexPath.row == 0 ? data.accountName + " ★" : data.accountName,
+                    safeBoxBalance: data.accountBalance.commaSeparatedWon
                 )
                 cell.playTableViewCellAnimation(sequence: indexPath.row)
 
