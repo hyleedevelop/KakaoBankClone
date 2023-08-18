@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
 		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
+		0749CD7E2A8F266900D091BE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749CD7D2A8F266900D091BE /* UserDefaults.swift */; };
 		075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */; };
 		075FBE932A8B434800A82EC1 /* AlertHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */; };
 		075FBE952A8B436D00A82EC1 /* MoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */; };
@@ -83,6 +84,7 @@
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
+		0749CD7D2A8F266900D091BE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHeaderView.swift; sourceTree = "<group>"; };
 		075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreHeaderView.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				07755D0A2A7E3A790076253B /* Int.swift */,
 				07CA4ED52A80FF9800F81E6F /* NSAttributedString.swift */,
 				07CA4ED92A81400400F81E6F /* UITableViewCell.swift */,
+				0749CD7D2A8F266900D091BE /* UserDefaults.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */,
 				075FBE952A8B436D00A82EC1 /* MoreHeaderView.swift in Sources */,
 				075FBEA82A8BA34E00A82EC1 /* TransferHeaderView.swift in Sources */,
+				0749CD7E2A8F266900D091BE /* UserDefaults.swift in Sources */,
 				072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */,
 				0768481B2A7C9F6400812353 /* Enums.swift in Sources */,
 				07AA67962A7BC215009DB3F0 /* ServiceViewModel.swift in Sources */,

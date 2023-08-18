@@ -10,8 +10,10 @@ import UIKit
 struct AccountModel {
     let backgroundColor: UIColor
     let tintColor: UIColor
-    let name: String
-    let hasSafeBox: Bool
+    let userName: String
+    let accountName: String
+    let accountNumber: String
     let accountBalance: Int
+    let hasSafeBox: Bool
     let safeBoxBalance: Int
 }

@@ -113,6 +113,16 @@ final class TransferViewController: UIViewController {
 
 }
 
+//MARK: - 네비게이션 뷰에 대한 커스텀 델리게이트 메서드
+
+extension TransferViewController: NavigationViewDelegate {
+    
+    func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
 //MARK: - 테이블뷰 델리게이트 메서드
 
 extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
@@ -198,16 +208,6 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
 //        }
         
         print(currentOffset)
-    }
-    
-}
-
-//MARK: - 네비게이션 뷰에 대한 커스텀 델리게이트 메서드
-
-extension TransferViewController: NavigationViewDelegate {
-    
-    func closeButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
     }
     
 }

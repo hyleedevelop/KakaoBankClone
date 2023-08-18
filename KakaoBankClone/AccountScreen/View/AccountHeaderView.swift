@@ -95,5 +95,11 @@ class AccountHeaderView: UIView {
             $0.right.equalToSuperview().offset(-25)
         }
     }
+    
+    //MARK: - 뷰컨트롤러에서 호출되는 메서드
+    
+    func setTitle(title: String) {
+        self.tabTitleLabel.text = title
+    }
 
 }

@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
-import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+
+protocol LoginUserInfoDelegate: AnyObject {
+    func sendLoginUserInfo(userID: String)
+}
 
 final class LoginViewController: UIViewController {
 
@@ -32,6 +35,8 @@ final class LoginViewController: UIViewController {
         tf.placeholder = "이메일"
         tf.borderStyle = .roundedRect
         tf.clearButtonMode = .whileEditing
+        tf.keyboardType = .emailAddress
+        tf.text = UserID.user1.rawValue + "@test.com"
         return tf
     }()
     
@@ -42,6 +47,9 @@ final class LoginViewController: UIViewController {
         tf.placeholder = "비밀번호"
         tf.borderStyle = .roundedRect
         tf.clearButtonMode = .whileEditing
+        tf.keyboardType = .asciiCapable
+        tf.isSecureTextEntry = true
+        tf.text = UserPassword.user1.rawValue
         return tf
     }()
     
@@ -49,6 +57,7 @@ final class LoginViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle(ButtonTitle.login.rawValue, for: .normal)
+        button.setTitleColor(UIColor(themeColor: .black), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = UIColor(themeColor: .transparentBlack)
         button.layer.cornerRadius = 25
@@ -56,6 +65,19 @@ final class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
         return button
     }()
+    
+    // 로딩 표시
+    private let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView()
+        ai.hidesWhenStopped = true
+        ai.stopAnimating()
+        ai.style = .large
+        return ai
+    }()
+    
+    //MARK: - 델리게이트 속성
+    
+    weak var delegate: LoginUserInfoDelegate?
     
     //MARK: - 생명주기
     
@@ -82,6 +104,7 @@ final class LoginViewController: UIViewController {
         self.view.addSubview(self.emailTextField)
         self.view.addSubview(self.passwordTextField)
         self.view.addSubview(self.loginButton)
+        self.view.addSubview(self.activityIndicator)
     }
     
     // 레이아웃 설정
@@ -116,6 +139,11 @@ final class LoginViewController: UIViewController {
             $0.right.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
             $0.height.equalTo(50)
         }
+        
+        // 로딩 표시
+        self.activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self.view.safeAreaLayoutGuide)
+        }
     }
     
     // 대리자 설정
@@ -126,18 +154,58 @@ final class LoginViewController: UIViewController {
 
     // 로그인 버튼을 눌렀을 때 실행할 내용 설정
     @objc private func buttonTapped(_ button: UIButton) {
-        // 계산결과 VC 인스턴스 생성
-        let vc = TabBarController()
-        // 계산결과 VC에 Navigation VC 넣기
-        let nav = UINavigationController(rootViewController: vc)
+        // 로딩 애니메이션 시작
+        self.activityIndicator.startAnimating()
         
-        // Bottom Sheet 관련 설정
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .coverVertical
-        nav.isModalInPresentation = true  // true이면 쓸어내리기 불가능
+        guard let email = self.emailTextField.text,
+              let password = self.passwordTextField.text else { return }
         
-        // 화면 전환
-        self.present(nav, animated: true, completion: nil)
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
+            // 로그인 성공 시
+            if error == nil {
+                
+                // 다음 화면으로 사용자 아이디 전달하기
+                //self.delegate?.sendLoginUserInfo(userID: String(email.dropLast(9)))
+                UserDefaults.standard.userID = String(email.dropLast(9))
+                
+                // 다음 화면으로 넘어가기
+                let tabBarController = TabBarController()
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                
+                window?.rootViewController = tabBarController
+                window?.makeKeyAndVisible()
+                
+                // iOS 15부터 아래의 방식은 deprecated 되었음
+                //UIApplication.shared.windows.first?.rootViewController = tabBarController  // 탭바 컨트롤러를 새로운 rootViewController로 설정
+                //UIApplication.shared.windows.first?.makeKeyAndVisible()  // key window로 지정하면서 화면 업데이트
+                
+                // 로딩 애니메이션 종료
+                self.activityIndicator.stopAnimating()
+            }
+                        
+            // 로그인 실패 시
+            else {
+                // 에러메세지 보여주기
+                let alert = UIAlertController(
+                    title: "로그인 실패",
+                    message: "이메일 또는 비밀번호가 올바르지 않습니다.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(
+                    UIAlertAction(title: "닫기", style: .default)
+                )
+                self.present(alert, animated: true)
+                
+                // 로딩 애니메이션 종료
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    // 뷰(화면)를 터치하면 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
@@ -146,6 +214,9 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        <#code#>
+//    }
     
     
 }

@@ -88,3 +88,15 @@ enum BankType: String {
     case hana = "하나은행"
     case kookmin = "국민은행"
 }
+
+//MARK: - 사용자 계정
+
+enum UserID: String {
+    case user1 = "user1"
+    case user2 = "user2"
+}
+
+enum UserPassword: String {
+    case user1 = "user1user1"
+    case user2 = "user2user2"
+}

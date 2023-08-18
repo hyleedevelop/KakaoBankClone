@@ -238,7 +238,7 @@ class AccountTableViewCell: UITableViewCell {
     //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
     // 계좌 잔고로 표시할 금액 설정
-    func setAccount(backgroundColor: UIColor, tintColor: UIColor, name: String, account: String, safeBox: String) {
+    func setAccount(backgroundColor: UIColor, tintColor: UIColor, accountName: String, accountNumber: String, accountBalance: String, safeBoxBalance: String) {
         self.containerView.backgroundColor = backgroundColor
         
         self.settingButton.tintColor = tintColor
@@ -250,9 +250,9 @@ class AccountTableViewCell: UITableViewCell {
         self.safeBoxNameLabel.textColor = tintColor
         self.safeBoxBalanceLabel.textColor = tintColor
         
-        self.accountNameLabel.text = name
-        self.accountBalanceLabel.text = account
-        self.safeBoxBalanceLabel.text = safeBox
+        self.accountNameLabel.text = accountName
+        self.accountBalanceLabel.text = accountBalance
+        self.safeBoxBalanceLabel.text = safeBoxBalance
     }
     
     // 계좌 영역이 클릭되었을 때 실행할 메서드

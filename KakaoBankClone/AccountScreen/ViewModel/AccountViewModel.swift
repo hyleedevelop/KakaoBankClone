@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 final class AccountViewModel {
     
@@ -17,9 +18,98 @@ final class AccountViewModel {
         // 변경: (3) - 1 - 2 - 3 - (1)
         self.accountTopAdData.insert(self.accountTopAdData[self.accountTopAdData.count-1], at: 0)
         self.accountTopAdData.append(self.accountTopAdData[1])
+        
+        //self.loadAccountDataFromServer()
     }
     
-    //MARK: - 데이터
+    //MARK: - Firestore 및 데이터
+    
+    // Firestore의 인스턴스
+    private let firestore = Firestore.firestore()
+    
+    // 계좌 정보 데이터
+    private var accountData = [AccountModel]()
+    
+    // Firestore에서 사용자 데이터 가져오기
+    func fetchAccountDataFromServer(userID: String, completion: @escaping ([AccountModel]) -> Void) {
+        self.firestore.collection(userID).addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            self.accountData = []
+            
+            for document in querySnapshot!.documents {
+                
+                guard let userName = document.data()["userName"] as? String,
+                      let accountName = document.data()["accountName"] as? String,
+                      let accountNumber = document.data()["accountNumber"] as? String,
+                      let accountBalance = document.data()["accountBalance"] as? Int,
+                      let hasSafeBox = document.data()["hasSafeBox"] as? Bool,
+                      let safeBoxBalance = document.data()["safeBoxBalance"] as? Int else { return }
+                
+                self.accountData.append(
+                    AccountModel(
+                        backgroundColor: UIColor(themeColor: .yellow),
+                        tintColor: UIColor(themeColor: .black),
+                        userName: userName,
+                        accountName: accountName,
+                        accountNumber: accountNumber,
+                        accountBalance: accountBalance,
+                        hasSafeBox: hasSafeBox,
+                        safeBoxBalance: safeBoxBalance
+                    )
+                )
+            }
+            
+            let isTheFirstUser = UserDefaults.standard.userID == "user1"
+            
+            self.accountData.append(
+                AccountModel(
+                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .pink : .blue),
+                    tintColor: UIColor(themeColor: .white),
+                    userName: UserDefaults.standard.userID,
+                    accountName: "적금",
+                    accountNumber: "222-222-222",
+                    accountBalance: isTheFirstUser ? 3_500_000 : 1_200_000,
+                    hasSafeBox: false,
+                    safeBoxBalance: 0
+                )
+            )
+            self.accountData.append(
+                AccountModel(
+                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .blue : .green),
+                    tintColor: UIColor(themeColor: .white),
+                    userName: UserDefaults.standard.userID,
+                    accountName: "예금",
+                    accountNumber: "333-333-333",
+                    accountBalance: isTheFirstUser ? 10_000_000 : 5_000_000,
+                    hasSafeBox: false,
+                    safeBoxBalance: 0
+                )
+            )
+            self.accountData.append(
+                AccountModel(
+                    backgroundColor: UIColor(themeColor: isTheFirstUser ? .green : .pink),
+                    tintColor: UIColor(themeColor: .white),
+                    userName: UserDefaults.standard.userID,
+                    accountName: "저금통",
+                    accountNumber: "444-444-444",
+                    accountBalance: isTheFirstUser ? 50_000 : 800_000,
+                    hasSafeBox: false,
+                    safeBoxBalance: 0
+                )
+            )
+            
+            completion(self.accountData)
+        }
+
+    }
+    
+    // 사용자 데이터에 접근
+    func getAccountData(at index: Int) -> AccountModel {
+        return self.accountData[index]
+    }
     
     var accountTopAdData: [AccountTopAdModel] = [
         AccountTopAdModel(title: "뜨거운 여름, 쿨한 혜택!", subtitle: "최대 6만원 혜택 챙기기", image: UIImage(named: "krw-money")!),
@@ -27,28 +117,13 @@ final class AccountViewModel {
         AccountTopAdModel(title: "안전 여행하면 환급되는 보험?", subtitle: "해외여행보험료 10% 돌려받기", image: UIImage(named: "krw-money")!),
     ]
     
-    let accountData: [AccountModel] = [
-        AccountModel(
-            backgroundColor: UIColor(themeColor: .yellow), tintColor: UIColor(themeColor: .black),
-            name: "현금창고", hasSafeBox: true, accountBalance: 375_000, safeBoxBalance: 5_000_000
-        ),
-        AccountModel(
-            backgroundColor: UIColor(themeColor: .pink), tintColor: UIColor(themeColor: .white),
-            name: "적금", hasSafeBox: false, accountBalance: 3_500_000, safeBoxBalance: 0
-        ),
-        AccountModel(
-            backgroundColor: UIColor(themeColor: .blue), tintColor: UIColor(themeColor: .white),
-            name: "예금", hasSafeBox: false, accountBalance: 10_000_000, safeBoxBalance: 0
-        ),
-        AccountModel(
-            backgroundColor: UIColor(themeColor: .green), tintColor: UIColor(themeColor: .white),
-            name: "저금통", hasSafeBox: false, accountBalance: 50_000, safeBoxBalance: 0
-        ),
-    ]
-    
     // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
     var getTopAdData: [AccountTopAdModel] {
         return self.accountTopAdData
+    }
+    
+    var numberOfAccountData: Int {
+        return self.accountData.count
     }
     
     //MARK: - 네비게이션 바 관련
