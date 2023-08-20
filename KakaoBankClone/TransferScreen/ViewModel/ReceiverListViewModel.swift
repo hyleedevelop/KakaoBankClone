@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-final class TransferViewModel {
+final class ReceiverListViewModel {
     
     //MARK: - 생성자
     
@@ -22,10 +22,10 @@ final class TransferViewModel {
     private let firestore = Firestore.firestore()
     
     // 계좌 정보 데이터
-    private var receiverAccountData = [ReceiverAccountModel]()
+    private var receiverAccountData = [ReceiverListModel]()
     
     // Firestore에서 사용자 데이터 가져오기
-    func fetchReceiverAccountDataFromServer(completion: @escaping ([ReceiverAccountModel]) -> Void) {
+    func fetchReceiverAccountDataFromServer(completion: @escaping ([ReceiverListModel]) -> Void) {
         // 실시간으로 자료를 업데이트 하고 데이터 가져오기 (addSnapshotListener)
         self.firestore
             .collection("users")
@@ -44,7 +44,7 @@ final class TransferViewModel {
                 
                 // 데이터 배열에 추가
                 self.receiverAccountData.append(
-                    ReceiverAccountModel(
+                    ReceiverListModel(
                         bankIcon: UIImage(systemName: "circle.fill")!,
                         receiverName: userName,
                         receiverAccountNumber: accountNumber
@@ -58,7 +58,7 @@ final class TransferViewModel {
     }
     
     // 사용자 데이터에 접근
-    func getReceiverAccountData(at index: Int) -> ReceiverAccountModel {
+    func getReceiverAccountData(at index: Int) -> ReceiverListModel {
         return self.receiverAccountData[index]
     }
     

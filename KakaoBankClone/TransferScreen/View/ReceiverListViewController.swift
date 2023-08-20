@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-final class TransferViewController: UIViewController {
+final class ReceiverListViewController: UIViewController {
 
     //MARK: - UI 속성
     
     // 화면 상단의 헤더뷰
-    private let headerView: TransferHeaderView = {
-        let view = TransferHeaderView()
+    private let headerView: ReceiverListHeaderView = {
+        let view = ReceiverListHeaderView()
         view.layer.borderColor = UIColor.blue.cgColor
         view.layer.borderWidth = 1
         view.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
@@ -25,8 +25,8 @@ final class TransferViewController: UIViewController {
     }()
     
     // 화면 최상단의 네비게이션 뷰
-    private let navigationView: TransferNavigationView = {
-        let view = TransferNavigationView()
+    private let navigationView: ReceiverListNavigationView = {
+        let view = ReceiverListNavigationView()
         view.layer.borderColor = UIColor.green.cgColor
         view.layer.borderWidth = 1
         return view
@@ -36,8 +36,8 @@ final class TransferViewController: UIViewController {
     private let accountListTableView: UITableView = {
         let tv = UITableView()
         tv.register(
-            TransferListTableViewCell.self,
-            forCellReuseIdentifier: TransferListTableViewCell.identifier
+            ReceiverListTableViewCell.self,
+            forCellReuseIdentifier: ReceiverListTableViewCell.identifier
         )
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
@@ -59,10 +59,10 @@ final class TransferViewController: UIViewController {
     //MARK: - 인스턴스 및 데이터 속성
     
     // 뷰모델의 인스턴스
-    private let viewModel = TransferViewModel()
+    private let viewModel = ReceiverListViewModel()
     
     // 계좌 데이터
-    private var db = [ReceiverAccountModel]()
+    private var db = [ReceiverListModel]()
     
     //MARK: - 생명주기
     
@@ -119,7 +119,7 @@ final class TransferViewController: UIViewController {
         self.navigationView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
-            $0.height.equalTo(TransferLayoutValues.navigationViewHeight)
+            $0.height.equalTo(TransferLayoutValues.receiverListNavigationViewHeight)
         }
     }
     
@@ -135,9 +135,10 @@ final class TransferViewController: UIViewController {
 
 //MARK: - 네비게이션 뷰에 대한 커스텀 델리게이트 메서드
 
-extension TransferViewController: NavigationViewDelegate {
+extension ReceiverListViewController: ReceiverListNavigationViewDelegate {
     
     func closeButtonTapped() {
+        // 화면 빠져나오기
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -145,7 +146,7 @@ extension TransferViewController: NavigationViewDelegate {
 
 //MARK: - 테이블뷰 델리게이트 메서드
 
-extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
+extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.viewModel.numberOfSections
@@ -162,8 +163,8 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = self.db[indexPath.row]
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TransferListTableViewCell.identifier, for: indexPath)
-                as? TransferListTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReceiverListTableViewCell.identifier, for: indexPath)
+                as? ReceiverListTableViewCell else { return UITableViewCell() }
         
         cell.selectionStyle = .none
         cell.applyCellUI(
@@ -177,7 +178,9 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // 바로 다음 화면으로 넘어가기
+        let nextVC = TransferInfoViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

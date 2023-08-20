@@ -138,7 +138,7 @@ final class AccountViewController: UIViewController {
     
     @objc private func buttonTapped(_ button: UIButton) {
         // 계산결과 VC 인스턴스 생성
-        let vc = TransferViewController()
+        let vc = ReceiverListViewController()
         // 계산결과 VC에 Navigation VC 넣기
         let nav = UINavigationController(rootViewController: vc)
         

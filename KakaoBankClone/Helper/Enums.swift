@@ -52,6 +52,8 @@ enum ButtonTitle: String {
     case appSetting = "앱설정"
     case close = "닫기"
     case login = "로그인"
+    case cancel = "취소"
+    case next = "다음"
 }
 
 //MARK: - 셀 제목 옆에 붙는 배지 타입
@@ -66,8 +68,9 @@ enum BadgeType {
 
 enum TransferLayoutValues {
     static let topSafeAreaHeight: CGFloat = 59
-    static let navigationViewHeight: CGFloat = 90
-    static let headerMaxHeight: CGFloat = navigationViewHeight + 65
+    static let receiverListNavigationViewHeight: CGFloat = 90
+    static let transferInfoNavigatoinViewHiehgt: CGFloat = 110
+    static let headerMaxHeight: CGFloat = receiverListNavigationViewHeight + 65
 }
 
 

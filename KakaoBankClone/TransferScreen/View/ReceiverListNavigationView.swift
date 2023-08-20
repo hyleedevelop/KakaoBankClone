@@ -8,16 +8,16 @@
 import UIKit
 import SnapKit
 
-protocol NavigationViewDelegate: AnyObject {
+protocol ReceiverListNavigationViewDelegate: AnyObject {
     func closeButtonTapped()
 }
 
-class TransferNavigationView: UIView {
+class ReceiverListNavigationView: UIView {
 
     //MARK: - UI 속성
     
-    // 내 계좌 버튼
-    let closeButton: UIButton = {
+    // 닫기 버튼
+    private let closeButton: UIButton = {
         let button = UIButton()
         button.setTitle(ButtonTitle.close.rawValue, for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
@@ -28,7 +28,7 @@ class TransferNavigationView: UIView {
     
     //MARK: - 델리게이트 속성
     
-    weak var delegate: NavigationViewDelegate?
+    weak var delegate: ReceiverListNavigationViewDelegate?
 
     //MARK: - 생성자
     
@@ -69,7 +69,9 @@ class TransferNavigationView: UIView {
         self.closeButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
     }
     
+    // 버튼이 눌러졌을 때 실행할 내용
     @objc private func buttonTapped(_ button: UIButton) {
         self.delegate?.closeButtonTapped()
     }
+    
 }

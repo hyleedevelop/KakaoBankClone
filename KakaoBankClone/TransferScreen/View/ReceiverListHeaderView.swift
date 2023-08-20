@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-class TransferHeaderView: UIView {
+class ReceiverListHeaderView: UIView {
 
     //MARK: - UI 속성
     
     // 화면 제목
-    let tabTitleLabel: UILabel = {
+    private let tabTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)

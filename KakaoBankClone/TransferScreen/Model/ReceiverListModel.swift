@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ReceiverAccountModel {
+struct ReceiverListModel {
     let bankIcon: UIImage
     let receiverName: String
     let receiverAccountNumber: String
