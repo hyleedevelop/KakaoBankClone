@@ -31,6 +31,7 @@ enum ThemeColor {
     case lightGray
     case darkGray
     case pink
+    case red
     case yellow
     case green
     case blue

@@ -214,8 +214,8 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     tintColor: data.tintColor,
                     accountName: indexPath.row == 0 ? data.accountName + " ★" : data.accountName,
                     accountNumber: data.accountNumber,
-                    accountBalance: data.accountBalance.commaSeparatedWon,
-                    safeBoxBalance: data.safeBoxBalance.commaSeparatedWon
+                    accountBalance: data.accountBalance.commaSeparatedWon + "원",
+                    safeBoxBalance: data.safeBoxBalance.commaSeparatedWon + "원"
                 )
                 cell.transferButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
                 cell.playTableViewCellAnimation(sequence: indexPath.row)
@@ -233,7 +233,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     backgroundColor: data.backgroundColor,
                     tintColor: data.tintColor,
                     accountName: indexPath.row == 0 ? data.accountName + " ★" : data.accountName,
-                    safeBoxBalance: data.accountBalance.commaSeparatedWon
+                    safeBoxBalance: data.accountBalance.commaSeparatedWon + "원"
                 )
                 cell.playTableViewCellAnimation(sequence: indexPath.row)
 

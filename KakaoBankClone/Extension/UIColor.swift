@@ -52,6 +52,8 @@ extension UIColor {
             self.init(hexCode: "#666666", alpha: 1.0)
         case .pink:
             self.init(hexCode: "#DE5A79", alpha: 1.0)
+        case .red:
+            self.init(hexCode: "#FE3A2A", alpha: 1.0)
         case .yellow:
             self.init(hexCode: "#FCE002", alpha: 1.0)
         case .green:
