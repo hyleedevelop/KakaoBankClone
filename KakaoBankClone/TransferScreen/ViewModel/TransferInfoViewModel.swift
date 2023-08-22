@@ -62,4 +62,12 @@ final class TransferInfoViewModel {
 //        return self.receiverAccountData[index]
 //    }
     
+    //MARK: - UI 관련
+    
+    // 키패드 버튼 제목
+    let keypadButtonTitles: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "00", "0", "<-"]
+    
+    // 보낼금액 추가 버튼 제목
+    let addAmountButtonTitles: [String] = ["+1만", "+5만", "+10만", "전액"]
+    
 }
