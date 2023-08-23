@@ -62,6 +62,8 @@ final class TransferInfoViewModel {
 //        return self.receiverAccountData[index]
 //    }
     
+    let currentBalance: Int = 1_000_000
+    
     //MARK: - UI 관련
     
     // 키패드 버튼 제목

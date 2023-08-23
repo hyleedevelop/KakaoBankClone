@@ -19,14 +19,17 @@ extension UITableViewCell {
     }
     
     // 셀 로딩 애니메이션
-    func playTableViewCellAnimation(sequence: Int) {
+    func playTableViewCellAnimation(sequence: Int, startAnimation: Bool) {
+        // true인 경우에만 애니메이션 시작
+        guard startAnimation else { return }
+        
         self.transform = CGAffineTransform(translationX: 0, y: 500)
         self.alpha = 0
         
         UIView.animate(
-            withDuration: 0.4,
+            withDuration: 0.5,
             delay: 0.1 * Double(sequence),
-            options: [.curveEaseInOut],
+            options: [.transitionCurlUp, .preferredFramesPerSecond60],
             animations: {
                 self.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.alpha = 1

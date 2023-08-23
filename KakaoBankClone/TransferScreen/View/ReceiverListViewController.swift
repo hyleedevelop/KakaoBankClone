@@ -16,7 +16,7 @@ final class ReceiverListViewController: UIViewController {
     private let headerView: ReceiverListHeaderView = {
         let view = ReceiverListHeaderView()
         view.layer.borderColor = UIColor.blue.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0
         view.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
         view.layer.shadowOpacity = 0.0
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -28,7 +28,7 @@ final class ReceiverListViewController: UIViewController {
     private let navigationView: ReceiverListNavigationView = {
         let view = ReceiverListNavigationView()
         view.layer.borderColor = UIColor.green.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0
         return view
     }()
     
@@ -42,7 +42,7 @@ final class ReceiverListViewController: UIViewController {
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
         tv.layer.borderColor = UIColor.red.cgColor
-        tv.layer.borderWidth = 1
+        tv.layer.borderWidth = 0
         return tv
     }()
     
@@ -54,6 +54,15 @@ final class ReceiverListViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .light)
         button.backgroundColor = UIColor(themeColor: .white)
         return button
+    }()
+    
+    // 로딩 표시
+    private let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView()
+        ai.hidesWhenStopped = true
+        ai.stopAnimating()
+        ai.style = .large
+        return ai
     }()
     
     //MARK: - 인스턴스 및 데이터 속성
@@ -95,6 +104,7 @@ final class ReceiverListViewController: UIViewController {
         self.view.addSubview(self.accountListTableView)
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.navigationView)
+        self.view.addSubview(self.activityIndicator)
     }
     
     // 레이아웃 설정
@@ -120,6 +130,11 @@ final class ReceiverListViewController: UIViewController {
             $0.top.equalTo(self.view)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
             $0.height.equalTo(TransferLayoutValues.receiverListNavigationViewHeight)
+        }
+        
+        // 로딩 표시
+        self.activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
     
@@ -178,9 +193,17 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 바로 다음 화면으로 넘어가기
-        let nextVC = TransferInfoViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        // 로딩 애니메이션 시작
+        self.activityIndicator.startAnimating()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            // 로딩 애니메이션 종료
+            self.activityIndicator.stopAnimating()
+            
+            // 바로 다음 화면으로 넘어가기
+            let nextVC = TransferInfoViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

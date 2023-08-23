@@ -18,10 +18,11 @@ class TransferInfoNavigationView: UIView {
     //MARK: - UI 속성
     
     // 돌아가기 버튼
-    private let backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton()
         button.tintColor = UIColor(themeColor: .black)
         button.setImage(UIImage(systemName: "chevron.left")!, for: .normal)
+        button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -58,12 +59,13 @@ class TransferInfoNavigationView: UIView {
     }()
     
     // 취소 버튼
-    private let cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle(ButtonTitle.cancel.rawValue, for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .light)
         button.backgroundColor = UIColor(themeColor: .white)
+        button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -123,13 +125,10 @@ class TransferInfoNavigationView: UIView {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(150)
         }
-        
-        self.backButton.addTarget(self, action: #selector(self.buttonTapped(button:)), for: .touchUpInside)
-        self.cancelButton.addTarget(self, action: #selector(self.buttonTapped(button:)), for: .touchUpInside)
     }
     
     // 버튼이 눌러졌을 때 실행할 내용
-    @objc private func buttonTapped(button: UIButton) {
+    @objc private func buttonTapped(_ button: UIButton) {
         if button == self.backButton {
             self.delegate?.backButtonTapped()
         }

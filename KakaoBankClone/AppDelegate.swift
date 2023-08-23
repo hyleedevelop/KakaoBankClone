@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //sleep(1)
         
+        // 앱 실행 후 계좌 화면의 테이블뷰 셀 애니메이션이 최초 1회만 시작되도록 설정
+        UserDefaults.standard.showCellAnimation = true
+        
         return true
     }
 

@@ -60,7 +60,7 @@ final class LoginViewController: UIViewController {
         button.setTitleColor(UIColor(themeColor: .black), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.backgroundColor = UIColor(themeColor: .transparentBlack)
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 30
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
         return button
@@ -137,7 +137,7 @@ final class LoginViewController: UIViewController {
             $0.top.equalTo(self.passwordTextField.snp.bottom).offset(100)
             $0.left.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             $0.right.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(50)
+            $0.height.equalTo(60)
         }
         
         // 로딩 표시

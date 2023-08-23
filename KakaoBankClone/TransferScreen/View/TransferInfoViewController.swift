@@ -16,7 +16,7 @@ final class TransferInfoViewController: UIViewController {
     private let navigationView: TransferInfoNavigationView = {
         let view = TransferInfoNavigationView()
         view.layer.borderColor = UIColor.green.cgColor
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0
         return view
     }()
     
@@ -59,13 +59,13 @@ final class TransferInfoViewController: UIViewController {
     }()
     
     // 내 계좌 선택 레이블
-    private let myAcountLabel: UILabel = {
+    private lazy var myAccountLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.numberOfLines = 1
-        label.text = ""
+        label.text = "생활비(5917): \(self.currentBalance.commaSeparatedWon)원"
         return label
     }()
     
@@ -95,7 +95,8 @@ final class TransferInfoViewController: UIViewController {
     // 받는 분에게 표기 텍스트필드
     private let yourTransactionNicknameTextfield: UITextField = {
         let tf = UITextField()
-        tf.placeholder = UserDefaults.standard.userID
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14, weight: .light)]
+        tf.attributedPlaceholder = NSAttributedString(string: UserDefaults.standard.userID, attributes: attributes)
         tf.textAlignment = .right
         return tf
     }()
@@ -126,7 +127,8 @@ final class TransferInfoViewController: UIViewController {
     // 나에게 표기 텍스트필드
     private let myTransactionNicknameTextfield: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "미입력시 수취인명"
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14, weight: .light)]
+        tf.attributedPlaceholder = NSAttributedString(string: "미입력시 수취인명", attributes: attributes)
         tf.textAlignment = .right
         return tf
     }()
@@ -165,6 +167,33 @@ final class TransferInfoViewController: UIViewController {
         return button
     }()
     
+    // 이체 확인 모달뷰
+    private let transferConfirmModalView: TransferConfirmModalView = {
+        let view = TransferConfirmModalView()
+        view.backgroundColor = UIColor(themeColor: .white)
+        view.layer.cornerRadius = 30
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.clipsToBounds = false
+        return view
+    }()
+    
+    // 모달뷰가 나타났을 때 나머지 배경을 어둡게 하는 디밍뷰
+    private let dimmingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(themeColor: .black)
+        view.alpha = 0.0
+        return view
+    }()
+    
+    // 로딩 표시
+    private let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView()
+        ai.hidesWhenStopped = true
+        ai.stopAnimating()
+        ai.style = .large
+        return ai
+    }()
+    
     //MARK: - 인스턴스 및 기타 속성
     
     // 뷰모델의 인스턴스
@@ -181,10 +210,10 @@ final class TransferInfoViewController: UIViewController {
         }
     }
     // 계좌 잔고(원)
-    private var currentBalance: Int = 1_000_000
+    private lazy var currentBalance: Int = self.viewModel.currentBalance
     
     // 다음 버튼을 최초로 탭 하는지에 대한 여부
-    private var firstTapOnTheNextButton: Bool = true
+    private var nextButtonTapCount: Int = 0
     
     //MARK: - 생명주기
     
@@ -283,7 +312,9 @@ final class TransferInfoViewController: UIViewController {
         self.view.addSubview(self.keypadStackView)
         self.view.addSubview(self.addAmountStackView)
         self.view.addSubview(self.myAccountButton)
+        self.view.addSubview(self.myAccountLabel)
         self.view.addSubview(self.amountStatusContainerView)
+        self.view.addSubview(self.activityIndicator)
         
         self.amountStatusContainerView.addSubview(self.amountLabel)
         self.amountStatusContainerView.addSubview(self.currentStatusLabel)
@@ -291,6 +322,10 @@ final class TransferInfoViewController: UIViewController {
     
     // 레이아웃 설정
     private func setupLayout() {
+//        self.view.snp.makeConstraints {
+//            $0.top.equalTo(self.view)
+//        }
+        
         // 네비게이션 뷰
         self.navigationView.snp.makeConstraints {
             $0.top.equalTo(self.view)
@@ -329,6 +364,13 @@ final class TransferInfoViewController: UIViewController {
             $0.height.equalTo(44)
         }
         
+        // 내 계좌 선택 버튼
+        self.myAccountLabel.snp.makeConstraints {
+            $0.left.equalTo(self.myAccountButton.snp.left).offset(15)
+            $0.centerY.equalTo(self.myAccountButton.snp.centerY)
+            $0.width.equalTo(self.myAccountButton.snp.width).multipliedBy(0.8)
+        }
+        
         //let myAccountButtonTitle = "현금창고(xxxx): \(self.currentBalance.commaSeparatedWon)원"
         //self.myAccountButton.setTitle(myAccountButtonTitle, for: .normal)
         
@@ -351,11 +393,17 @@ final class TransferInfoViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(40)
         }
+        
+        // 로딩 표시
+        self.activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self.view.safeAreaLayoutGuide)
+        }
     }
     
     // 대리자 설정
     private func setupDelegate() {
         self.navigationView.delegate = self
+        self.transferConfirmModalView.delegate = self
     }
     
     //MARK: - 특정 상황에서만 실행되는 메서드
@@ -395,7 +443,7 @@ final class TransferInfoViewController: UIViewController {
     }
     
     @objc private func nextButtonTapped(_ button: UIButton) {
-        if self.firstTapOnTheNextButton {
+        if self.nextButtonTapCount == 0 {
             // 버튼이 활성화 된 경우 아래의 코드 실행
             guard button.isUserInteractionEnabled else { return }
             
@@ -456,9 +504,23 @@ final class TransferInfoViewController: UIViewController {
                 self.yourTransactionContainerView.alpha = 1
                 self.myTransactionContainerView.alpha = 1
             }
+            
+            self.nextButtonTapCount += 1
         } else {
-            // modal view 띄우기 구현
-            // ...
+            // 로딩 애니메이션 시작
+            self.activityIndicator.startAnimating()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                // 로딩 애니메이션 종료
+                self.activityIndicator.stopAnimating()
+                
+                // modal view 띄우기 구현
+                self.popoverModalView(
+                    receiver: "사용자2",
+                    receiverAccount: "우리 1357924680",
+                    amount: self.currentInputAmount
+                )
+            }
         }
     }
 
@@ -469,7 +531,6 @@ final class TransferInfoViewController: UIViewController {
             self.amountLabel.text = "보낼금액"
             self.amountLabel.textColor = UIColor(themeColor: .transparentBlack)
             self.amountLabel.font = UIFont.systemFont(ofSize: 40, weight: .medium)
-            
             self.deactivateNextButton()
         } else {
             self.amountLabel.text = self.currentInputAmount.commaSeparatedWon + "원"
@@ -490,12 +551,10 @@ final class TransferInfoViewController: UIViewController {
                 self.amountLabel.textColor = UIColor(themeColor: .red)
                 self.currentStatusLabel.textColor = UIColor(themeColor: .black)
                 self.currentStatusLabel.text = "출금계좌 잔고 부족"
-                
                 self.deactivateNextButton()
             } else {
                 self.amountLabel.textColor = UIColor(themeColor: .black)
                 self.currentStatusLabel.textColor = UIColor(themeColor: .black)
-                
                 self.activateNextButton()
             }
         }
@@ -513,20 +572,111 @@ final class TransferInfoViewController: UIViewController {
         self.nextButton.isUserInteractionEnabled = false
     }
     
+    // 이체 확인 모달뷰 화면에 띄우기
+    private func popoverModalView(receiver: String, receiverAccount: String, amount: Int) {
+        // 하위뷰 추가
+        self.view.addSubview(self.dimmingView)
+        self.view.addSubview(self.transferConfirmModalView)
+        
+        // 초기 상태
+        self.dimmingView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalTo(self.view)
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dimmingViewTapped(_:)))
+        self.dimmingView.addGestureRecognizer(tap)
+        self.dimmingView.alpha = 0.0
+        
+        self.transferConfirmModalView.snp.makeConstraints {
+            $0.height.equalTo(340)
+            $0.top.equalTo(self.view.snp.bottom).offset(20)
+            $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        self.view.layoutIfNeeded()
+        
+        // 애니메이션 효과를 위해 레이아웃을 서서히 변경
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) {
+            self.dimmingView.alpha = 0.7
+            
+            self.transferConfirmModalView.snp.removeConstraints()
+            self.transferConfirmModalView.snp.updateConstraints {
+                $0.height.equalTo(340)
+                $0.top.equalTo(self.view.snp.bottom).offset(-340)
+                $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func dimmingViewTapped(_ view: UIView) {
+        // 애니메이션 효과를 위해 레이아웃을 서서히 변경
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
+            self.dimmingView.alpha = 0.0
+            
+            self.transferConfirmModalView.snp.updateConstraints {
+                $0.top.equalTo(self.view.snp.bottom).offset(20)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
 }
 
 //MARK: - 네비게이션 뷰에 대한 커스텀 델리게이트 메서드
 
 extension TransferInfoViewController: TransferInfoNavigationViewDelegate {
     
+    // 돌아가기 버튼을 눌렀을 때 실행할 내용
     func backButtonTapped() {
         // 바로 직전 화면으로 돌아가기
         self.navigationController?.popViewController(animated: true)
     }
     
+    // 취소 버튼을 눌렀을 때 실행할 내용
     func cancelButtonTapped() {
         // 화면 빠져나오기
         self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: - 모달 뷰에 대한 커스텀 델리게이트 메서드
+
+extension TransferInfoViewController: TransferConfirmModalViewDelegate {
+    
+    // 취소 버튼을 눌렀을 때 실행할 내용
+    func dismissButtonTapped() {
+        // 애니메이션 효과를 위해 레이아웃을 서서히 변경
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
+            self.dimmingView.alpha = 0.0
+            
+            self.transferConfirmModalView.snp.updateConstraints {
+                $0.top.equalTo(self.view.snp.bottom).offset(20)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // 이체하기 버튼을 눌렀을 때 실행할 내용
+    func transferButtonTapped() {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
+            self.transferConfirmModalView.snp.updateConstraints {
+                $0.top.equalTo(self.view.snp.bottom).offset(20)
+            }
+            self.view.layoutIfNeeded()
+        }
+        
+        // 로딩 애니메이션 시작
+        self.activityIndicator.startAnimating()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // 로딩 애니메이션 종료
+            self.activityIndicator.stopAnimating()
+            
+            // 바로 다음 화면으로 넘어가기
+            let nextVC = TransferCompleteViewController()
+            self.navigationController?.pushViewController(nextVC, animated: false)
+        }
     }
     
 }

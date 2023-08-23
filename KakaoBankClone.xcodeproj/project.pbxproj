@@ -21,6 +21,8 @@
 		075FBEA62A8BA23500A82EC1 /* ReceiverListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA52A8BA23500A82EC1 /* ReceiverListTableViewCell.swift */; };
 		075FBEA82A8BA34E00A82EC1 /* ReceiverListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA72A8BA34E00A82EC1 /* ReceiverListHeaderView.swift */; };
 		075FBEAA2A8BA57D00A82EC1 /* ReceiverListNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA92A8BA57D00A82EC1 /* ReceiverListNavigationView.swift */; };
+		076391072A9587870003E5BE /* TransferConfirmModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076391062A9587870003E5BE /* TransferConfirmModalView.swift */; };
+		076391092A95DE5A0003E5BE /* TransferCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */; };
 		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
 		076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */; };
 		076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */; };
@@ -99,6 +101,8 @@
 		075FBEA52A8BA23500A82EC1 /* ReceiverListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListTableViewCell.swift; sourceTree = "<group>"; };
 		075FBEA72A8BA34E00A82EC1 /* ReceiverListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListHeaderView.swift; sourceTree = "<group>"; };
 		075FBEA92A8BA57D00A82EC1 /* ReceiverListNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListNavigationView.swift; sourceTree = "<group>"; };
+		076391062A9587870003E5BE /* TransferConfirmModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferConfirmModalView.swift; sourceTree = "<group>"; };
+		076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCompleteViewController.swift; sourceTree = "<group>"; };
 		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		076848202A7CE96400812353 /* AccountTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTopAdTableViewCell.swift; sourceTree = "<group>"; };
 		076848222A7D14ED00812353 /* AccountAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddTableViewCell.swift; sourceTree = "<group>"; };
@@ -352,6 +356,8 @@
 				075FBEA52A8BA23500A82EC1 /* ReceiverListTableViewCell.swift */,
 				07DEB9062A92019100E75BC4 /* TransferInfoViewController.swift */,
 				07DEB9082A9203C500E75BC4 /* TransferInfoNavigationView.swift */,
+				076391062A9587870003E5BE /* TransferConfirmModalView.swift */,
+				076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -751,9 +757,11 @@
 				076848252A7D306C00812353 /* AccountTopAdModel.swift in Sources */,
 				07D9E3732A7FB834000EDF9B /* ServiceMenuCollectionViewCell.swift in Sources */,
 				075FBEAA2A8BA57D00A82EC1 /* ReceiverListNavigationView.swift in Sources */,
+				076391092A95DE5A0003E5BE /* TransferCompleteViewController.swift in Sources */,
 				07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */,
 				07DEB90B2A92044900E75BC4 /* TransferInfoViewModel.swift in Sources */,
 				075FBEA22A8B78C500A82EC1 /* ReceiverListViewModel.swift in Sources */,
+				076391072A9587870003E5BE /* TransferConfirmModalView.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
 				075FBE972A8B5C4200A82EC1 /* AlertTableViewCell.swift in Sources */,

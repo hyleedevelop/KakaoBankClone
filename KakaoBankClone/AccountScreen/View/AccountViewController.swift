@@ -57,7 +57,24 @@ final class AccountViewController: UIViewController {
         return control
     }()
     
-    //MARK: - 인스턴스 및 데이터 속성
+    // 로딩 표시 애니메이션이 작동중일 때 나머지 배경을 어둡게 하는 디밍뷰
+    private let dimmingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(themeColor: .black)
+        view.alpha = 0.0
+        return view
+    }()
+    
+    // 로딩 표시
+    private let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView()
+        ai.hidesWhenStopped = true
+        ai.stopAnimating()
+        ai.style = .large
+        return ai
+    }()
+    
+    //MARK: - 인스턴스 및 기타 속성
     
     // 뷰모델의 인스턴스
     private let viewModel = AccountViewModel()
@@ -95,6 +112,7 @@ final class AccountViewController: UIViewController {
     private func addSubview() {
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.headerView)
+        self.view.addSubview(self.activityIndicator)
         self.tableView.addSubview(self.refreshControl)
     }
     
@@ -108,6 +126,11 @@ final class AccountViewController: UIViewController {
         }
         
         self.headerView.setTitle(title: self.viewModel.getUserName(userID: UserDefaults.standard.userID))
+        
+        // 로딩 표시
+        self.activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self.view.safeAreaLayoutGuide)
+        }
         
         // 테이블뷰
         self.tableView.snp.makeConstraints {
@@ -128,8 +151,13 @@ final class AccountViewController: UIViewController {
     
     // 테이블뷰 새로고침 시 실행할 내용 설정
     @objc private func refreshTableView(refresh: UIRefreshControl) {
+        // 로딩중 표시하기
         self.tableView.refreshControl = self.refreshControl
         
+        // 테이블뷰 셀 애니메이션 비활성화
+        UserDefaults.standard.showCellAnimation = false
+        
+        // 테이블뷰 갱신
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.tableView.reloadData()
             refresh.endRefreshing()
@@ -137,7 +165,22 @@ final class AccountViewController: UIViewController {
     }
     
     @objc private func buttonTapped(_ button: UIButton) {
-        // 계산결과 VC 인스턴스 생성
+        // 하위뷰 추가
+        self.view.addSubview(self.dimmingView)
+        
+        // 초기 상태
+        self.dimmingView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalTo(self.view)
+        }
+        self.dimmingView.alpha = 0.5
+        
+        // 로딩 애니메이션 시작
+        self.activityIndicator.startAnimating()
+        
+        // 테이블뷰 셀 애니메이션 비활성화
+        UserDefaults.standard.showCellAnimation = false
+        
+        // 이체 받을사람 목록 VC 인스턴스 생성
         let vc = ReceiverListViewController()
         // 계산결과 VC에 Navigation VC 넣기
         let nav = UINavigationController(rootViewController: vc)
@@ -147,8 +190,14 @@ final class AccountViewController: UIViewController {
         nav.modalTransitionStyle = .coverVertical
         nav.isModalInPresentation = true  // true이면 쓸어내리기 불가능
         
-        // 화면 전환
-        self.present(nav, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            // 로딩 애니메이션 종료
+            self.activityIndicator.stopAnimating()
+            self.dimmingView.alpha = 0.0
+            
+            // 화면 전환
+            self.present(nav, animated: true)
+        }
     }
     
 }
@@ -189,7 +238,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             safeBox: self.viewModel.isAccountIncludeSafeBox(at: indexPath.row)
         )
     }
-
+    
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -198,6 +247,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.getTopAdData)
+            
             return cell
 
         case 1:
@@ -218,7 +268,10 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     safeBoxBalance: data.safeBoxBalance.commaSeparatedWon + "원"
                 )
                 cell.transferButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
-                cell.playTableViewCellAnimation(sequence: indexPath.row)
+                cell.playTableViewCellAnimation(
+                    sequence: indexPath.row,
+                    startAnimation: UserDefaults.standard.showCellAnimation
+                )
 
                 return cell
             }
@@ -235,8 +288,11 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     accountName: indexPath.row == 0 ? data.accountName + " ★" : data.accountName,
                     safeBoxBalance: data.accountBalance.commaSeparatedWon + "원"
                 )
-                cell.playTableViewCellAnimation(sequence: indexPath.row)
-
+                cell.playTableViewCellAnimation(
+                    sequence: indexPath.row,
+                    startAnimation: UserDefaults.standard.showCellAnimation
+                )
+                
                 return cell
             }
 
@@ -245,8 +301,11 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     as? AccountAddTableViewCell else { return UITableViewCell() }
 
             cell.selectionStyle = .none
-            cell.playTableViewCellAnimation(sequence: self.viewModel.numberOfAccountData + indexPath.row)
-
+            cell.playTableViewCellAnimation(
+                sequence: self.viewModel.numberOfAccountData + indexPath.row,
+                startAnimation: UserDefaults.standard.showCellAnimation
+            )
+            
             return cell
 
         default:
