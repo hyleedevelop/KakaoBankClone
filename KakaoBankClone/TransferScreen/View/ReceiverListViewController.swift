@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ReceiverListViewController: UIViewController {
-
+    
     //MARK: - UI 속성
     
     // 화면 상단의 헤더뷰
@@ -65,10 +65,20 @@ final class ReceiverListViewController: UIViewController {
         return ai
     }()
     
-    //MARK: - 인스턴스 및 데이터 속성
+    //MARK: - 뷰모델의 인스턴스 및 생성자
     
-    // 뷰모델의 인스턴스
-    private let viewModel = ReceiverListViewModel()
+    private var viewModel: ReceiverListViewModel
+    
+    init(viewModel: ReceiverListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - 인스턴스 및 기타 속성
     
     // 계좌 데이터
     private var db = [ReceiverListModel]()
@@ -83,7 +93,8 @@ final class ReceiverListViewController: UIViewController {
         
         // Firestore에서 DB를 가져온 후에 실행할 내용
         self.viewModel.fetchReceiverAccountDataFromServer() { db in
-            self.db = db
+            // 로그인한 사용자의 계좌는 이체 받을사람 목록에서 제외하기
+            self.db = db.filter { $0.receiverAccountNumber != self.viewModel.accountNumber }
                 
             self.addSubview()
             self.setupLayout()
@@ -168,7 +179,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.numberOfRowsInSection
+        return self.db.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -177,7 +188,6 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = self.db[indexPath.row]
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReceiverListTableViewCell.identifier, for: indexPath)
                 as? ReceiverListTableViewCell else { return UITableViewCell() }
         
@@ -197,12 +207,21 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         self.activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            // 다음 화면으로 데이터를 전달하고 넘어가기
+            let data = self.viewModel.getReceiverAccountData(at: indexPath.row)
+            
+            let nextVM = TransferInfoViewModel(  // 다음 화면의 뷰모델
+                accountName: self.viewModel.accountName,
+                accountNumber: self.viewModel.accountNumber,
+                currentBalance: self.viewModel.currentBalance,
+                selectedReceiverName: data.receiverName,
+                selectedReceiverAccount: data.receiverAccountNumber
+            )
+            let nextVC = TransferInfoViewController(viewModel: nextVM)  // 다음 화면의 뷰컨트롤러
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
             // 로딩 애니메이션 종료
             self.activityIndicator.stopAnimating()
-            
-            // 바로 다음 화면으로 넘어가기
-            let nextVC = TransferInfoViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
     

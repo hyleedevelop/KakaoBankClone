@@ -12,8 +12,10 @@ final class ReceiverListViewModel {
     
     //MARK: - 생성자
     
-    init() {
-        
+    init(accountName: String, accountNumber: String, currentBalance: Int) {
+        self.accountName = accountName
+        self.accountNumber = accountNumber
+        self.currentBalance = currentBalance
     }
     
     //MARK: - Firestore 및 데이터
@@ -21,8 +23,17 @@ final class ReceiverListViewModel {
     // Firestore의 인스턴스
     private let firestore = Firestore.firestore()
     
-    // 계좌 정보 데이터
+    // 받는 사람의 계좌 정보 데이터
     private var receiverAccountData = [ReceiverListModel]()
+    
+    // 로그인한 사용자의 현재 계좌 이름
+    var accountName: String
+    
+    // 로그인한 사용자의 현재 계좌 번호
+    var accountNumber: String
+    
+    // 로그인한 사용자의 현재 계좌 잔고
+    var currentBalance: Int
     
     // Firestore에서 사용자 데이터 가져오기
     func fetchReceiverAccountDataFromServer(completion: @escaping ([ReceiverListModel]) -> Void) {
@@ -54,7 +65,6 @@ final class ReceiverListViewModel {
             
             completion(self.receiverAccountData)
         }
-        
     }
     
     // 사용자 데이터에 접근

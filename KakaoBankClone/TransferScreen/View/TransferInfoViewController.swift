@@ -65,7 +65,8 @@ final class TransferInfoViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.text = "생활비(5917): \(self.currentBalance.commaSeparatedWon)원"
+        label.text = "\(self.viewModel.accountName)(\(self.viewModel.accountNumber.suffix(4))): " +
+                     "\(self.viewModel.currentBalance.commaSeparatedWon)원"
         return label
     }()
     
@@ -93,10 +94,10 @@ final class TransferInfoViewController: UIViewController {
     }()
     
     // 받는 분에게 표기 텍스트필드
-    private let yourTransactionNicknameTextfield: UITextField = {
+    private lazy var yourTransactionNicknameTextfield: UITextField = {
         let tf = UITextField()
         let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14, weight: .light)]
-        tf.attributedPlaceholder = NSAttributedString(string: UserDefaults.standard.userID, attributes: attributes)
+        tf.attributedPlaceholder = NSAttributedString(string: "user name", attributes: attributes)
         tf.textAlignment = .right
         return tf
     }()
@@ -194,13 +195,20 @@ final class TransferInfoViewController: UIViewController {
         return ai
     }()
     
-    //MARK: - 인스턴스 및 기타 속성
+    //MARK: - 뷰모델의 인스턴스 및 생성자
     
-    // 뷰모델의 인스턴스
-    private let viewModel = TransferInfoViewModel()
+    private var viewModel: TransferInfoViewModel
     
-    // 계좌 데이터
-    //private var db = [ReceiverListModel]()
+    init(viewModel: TransferInfoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - 기타 속성
     
     // 보낼금액(원)
     private var currentInputAmount: Int = 0 {
@@ -209,8 +217,6 @@ final class TransferInfoViewController: UIViewController {
             self.changeUI()
         }
     }
-    // 계좌 잔고(원)
-    private lazy var currentBalance: Int = self.viewModel.currentBalance
     
     // 다음 버튼을 최초로 탭 하는지에 대한 여부
     private var nextButtonTapCount: Int = 0
@@ -220,19 +226,19 @@ final class TransferInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Firestore에서 DB를 가져오기 전에 실행할 내용
         self.setupView()
         
-        // Firestore에서 DB를 가져온 후에 실행할 내용
-        //self.viewModel.fetchReceiverAccountDataFromServer() { db in
-            //self.db = db
         self.createKeypadButtons()
         self.createAmountAddButtons()
         
         self.addSubview()
         self.setupLayout()
         self.setupDelegate()
-        //}
+        
+        self.navigationView.setupNavigationView(
+            name: self.viewModel.selectedReceiverName,
+            account: self.viewModel.selectedReceiverAccount
+        )
     }
 
     //MARK: - UI 생성 메서드
@@ -322,10 +328,6 @@ final class TransferInfoViewController: UIViewController {
     
     // 레이아웃 설정
     private func setupLayout() {
-//        self.view.snp.makeConstraints {
-//            $0.top.equalTo(self.view)
-//        }
-        
         // 네비게이션 뷰
         self.navigationView.snp.makeConstraints {
             $0.top.equalTo(self.view)
@@ -371,9 +373,6 @@ final class TransferInfoViewController: UIViewController {
             $0.width.equalTo(self.myAccountButton.snp.width).multipliedBy(0.8)
         }
         
-        //let myAccountButtonTitle = "현금창고(xxxx): \(self.currentBalance.commaSeparatedWon)원"
-        //self.myAccountButton.setTitle(myAccountButtonTitle, for: .normal)
-        
         // 레이블 컨테이너뷰
         self.amountStatusContainerView.snp.makeConstraints {
             $0.left.equalTo(self.view.safeAreaLayoutGuide).offset(20)
@@ -414,7 +413,7 @@ final class TransferInfoViewController: UIViewController {
         if button.tag == 20 { self.currentInputAmount += 10_000 }
         if button.tag == 21 { self.currentInputAmount += 50_000 }
         if button.tag == 22 { self.currentInputAmount += 100_000 }
-        if button.tag == 23 { self.currentInputAmount = self.currentBalance }
+        if button.tag == 23 { self.currentInputAmount = self.viewModel.currentBalance }
     }
     
     // 키패드 버튼을 눌렀을 때 실행할 내용
@@ -516,8 +515,8 @@ final class TransferInfoViewController: UIViewController {
                 
                 // modal view 띄우기 구현
                 self.popoverModalView(
-                    receiver: "사용자2",
-                    receiverAccount: "우리 1357924680",
+                    receiver: self.viewModel.selectedReceiverName,
+                    receiverAccount: self.viewModel.selectedReceiverAccount,
                     amount: self.currentInputAmount
                 )
             }
@@ -547,7 +546,7 @@ final class TransferInfoViewController: UIViewController {
             }
             
             // 보낼금액이 계좌잔고를 초과했는지의 여부에 따라 UI를 다르게 설정
-            if self.currentInputAmount > self.currentBalance {
+            if self.currentInputAmount > self.viewModel.currentBalance {
                 self.amountLabel.textColor = UIColor(themeColor: .red)
                 self.currentStatusLabel.textColor = UIColor(themeColor: .black)
                 self.currentStatusLabel.text = "출금계좌 잔고 부족"
@@ -574,6 +573,13 @@ final class TransferInfoViewController: UIViewController {
     
     // 이체 확인 모달뷰 화면에 띄우기
     private func popoverModalView(receiver: String, receiverAccount: String, amount: Int) {
+        // 모달뷰의 메세지 내용 작성
+        self.transferConfirmModalView.setupMessage(
+            selectedUserName: receiver,
+            selectedUserAccount: receiverAccount,
+            currentInputAmount: amount
+        )
+        
         // 하위뷰 추가
         self.view.addSubview(self.dimmingView)
         self.view.addSubview(self.transferConfirmModalView)
@@ -670,6 +676,8 @@ extension TransferInfoViewController: TransferConfirmModalViewDelegate {
         self.activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            
+            
             // 로딩 애니메이션 종료
             self.activityIndicator.stopAnimating()
             

@@ -33,7 +33,6 @@ class TransferConfirmModalView: UIView {
         label.font = UIFont.systemFont(ofSize: 20, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.attributedText = NSAttributedString(string: "\(UserDefaults.standard.userID)님에게 n원\n이체하시겠습니까?").withLineSpacing(5)
         return label
     }()
     
@@ -44,7 +43,6 @@ class TransferConfirmModalView: UIView {
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.text = "받는계좌: 우리 1357924680"
         return label
     }()
     
@@ -166,6 +164,16 @@ class TransferConfirmModalView: UIView {
         if button == self.cancelButton {
             self.delegate?.dismissButtonTapped()
         }
+    }
+    
+    //MARK: - 뷰컨트롤러에서 호출하는 메서드
+    
+    func setupMessage(selectedUserName: String, selectedUserAccount: String, currentInputAmount: Int) {
+        self.messageLabel.attributedText = NSAttributedString(
+            string: "\(selectedUserName)님에게 \(currentInputAmount.commaSeparatedWon)원\n이체하시겠습니까?"
+        ).withLineSpacing(5)
+        
+        self.accountLabel.text = "받는계좌: \(BankType.woori.rawValue) \(selectedUserAccount)"
     }
     
 }

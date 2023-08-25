@@ -129,7 +129,7 @@ class AccountWithoutSafeBoxTableViewCell: UITableViewCell {
         
         // 계좌 정보 스택뷰
         self.accountStackView.snp.makeConstraints {
-            $0.left.equalTo(self.bankLogoImage.snp.right).offset(5)
+            $0.left.equalTo(self.bankLogoImage.snp.right).offset(8)
             $0.centerY.equalTo(self.bankLogoImage.snp.centerY)
             $0.height.equalTo(45)
         }

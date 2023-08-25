@@ -115,9 +115,24 @@ final class AccountViewModel {
         
     }
     
-    // 사용자 데이터에 접근
+    // 사용자의 이름 가져오기
     func getUserName(userID: String) -> String {
         return self.accountData.first(where: { $0.userID == userID })?.userName ?? "익명"
+    }
+    
+    // 사용자의 계좌 이름 가져오기
+    func getAccountName(userID: String) -> String {
+        return self.accountData.first(where: { $0.userID == userID})?.accountName ?? ""
+    }
+    
+    // 사용자의 계좌 이름 가져오기
+    func getAccountNumber(userID: String) -> String {
+        return self.accountData.first(where: { $0.userID == userID})?.accountNumber ?? ""
+    }
+    
+    // 사용자의 계좌 잔고 가져오기
+    func getAccountBalance(userID: String) -> Int {
+        return self.accountData.first(where: { $0.userID == userID})?.accountBalance ?? 0
     }
     
     // 세이프박스 포함 여부 확인
@@ -131,11 +146,12 @@ final class AccountViewModel {
         AccountTopAdModel(title: "안전 여행하면 환급되는 보험?", subtitle: "해외여행보험료 10% 돌려받기", image: UIImage(named: "krw-money")!),
     ]
     
-    // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
+    // 상단 광고 데이터 가져오기
     var getTopAdData: [AccountTopAdModel] {
         return self.accountTopAdData
     }
     
+    // 사용자의 계좌 개수
     var numberOfAccountData: Int {
         return self.accountData.count
     }

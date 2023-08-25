@@ -180,22 +180,24 @@ final class AccountViewController: UIViewController {
         // 테이블뷰 셀 애니메이션 비활성화
         UserDefaults.standard.showCellAnimation = false
         
-        // 이체 받을사람 목록 VC 인스턴스 생성
-        let vc = ReceiverListViewController()
-        // 계산결과 VC에 Navigation VC 넣기
-        let nav = UINavigationController(rootViewController: vc)
-        
-        // Bottom Sheet 관련 설정
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .coverVertical
-        nav.isModalInPresentation = true  // true이면 쓸어내리기 불가능
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             // 로딩 애니메이션 종료
             self.activityIndicator.stopAnimating()
             self.dimmingView.alpha = 0.0
             
             // 화면 전환
+            let nextVM = ReceiverListViewModel(  // 다음 화면의 뷰모델
+                accountName: self.viewModel.getAccountName(userID: UserDefaults.standard.userID),
+                accountNumber: self.viewModel.getAccountNumber(userID: UserDefaults.standard.userID),
+                currentBalance: self.viewModel.getAccountBalance(userID: UserDefaults.standard.userID)
+            )
+            let nextVC = ReceiverListViewController(viewModel: nextVM)  // 다음 화면의 뷰컨트롤러
+            let nav = UINavigationController(rootViewController: nextVC)
+            
+            nav.modalPresentationStyle = .fullScreen
+            nav.modalTransitionStyle = .coverVertical
+            nav.isModalInPresentation = true  // true이면 쓸어내리기 불가능
+            
             self.present(nav, animated: true)
         }
     }
