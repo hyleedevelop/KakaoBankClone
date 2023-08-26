@@ -24,24 +24,26 @@ class TransferCompleteViewController: UIViewController {
     }()
     
     // 메세지 레이블
-    private let messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.attributedText = NSAttributedString(string: "\(UserDefaults.standard.userID)님에게\nn원 보냈어요").withLineSpacing(2)
+        label.attributedText = NSAttributedString(
+            string: "\(self.viewModel.selectedReceiverName)님에게\n\(self.viewModel.amount.commaSeparatedWon)원 보냈어요"
+        ).withLineSpacing(2)
         return label
     }()
     
     // 계좌 레이블
-    private let accountLabel: UILabel = {
+    private lazy var accountLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .darkGray)
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.text = "우리 1357924680"
+        label.text = "\(self.viewModel.selectedReceiverAccount)"
         return label
     }()
     
@@ -88,6 +90,19 @@ class TransferCompleteViewController: UIViewController {
         sv.spacing = 10
         return sv
     }()
+    
+    //MARK: - 뷰모델의 인스턴스 및 생성자
+    
+    private var viewModel: TransferCompleteViewModel
+    
+    init(viewModel: TransferCompleteViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - 생명주기
     

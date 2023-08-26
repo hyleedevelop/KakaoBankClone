@@ -12,7 +12,8 @@ final class ReceiverListViewModel {
     
     //MARK: - 생성자
     
-    init(accountName: String, accountNumber: String, currentBalance: Int) {
+    init(userName: String, accountName: String, accountNumber: String, currentBalance: Int) {
+        self.userName = userName
         self.accountName = accountName
         self.accountNumber = accountNumber
         self.currentBalance = currentBalance
@@ -25,6 +26,9 @@ final class ReceiverListViewModel {
     
     // 받는 사람의 계좌 정보 데이터
     private var receiverAccountData = [ReceiverListModel]()
+    
+    // 로그인한 사용자의 이름
+    var userName: String
     
     // 로그인한 사용자의 현재 계좌 이름
     var accountName: String
@@ -50,15 +54,19 @@ final class ReceiverListViewModel {
             
             // 가져오는데 성공한 경우
             for document in querySnapshot!.documents {
-                guard let userName = document.data()["userName"] as? String,
-                      let accountNumber = document.data()["accountNumber"] as? String else { return }
+                guard let userID = document.data()["userID"] as? String,
+                      let userName = document.data()["userName"] as? String,
+                      let accountNumber = document.data()["accountNumber"] as? String,
+                      let accountBalance = document.data()["accountBalance"] as? Int else { return }
                 
                 // 데이터 배열에 추가
                 self.receiverAccountData.append(
                     ReceiverListModel(
                         bankIcon: UIImage(systemName: "circle.fill")!,
+                        receiverID: userID,
                         receiverName: userName,
-                        receiverAccountNumber: accountNumber
+                        receiverAccountNumber: accountNumber,
+                        receiverAccountBalance: accountBalance
                     )
                 )
             }

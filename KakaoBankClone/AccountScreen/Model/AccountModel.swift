@@ -12,6 +12,7 @@ struct AccountModel {
     let tintColor: UIColor
     let userID: String
     let userName: String
+    let bank: String
     let accountName: String
     let accountNumber: String
     let accountBalance: Int

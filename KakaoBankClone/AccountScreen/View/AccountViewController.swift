@@ -187,6 +187,7 @@ final class AccountViewController: UIViewController {
             
             // 화면 전환
             let nextVM = ReceiverListViewModel(  // 다음 화면의 뷰모델
+                userName: self.viewModel.getUserName(userID: UserDefaults.standard.userID),
                 accountName: self.viewModel.getAccountName(userID: UserDefaults.standard.userID),
                 accountNumber: self.viewModel.getAccountNumber(userID: UserDefaults.standard.userID),
                 currentBalance: self.viewModel.getAccountBalance(userID: UserDefaults.standard.userID)

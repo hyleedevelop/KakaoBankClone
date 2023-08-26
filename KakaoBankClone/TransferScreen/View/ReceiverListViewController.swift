@@ -208,14 +208,15 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             // 다음 화면으로 데이터를 전달하고 넘어가기
-            let data = self.viewModel.getReceiverAccountData(at: indexPath.row)
-            
             let nextVM = TransferInfoViewModel(  // 다음 화면의 뷰모델
+                userName: self.viewModel.userName,
                 accountName: self.viewModel.accountName,
                 accountNumber: self.viewModel.accountNumber,
                 currentBalance: self.viewModel.currentBalance,
-                selectedReceiverName: data.receiverName,
-                selectedReceiverAccount: data.receiverAccountNumber
+                selectedReceiverID: self.db[indexPath.row].receiverID,
+                selectedReceiverName: self.db[indexPath.row].receiverName,
+                selectedReceiverAccount: self.db[indexPath.row].receiverAccountNumber,
+                selectedReceiverAccountBalance: self.db[indexPath.row].receiverAccountBalance
             )
             let nextVC = TransferInfoViewController(viewModel: nextVM)  // 다음 화면의 뷰컨트롤러
             self.navigationController?.pushViewController(nextVC, animated: true)
