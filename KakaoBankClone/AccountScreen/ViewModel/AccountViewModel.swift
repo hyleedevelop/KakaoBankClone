@@ -30,27 +30,20 @@ final class AccountViewModel {
     
     // Firestore에서 사용자 데이터 가져오기
     func fetchAccountDataFromServer(userID: String, completion: @escaping ([AccountModel]) -> Void) {
-        // 실시간으로 자료를 업데이트 하고 데이터 가져오기 (addSnapshotListener)
+        // 데이터 한번 가져오기 (addSnapshotListener와는 다름)
         self.firestore
             .collection("users")
-            .order(by: "userID", descending: false)
-            .whereField("userID", isEqualTo: userID)
-            .addSnapshotListener { querySnapshot, error in
-                // 가져오는데 실패한 경우
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                
-                // 가져오는데 성공한 경우
-                for document in querySnapshot!.documents {
-                    guard let userName = document.data()["userName"] as? String,
-                          let userID = document.data()["userID"] as? String,
-                          let bank = document.data()["bank"] as? String,
-                          let accountName = document.data()["accountName"] as? String,
-                          let accountNumber = document.data()["accountNumber"] as? String,
-                          let accountBalance = document.data()["accountBalance"] as? Int,
-                          let hasSafeBox = document.data()["hasSafeBox"] as? Bool,
-                          let safeBoxBalance = document.data()["safeBoxBalance"] as? Int else { return }
+            .document(userID)
+            .getDocument { document, error in
+                if let document = document, document.exists {
+                    guard let userName = document.get("userName") as? String,
+                          let userID = document.get("userID") as? String,
+                          let bank = document.get("bank") as? String,
+                          let accountName = document.get("accountName") as? String,
+                          let accountNumber = document.get("accountNumber") as? String,
+                          let accountBalance = document.get("accountBalance") as? Int,
+                          let hasSafeBox = document.get("hasSafeBox") as? Bool,
+                          let safeBoxBalance = document.get("safeBoxBalance") as? Int else { return }
                     
                     // 데이터 배열에 추가 (1)
                     self.accountData.append(
@@ -67,57 +60,100 @@ final class AccountViewModel {
                             safeBoxBalance: safeBoxBalance
                         )
                     )
+                    
+                    let isTheFirstUser = UserDefaults.standard.userID == "user1"
+                    
+                    // 데이터 배열에 추가 (2)
+                    self.accountData.append(
+                        AccountModel(
+                            backgroundColor: UIColor(themeColor: isTheFirstUser ? .pink : .blue),
+                            tintColor: UIColor(themeColor: .white),
+                            userID: userID,
+                            userName: UserDefaults.standard.userID,
+                            bank: "카카오뱅크",
+                            accountName: "적금",
+                            accountNumber: "222-222-222",
+                            accountBalance: isTheFirstUser ? 3_500_000 : 1_200_000,
+                            hasSafeBox: false,
+                            safeBoxBalance: 0
+                        )
+                    )
+                    self.accountData.append(
+                        AccountModel(
+                            backgroundColor: UIColor(themeColor: isTheFirstUser ? .blue : .green),
+                            tintColor: UIColor(themeColor: .white),
+                            userID: userID,
+                            userName: UserDefaults.standard.userID,
+                            bank: "카카오뱅크",
+                            accountName: "예금",
+                            accountNumber: "333-333-333",
+                            accountBalance: isTheFirstUser ? 10_000_000 : 5_000_000,
+                            hasSafeBox: false,
+                            safeBoxBalance: 0
+                        )
+                    )
+                    self.accountData.append(
+                        AccountModel(
+                            backgroundColor: UIColor(themeColor: isTheFirstUser ? .green : .pink),
+                            tintColor: UIColor(themeColor: .white),
+                            userID: userID,
+                            userName: UserDefaults.standard.userID,
+                            bank: "카카오뱅크",
+                            accountName: "저금통",
+                            accountNumber: "444-444-444",
+                            accountBalance: isTheFirstUser ? 50_000 : 800_000,
+                            hasSafeBox: false,
+                            safeBoxBalance: 0
+                        )
+                    )
+                    
+                    completion(self.accountData)
+                } else {
+                    print("Firestore로부터 데이터를 읽어오는데 실패했습니다.")
                 }
-                
-                let isTheFirstUser = UserDefaults.standard.userID == "user1"
-                
-                // 데이터 배열에 추가 (2)
-                self.accountData.append(
-                    AccountModel(
-                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .pink : .blue),
-                        tintColor: UIColor(themeColor: .white),
-                        userID: userID,
-                        userName: UserDefaults.standard.userID,
-                        bank: "카카오뱅크",
-                        accountName: "적금",
-                        accountNumber: "222-222-222",
-                        accountBalance: isTheFirstUser ? 3_500_000 : 1_200_000,
-                        hasSafeBox: false,
-                        safeBoxBalance: 0
-                    )
-                )
-                self.accountData.append(
-                    AccountModel(
-                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .blue : .green),
-                        tintColor: UIColor(themeColor: .white),
-                        userID: userID,
-                        userName: UserDefaults.standard.userID,
-                        bank: "카카오뱅크",
-                        accountName: "예금",
-                        accountNumber: "333-333-333",
-                        accountBalance: isTheFirstUser ? 10_000_000 : 5_000_000,
-                        hasSafeBox: false,
-                        safeBoxBalance: 0
-                    )
-                )
-                self.accountData.append(
-                    AccountModel(
-                        backgroundColor: UIColor(themeColor: isTheFirstUser ? .green : .pink),
-                        tintColor: UIColor(themeColor: .white),
-                        userID: userID,
-                        userName: UserDefaults.standard.userID,
-                        bank: "카카오뱅크",
-                        accountName: "저금통",
-                        accountNumber: "444-444-444",
-                        accountBalance: isTheFirstUser ? 50_000 : 800_000,
-                        hasSafeBox: false,
-                        safeBoxBalance: 0
-                    )
-                )
-                
-                completion(self.accountData)
+            }
+    }
+    
+    // Firestore에서 갱신된 사용자 데이터 가져오기
+    func fetchUpdatedAccountDataFromServer(userID: String, completion: @escaping (Int) -> Void) {
+        self.firestore
+            .collection("users")
+            .document(userID)
+            .getDocument { document, error in
+                if let document = document, document.exists {
+                    guard let accountBalance = document.get("accountBalance") as? Int else { return }
+                    
+                    // 계좌 잔고 갱신
+                    self.accountData[0].accountBalance = accountBalance
+                    
+                    completion(accountBalance)
+                } else {
+                    print("Firestore로부터 데이터를 읽어오는데 실패했습니다.")
+                }
             }
         
+        // 실시간으로 자료를 업데이트 하고 데이터 가져오기 (addSnapshotListener)
+//        self.firestore
+//            .collection("users")
+//            .order(by: "userID", descending: false)
+//            .whereField("userID", isEqualTo: userID)
+//            .addSnapshotListener { querySnapshot, error in
+//                // 가져오는데 실패한 경우
+//                if let error = error {
+//                    print(error.localizedDescription)
+//                }
+//
+//                // 가져오는데 성공한 경우
+//                for document in querySnapshot!.documents {
+//                    guard let accountBalance = document.data()["accountBalance"] as? Int else { return }
+//
+//                    // 계좌 잔고 갱신
+//                    self.accountData[0].accountBalance = accountBalance
+//                    completion(accountBalance)
+//                }
+//
+//                //completion(self.accountData[0].accountBalance)
+//            }
     }
     
     // 사용자의 이름 가져오기

@@ -157,10 +157,15 @@ final class AccountViewController: UIViewController {
         // 테이블뷰 셀 애니메이션 비활성화
         UserDefaults.standard.showCellAnimation = false
         
-        // 테이블뷰 갱신
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.tableView.reloadData()
-            refresh.endRefreshing()
+        // Firestore에서 데이터를 다시 가져와서 테이블뷰 갱신하기
+        self.viewModel.fetchUpdatedAccountDataFromServer(userID: UserDefaults.standard.userID) { newAccountBalance in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.db[0].accountBalance = newAccountBalance
+                //print(self.db.count, newAccountBalance)
+                //self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+                self.tableView.reloadData()
+                refresh.endRefreshing()
+            }
         }
     }
     
@@ -245,7 +250,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case 0:  // 상단 광고 부분
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountTopAdTableViewCell.identifier, for: indexPath)
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
@@ -253,7 +258,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
             
             return cell
 
-        case 1:
+        case 1:  // 계좌 박스 부분
             let data = self.db[indexPath.row]
 
             // 계좌가 세이프박스를 포함하는 경우
@@ -299,7 +304,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
 
-        case 2:
+        case 2:  // + 박스 부분
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountAddTableViewCell.identifier, for: indexPath)
                     as? AccountAddTableViewCell else { return UITableViewCell() }
 

@@ -15,7 +15,7 @@ struct AccountModel {
     let bank: String
     let accountName: String
     let accountNumber: String
-    let accountBalance: Int
+    var accountBalance: Int
     let hasSafeBox: Bool
     let safeBoxBalance: Int
 }

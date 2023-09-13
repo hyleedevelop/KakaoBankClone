@@ -56,6 +56,7 @@ final class TransferInfoViewModel {
     
     //MARK: - 거래내역 생성 관련
     
+    // 거래내역 히스토리 데이터를 Firestore에 저장하기
     func makeTransactionHistory(senderID: String, receiverID: String, amount: Int, completion: @escaping () -> Void) {
         // Firestore 업데이트: 보내는 사람의 계좌 잔고 감액 (-)
         self.firestore
