@@ -29,11 +29,11 @@ final class AccountViewModel {
     private var accountData = [AccountModel]()
     
     // Firestore에서 사용자 데이터 가져오기
-    func fetchAccountDataFromServer(userID: String, completion: @escaping ([AccountModel]) -> Void) {
+    func fetchAccountDataFromServer(completion: @escaping ([AccountModel]) -> Void) {
         // 데이터 한번 가져오기 (addSnapshotListener와는 다름)
         self.firestore
             .collection("users")
-            .document(userID)
+            .document(UserDefaults.standard.userID)
             .getDocument { document, error in
                 if let document = document, document.exists {
                     guard let userName = document.get("userName") as? String,
@@ -115,10 +115,10 @@ final class AccountViewModel {
     }
     
     // Firestore에서 갱신된 사용자 데이터 가져오기
-    func fetchUpdatedAccountDataFromServer(userID: String, completion: @escaping (Int) -> Void) {
+    func fetchUpdatedAccountDataFromServer(completion: @escaping (Int) -> Void) {
         self.firestore
             .collection("users")
-            .document(userID)
+            .document(UserDefaults.standard.userID)
             .getDocument { document, error in
                 if let document = document, document.exists {
                     guard let accountBalance = document.get("accountBalance") as? Int else { return }
@@ -131,29 +131,27 @@ final class AccountViewModel {
                     print("Firestore로부터 데이터를 읽어오는데 실패했습니다.")
                 }
             }
-        
-        // 실시간으로 자료를 업데이트 하고 데이터 가져오기 (addSnapshotListener)
-//        self.firestore
-//            .collection("users")
-//            .order(by: "userID", descending: false)
-//            .whereField("userID", isEqualTo: userID)
-//            .addSnapshotListener { querySnapshot, error in
-//                // 가져오는데 실패한 경우
-//                if let error = error {
-//                    print(error.localizedDescription)
-//                }
-//
-//                // 가져오는데 성공한 경우
-//                for document in querySnapshot!.documents {
-//                    guard let accountBalance = document.data()["accountBalance"] as? Int else { return }
-//
-//                    // 계좌 잔고 갱신
-//                    self.accountData[0].accountBalance = accountBalance
-//                    completion(accountBalance)
-//                }
-//
-//                //completion(self.accountData[0].accountBalance)
-//            }
+    }
+    
+    func trackAccountBalance(completion: @escaping (Int) -> Void) {
+        self.firestore
+            .collection("users")
+            .order(by: "userID", descending: false)
+            .whereField("userID", isEqualTo: UserDefaults.standard.userID)
+            .addSnapshotListener { querySnapshot, error in
+                // 가져오는데 실패한 경우
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                
+                // 가져오는데 성공한 경우
+                for document in querySnapshot!.documents {
+                    guard let accountBalance = document.data()["accountBalance"] as? Int else { return }
+                    
+                    // 변경된 계좌 잔고 콜백
+                    completion(accountBalance)
+                }
+            }
     }
     
     // 사용자의 이름 가져오기

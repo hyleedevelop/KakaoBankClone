@@ -91,16 +91,28 @@ final class AccountViewController: UIViewController {
         self.setupView()
         
         // Firestore에서 DB를 가져온 후에 실행할 내용
-        self.viewModel.fetchAccountDataFromServer(userID: UserDefaults.standard.userID) { db in
+        self.viewModel.fetchAccountDataFromServer { db in
             self.db = db
                 
             self.addSubview()
             self.setupLayout()
             self.setupDelegate()
+            
+            // Firestore DB의 스냅샷 리스너 설정
+            // (계좌 잔고 변동사항을 파악하려면 db에 값이 먼저 들어있어야 하므로 콜백 이후 실행해야 함)
+            self.viewModel.trackAccountBalance { updatedAccountBalance in
+                print(UserDefaults.standard.userID, updatedAccountBalance)
+                
+                // 계좌 잔고가 달라진 경우, 출금 또는 입금에 대한 로컬 푸시알림 보내기
+                let changeOfBalance = updatedAccountBalance - self.db[0].accountBalance
+                if changeOfBalance != 0 {
+                    self.requestLocalPushNotification(changeOfBalance: changeOfBalance, seconds: 3)
+                }
+            }
         }
     }
 
-    //MARK: - 메서드
+    //MARK: - 기본 UI 설정 메서드
     
     // 뷰 설정
     private func setupView() {
@@ -147,6 +159,34 @@ final class AccountViewController: UIViewController {
         self.tableView.dataSource = self
     }
     
+    //MARK: - 푸시 알림 관련 메서드
+    
+    func requestLocalPushNotification(changeOfBalance: Int, seconds: Double) {
+        // 푸시 알림 메세지의 제목 및 내용 구성
+        // 제목 예시) 입금 1원
+        // 내용 예시) 이호연 → 내 공과금통장(4680)
+        //          잔액 3,500,000원
+        let notiContent = UNMutableNotificationContent()
+        let title = (changeOfBalance > 0 ? "입금" : "출금") + " \((abs(changeOfBalance)).commaSeparatedWon)원"
+        let body = "이호연" + " → " + "내 \(self.db[0].accountName)(\(self.db[0].accountNumber.dropFirst(6)))" +
+                   "\n" + "잔액 \((self.db[0].accountBalance + changeOfBalance).commaSeparatedWon)원"
+        
+        notiContent.title = title
+        notiContent.body = body
+        
+        // 주어진 시간동안 푸시 알림 보이기
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString,
+                                            content: notiContent,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     //MARK: - objc 메서드
     
     // 테이블뷰 새로고침 시 실행할 내용 설정
@@ -158,11 +198,9 @@ final class AccountViewController: UIViewController {
         UserDefaults.standard.showCellAnimation = false
         
         // Firestore에서 데이터를 다시 가져와서 테이블뷰 갱신하기
-        self.viewModel.fetchUpdatedAccountDataFromServer(userID: UserDefaults.standard.userID) { newAccountBalance in
+        self.viewModel.fetchUpdatedAccountDataFromServer { newAccountBalance in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.db[0].accountBalance = newAccountBalance
-                //print(self.db.count, newAccountBalance)
-                //self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
                 self.tableView.reloadData()
                 refresh.endRefreshing()
             }
