@@ -284,7 +284,7 @@ extension TransferInfoViewController: TransferConfirmModalViewDelegate {
         self.activityIndicator.startAnimating()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            // 거래 내역 만들기 (Firestore)
+            // Firestore DB에 거래 내역 새로 만들기
             self.viewModel.makeTransactionHistory(
                 senderID: UserDefaults.standard.userID,
                 receiverID: self.viewModel.selectedReceiverID,

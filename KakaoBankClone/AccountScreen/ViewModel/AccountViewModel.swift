@@ -133,26 +133,94 @@ final class AccountViewModel {
             }
     }
     
-    func trackAccountBalance(completion: @escaping (Int) -> Void) {
+    // 입금 푸시 알림 보낼 준비하기
+    func prepareForIncomePushNotification(completion: @escaping () -> Void) {
+        // 리스너 등록 후 첫번째로 실행되는지의 여부 (앱 최초 실행 시 리스너가 등록됨과 동시에 클로저 내부 코드가 한번 실행됨)
+        var isFirstListenerCall = true
+        
         self.firestore
-            .collection("users")
-            .order(by: "userID", descending: false)
-            .whereField("userID", isEqualTo: UserDefaults.standard.userID)
+            .collection("transaction")
             .addSnapshotListener { querySnapshot, error in
-                // 가져오는데 실패한 경우
-                if let error = error {
-                    print(error.localizedDescription)
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error ?? "Unknown error" as! Error)")
+                    return
                 }
                 
-                // 가져오는데 성공한 경우
-                for document in querySnapshot!.documents {
-                    guard let accountBalance = document.data()["accountBalance"] as? Int else { return }
-                    
-                    // 변경된 계좌 잔고 콜백
-                    completion(accountBalance)
+                // 리스너 등록 후 첫번째는 아래의 코드를 실행하지 않음
+                guard !isFirstListenerCall else {
+                    isFirstListenerCall.toggle()
+                    return
                 }
+                
+                // 가장 마지막 문서(가장 최신의 이체내역) 가져오기
+                guard let document = documents.last else { return }
+                // 새로운 문서(이체 거래)가 추가될 때마다 실행할 코드 작성
+                guard let sender = document.get("sender") as? String,
+                      let receiver = document.get("receiver") as? String,
+                      let amount = document.get("amount") as? Int else { return }
+                
+                // 현재 로그인한 사용자의 ID가 계좌이체 수신자의 ID와 일치할 때만 입금 푸시 알림 처리하기
+                if UserDefaults.standard.userID == receiver {
+                    self.requestLocalPushNotification(
+                        sender: sender,
+                        receiver: receiver,
+                        amount: amount
+                    )
+                }
+                
+                completion()
             }
     }
+    
+    // 로컬 푸시 알림 보내기
+    func requestLocalPushNotification(sender: String, receiver: String, amount: Int) {
+        // 푸시 알림 메세지의 제목 및 내용 구성
+        // 제목 예시) 입금 1원
+        // 내용 예시) 이호연 → 내 공과금통장(4680)
+        //          잔액 3,500,000원
+        let content = UNMutableNotificationContent()
+        let title = "입금 \((amount).commaSeparatedWon)원"
+        let body = sender + " → " + "내 \(self.accountData[0].accountName)(\(self.accountData[0].accountNumber.dropFirst(6)))" +
+                   "\n" + "잔액 \((self.accountData[0].accountBalance + amount).commaSeparatedWon)원"
+        
+        content.title = title
+        content.body = body
+        content.interruptionLevel = .critical
+        content.userInfo = ["content-available": 1]
+        
+        // 주어진 시간동안 푸시 알림 보이기
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString,
+                                            content: content,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+//    func trackAccountBalance(completion: @escaping (Int) -> Void) {
+//        self.firestore
+//            .collection("users")
+//            .order(by: "userID", descending: false)
+//            .whereField("userID", isEqualTo: UserDefaults.standard.userID)
+//            .addSnapshotListener { querySnapshot, error in
+//                // 가져오는데 실패한 경우
+//                if let error = error {
+//                    print(error.localizedDescription)
+//                }
+//
+//                // 가져오는데 성공한 경우
+//                for document in querySnapshot!.documents {
+//                    guard let accountBalance = document.data()["accountBalance"] as? Int else { return }
+//
+//                    // 변경된 계좌 잔고 콜백
+//                    completion(accountBalance)
+//                }
+//            }
+//    }
     
     // 사용자의 이름 가져오기
     func getUserName(userID: String) -> String {
