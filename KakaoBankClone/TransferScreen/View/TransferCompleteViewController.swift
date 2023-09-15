@@ -186,12 +186,15 @@ class TransferCompleteViewController: UIViewController {
     @objc private func buttonTapped(_ button: UIButton) {
         if button == self.confirmButton {
             // 탭바 화면으로 이동
-            let tabBarController = TabBarController()
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            let window = windowScene?.windows.first
+//            let tabBarController = TabBarController()
+//            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+//            let window = windowScene?.windows.first
+//
+//            window?.rootViewController = tabBarController
+//            window?.makeKeyAndVisible()
             
-            window?.rootViewController = tabBarController
-            window?.makeKeyAndVisible()
+            //self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.topViewController?.dismiss(animated: true)
         }
     }
     

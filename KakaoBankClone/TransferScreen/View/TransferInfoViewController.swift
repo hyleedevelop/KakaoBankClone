@@ -239,6 +239,11 @@ final class TransferInfoViewController: UIViewController {
             name: self.viewModel.selectedReceiverName,
             account: self.viewModel.selectedReceiverAccount
         )
+        
+        // 출금 푸시 알림 보여주기
+        //self.viewModel.showOutcomePushNotification {
+            // 이후 실행할 내용 (없음)
+        //}
     }
     
     //MARK: - UI 생성 메서드

@@ -98,8 +98,8 @@ final class AccountViewController: UIViewController {
             self.setupLayout()
             self.setupDelegate()
             
-            // 입금 푸시 알림 보낼 준비하기
-            self.viewModel.prepareForIncomePushNotification {
+            // 입금 푸시 알림 보여주기
+            self.viewModel.setupSnapshotListener {
                 // 스냅샷 리스너를 통해 새로운 거래가 발생하면 입금된 금액을 반영하기 위해 계좌 잔고 갱신하기
                 self.refreshTableView(refresh: self.refreshControl)
             }
