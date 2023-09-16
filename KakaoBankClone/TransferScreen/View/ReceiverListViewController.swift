@@ -236,7 +236,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         guard scrollView == self.accountListTableView else { return }
         
         // 현재 테이블뷰의 스크롤의 위치
-        let currentOffset: CGFloat = -scrollView.contentOffset.y
+//        let currentOffset: CGFloat = -scrollView.contentOffset.y
 //        // 다이내믹한 오토레이아웃 설정을 위한 스크롤뷰 오프셋의 최소 기준값
 //        let minimum: CGFloat = ServiceLayoutValues.headerMinHeight + ServiceLayoutValues.topSafeAreaHeight
 //        // 다이내믹한 오토레이아웃 설정을 위한 스크롤뷰 오프셋의 최대 기준값
@@ -279,7 +279,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
 //            }
 //        }
         
-        print(currentOffset)
+//        print(currentOffset)
     }
     
 }

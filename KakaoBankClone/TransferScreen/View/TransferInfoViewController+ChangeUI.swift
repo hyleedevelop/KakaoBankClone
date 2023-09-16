@@ -285,22 +285,19 @@ extension TransferInfoViewController: TransferConfirmModalViewDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             // Firestore DB에 거래 내역 새로 만들기
-            self.viewModel.makeTransactionHistory(
-                senderID: UserDefaults.standard.userID,
-                receiverID: self.viewModel.selectedReceiverID,
-                amount: self.currentInputAmount) {
-                    // 로딩 애니메이션 종료
-                    self.activityIndicator.stopAnimating()
-                    
-                    // 바로 다음 화면으로 넘어가기
-                    let nextVM = TransferCompleteViewModel(  // 다음 화면의 뷰모델
-                        selectedReceiverName: self.viewModel.selectedReceiverName,
-                        selectedReceiverAccount: self.viewModel.selectedReceiverAccount,
-                        amount: self.currentInputAmount
-                    )
-                    let nextVC = TransferCompleteViewController(viewModel: nextVM)  // 다음 화면의 뷰컨트롤러
-                    self.navigationController?.pushViewController(nextVC, animated: false)
-                }
+            self.viewModel.createTransactionHistory(amount: self.currentInputAmount) {
+                // 로딩 애니메이션 종료
+                self.activityIndicator.stopAnimating()
+                
+                // 바로 다음 화면으로 넘어가기
+                let nextVM = TransferCompleteViewModel(  // 다음 화면의 뷰모델
+                    selectedReceiverName: self.viewModel.selectedReceiverName,
+                    selectedReceiverAccount: self.viewModel.selectedReceiverAccount,
+                    amount: self.currentInputAmount
+                )
+                let nextVC = TransferCompleteViewController(viewModel: nextVM)  // 다음 화면의 뷰컨트롤러
+                self.navigationController?.pushViewController(nextVC, animated: false)
+            }
         }
     }
     

@@ -8,6 +8,11 @@
 import UIKit
 import FirebaseFirestore
 
+enum TransactionType {
+    case send
+    case receive
+}
+
 final class AccountViewModel {
     
     //MARK: - 생성자
@@ -135,44 +140,115 @@ final class AccountViewModel {
     
     // 스냅샷 리스너 설정하기
     func setupSnapshotListener(completion: @escaping () -> Void) {
+        print(#function)
         // 리스너 등록 후 첫번째로 실행되는지의 여부 (앱 최초 실행 시 리스너가 등록됨과 동시에 클로저 내부 코드가 한번 실행됨)
         var isFirstListenerCall = true
         
-        if isFirstListenerCall {
-            self.firestore
-                .collection("transaction")
-                .addSnapshotListener { querySnapshot, error in
-                    guard let documents = querySnapshot?.documents else {
-                        print("Error fetching documents: \(error ?? "Unknown error" as! Error)")
-                        return
-                    }
+        self.firestore
+            .collection("transaction")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error ?? "Unknown error" as! Error)")
+                    return
+                }
+                
+                // 리스너 등록 후 1회에 한해 아래의 코드를 실행하지 않음
+                // 계좌 화면이 처음 나타났을 때, 가장 마지막 거래내역에 대한 푸시 알림이 보여지는 것을 방지함
+                if isFirstListenerCall {
+                    isFirstListenerCall = false
+                } else {
+                    // 가장 마지막 문서(가장 최신의 이체내역) 가져오기
+                    guard let document = documents.last else { return }
                     
-                    // 리스너 등록 후 1회에 한해 아래의 코드를 실행하지 않음
-                    // 계좌 화면이 처음 나타났을 때, 가장 마지막 거래내역에 대한 푸시 알림이 보여지는 것을 방지함
-                    if isFirstListenerCall {
-                        isFirstListenerCall = false
-                    } else {
-                        // 가장 마지막 문서(가장 최신의 이체내역) 가져오기
-                        guard let document = documents.last else { return }
-                        // 새로운 문서(이체 거래)가 추가될 때마다 실행할 코드 작성
-                        guard let sender = document.get("sender") as? String,
-                              let receiver = document.get("receiver") as? String,
-                              let amount = document.get("amount") as? Int else { return }
-                        
-                        // 현재 로그인한 사용자의 ID가 계좌이체 수신자의 ID와 일치할 때만 입금 푸시 알림 처리하기
-                        PushNotificationService.shared.requestLocalPushNotification(
-                            type: UserDefaults.standard.userID == sender ? .send : .receive,
-                            sender: sender,
-                            receiver: receiver,
+                    // 새로운 문서(이체 거래)가 추가될 때마다 실행할 코드 작성
+                    guard let senderID = document.get("senderID") as? String,
+                          let senderName = document.get("senderName") as? String,
+                          let receiverID = document.get("receiverID") as? String,
+                          let receiverName = document.get("receiverName") as? String,
+                          let amount = document.get("amount") as? Int else { return }
+                    
+                    //
+                    switch UserDefaults.standard.userID {
+                    case senderID:
+                        // 푸시 알림 요청
+                        self.requestLocalPushNotification(
+                            type: .send,
+                            senderID: senderID,
+                            senderName: senderName,
+                            receiverID: receiverID,
+                            receiverName: receiverName,
                             amount: amount,
                             myAccountName: self.accountData[0].accountName,
                             myAccountNumber: self.accountData[0].accountNumber,
                             myAccountBalance: self.accountData[0].accountBalance
                         )
-                        
-                        completion()
+                    case receiverID:
+                        // 푸시 알림 요청
+                        self.requestLocalPushNotification(
+                            type: .receive,
+                            senderID: senderID,
+                            senderName: senderName,
+                            receiverID: receiverID,
+                            receiverName: receiverName,
+                            amount: amount,
+                            myAccountName: self.accountData[0].accountName,
+                            myAccountNumber: self.accountData[0].accountNumber,
+                            myAccountBalance: self.accountData[0].accountBalance
+                        )
+                    default:
+                        return
                     }
+                    
+                    completion()
                 }
+            }
+    }
+    
+    // 로컬 푸시 알림 보내기
+    private func requestLocalPushNotification(
+        type: TransactionType, senderID: String, senderName: String, receiverID: String, receiverName: String, amount: Int,
+        myAccountName: String, myAccountNumber: String, myAccountBalance: Int
+    ) {
+        // 푸시 알림 메세지의 제목 및 내용 구성
+        //
+        // * 입금 메세지 예시
+        // 제목) 입금 100,000원
+        // 내용) 이호연 → 내 공과금통장(4680)
+        //      잔액 3,500,000원
+        //
+        // * 출금 메세지 예시
+        // 제목) 출금 100,000원
+        // 내용) 내 공과금통장(4680) → 박민성
+        //      잔액 3,500,000원
+        
+        let content = UNMutableNotificationContent()
+        var title: String
+        var body : String
+        
+        switch type {
+        case .send:
+            title = "출금 \((amount).commaSeparatedWon)원"
+            body = "내 \(myAccountName)(\(myAccountNumber.dropFirst(6)))" + " → " + receiverName +
+            "\n" + "잔액 \((myAccountBalance - amount).commaSeparatedWon)원"
+        case .receive:
+            title = "입금 \((amount).commaSeparatedWon)원"
+            body = senderName + " → " + "내 \(myAccountName)(\(myAccountNumber.dropFirst(6)))" +
+            "\n" + "잔액 \((myAccountBalance + amount).commaSeparatedWon)원"
+        }
+        
+        content.title = title
+        content.body = body
+        content.interruptionLevel = .critical
+        content.userInfo = ["content-available": 1]
+        
+        // 3초간 푸시 알림 보여주기
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3.0, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
     

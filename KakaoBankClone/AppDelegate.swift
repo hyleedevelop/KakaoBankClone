@@ -74,6 +74,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.banner, .sound, .badge])
     }
     
+    // 알림을 받았을 때의 처리 로직
+    func application(_ application: UIApplication, didReceive notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // completionHandler를 통해 알림을 어떻게 표시할지 설정
+        completionHandler([.banner, .sound, .badge])
+    }
+    
 }
 
 extension AppDelegate: MessagingDelegate {

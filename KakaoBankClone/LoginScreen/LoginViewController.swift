@@ -163,9 +163,7 @@ final class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { _, error in
             // 로그인 성공 시
             if error == nil {
-                
                 // 다음 화면으로 사용자 아이디 전달하기
-                //self.delegate?.sendLoginUserInfo(userID: String(email.dropLast(9)))
                 UserDefaults.standard.userID = String(email.dropLast(9))
                 
                 // 다음 화면으로 넘어가기

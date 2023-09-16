@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07163AA32AB40A330019004E /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07163AA22AB40A330019004E /* PushNotificationService.swift */; };
 		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
 		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
 		0749CD7E2A8F266900D091BE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749CD7D2A8F266900D091BE /* UserDefaults.swift */; };
@@ -90,7 +89,6 @@
 
 /* Begin PBXFileReference section */
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07163AA22AB40A330019004E /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
 		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
 		0749CD7D2A8F266900D091BE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				0768481A2A7C9F6400812353 /* Enums.swift */,
-				07163AA22AB40A330019004E /* PushNotificationService.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -772,7 +769,6 @@
 				07CA4EDA2A81400400F81E6F /* UITableViewCell.swift in Sources */,
 				07DEB90B2A92044900E75BC4 /* TransferInfoViewModel.swift in Sources */,
 				075FBEA22A8B78C500A82EC1 /* ReceiverListViewModel.swift in Sources */,
-				07163AA32AB40A330019004E /* PushNotificationService.swift in Sources */,
 				076391072A9587870003E5BE /* TransferConfirmModalView.swift in Sources */,
 				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
