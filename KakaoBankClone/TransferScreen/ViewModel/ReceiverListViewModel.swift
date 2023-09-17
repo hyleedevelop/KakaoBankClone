@@ -62,7 +62,7 @@ final class ReceiverListViewModel {
                 // 데이터 배열에 추가
                 self.receiverAccountData.append(
                     ReceiverListModel(
-                        bankIcon: UIImage(systemName: "circle.fill")!,
+                        bankIcon: UIImage(named: "Kakao_Bank_of_Korea_Logo.jpg") ?? UIImage(),
                         receiverID: userID,
                         receiverName: userName,
                         receiverAccountNumber: accountNumber,
@@ -80,7 +80,7 @@ final class ReceiverListViewModel {
         return self.receiverAccountData[index]
     }
     
-    //MARK: - 테이블뷰 관련
+    //MARK: - 테이블뷰
     
     // section의 개수
     let numberOfSections: Int = 1
@@ -91,19 +91,35 @@ final class ReceiverListViewModel {
     }
     
     // header 높이
-//    let headerHeight: CGFloat = 40
-    
-    // footer 높이
-//    func footerHeight(at section: Int) -> CGFloat {
-//        return section == 2 ? 40 : 0
-//    }
+    let heightForHeaderInSection: CGFloat = 50
     
     // cell 높이
     let heightForRow: CGFloat = 70
     
+    // custom header view
+    func viewForHeaderInSection(tableView: UITableView, at section: Int) -> UIView? {
+        let titleLabel = UILabel(
+            frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 50)
+        )
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        titleLabel.textColor = UIColor.black
+        titleLabel.text = "최근 이체"
+        
+        let headerView = UIView()
+        headerView.addSubview(titleLabel)
+        headerView.backgroundColor = UIColor(themeColor: .white)
+        headerView.layer.borderColor = UIColor.cyan.cgColor
+        headerView.layer.borderWidth = 0
+        
+        return headerView
+    }
+    
     // custom footer view
-//    func viewForFooterInSection(at section: Int) -> UIView? {
-//        return section == 2 ? UIView() : nil
-//    }
+    func viewForFooterInSection(at section: Int) -> UIView {
+        let footerView = UIView()
+        footerView.backgroundColor = UIColor(themeColor: .white)
+        return footerView
+    }
     
 }

@@ -64,7 +64,7 @@ final class ServiceViewController: UIViewController {
             ServiceListTableViewCell.self,
             forCellReuseIdentifier: ServiceListTableViewCell.identifier
         )
-        tv.showsVerticalScrollIndicator = true
+        tv.showsVerticalScrollIndicator = false
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         tv.backgroundColor = UIColor(themeColor: .white)
         tv.layer.borderColor = UIColor.green.cgColor
@@ -298,7 +298,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
                     as? ServiceListTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.accessoryType = data.hasInterest ? .none : .disclosureIndicator
-            cell.setValue(
+            cell.setCellUI(
                 title: data.title,
                 subtitle: data.subtitle,
                 interest: data.interest ?? "",

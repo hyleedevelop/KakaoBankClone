@@ -55,6 +55,7 @@ enum ButtonTitle: String {
     case login = "로그인"
     case cancel = "취소"
     case next = "다음"
+    case enterAccount = "+ 계좌번호 직접입력"
 }
 
 //MARK: - 셀 제목 옆에 붙는 배지 타입
@@ -87,6 +88,7 @@ enum ServiceLayoutValues {
 //MARK: - 은행 종류
 
 enum BankType: String {
+    case kakao = "카카오뱅크"
     case woori = "우리은행"
     case nonghyup = "농협은행"
     case kookmin = "국민은행"

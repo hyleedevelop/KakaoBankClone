@@ -34,11 +34,12 @@ final class ReceiverListViewController: UIViewController {
     
     // 계좌 테이블뷰
     private let accountListTableView: UITableView = {
-        let tv = UITableView()
+        let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
         tv.register(
             ReceiverListTableViewCell.self,
             forCellReuseIdentifier: ReceiverListTableViewCell.identifier
         )
+        tv.backgroundColor = UIColor(themeColor: .white)
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
         tv.layer.borderColor = UIColor.red.cgColor
@@ -47,12 +48,18 @@ final class ReceiverListViewController: UIViewController {
     }()
     
     // 계좌번호 직접입력 버튼
-    let closeButton: UIButton = {
+    let accountNumberButton: UIButton = {
         let button = UIButton()
-        button.setTitle(ButtonTitle.close.rawValue, for: .normal)
+        button.setTitle(ButtonTitle.enterAccount.rawValue, for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .light)
         button.backgroundColor = UIColor(themeColor: .white)
+        button.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 0, height: 0)
+        button.layer.shadowRadius = 5
+        button.layer.cornerRadius = 10
+        //button.clipsToBounds = true
         return button
     }()
     
@@ -115,11 +122,21 @@ final class ReceiverListViewController: UIViewController {
         self.view.addSubview(self.accountListTableView)
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.navigationView)
+        self.view.addSubview(self.accountNumberButton)
         self.view.addSubview(self.activityIndicator)
     }
     
     // 레이아웃 설정
     private func setupLayout() {
+        // 테이블뷰
+        self.accountListTableView.snp.makeConstraints {
+            $0.top.bottom.equalTo(self.view)
+            $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
+        // 테이블뷰 꼭대기의 내부간격
+        self.accountListTableView.contentInset.top = TransferLayoutValues.receiverListNavigationViewHeight
+        
         // 헤더뷰
         self.headerView.snp.makeConstraints {
             $0.top.equalTo(self.view)
@@ -127,20 +144,19 @@ final class ReceiverListViewController: UIViewController {
             $0.height.equalTo(TransferLayoutValues.headerMaxHeight)
         }
         
-        // 테이블뷰
-        self.accountListTableView.snp.makeConstraints {
-            $0.top.bottom.equalTo(self.view)
-            $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        
-        self.accountListTableView.contentOffset.y = -(TransferLayoutValues.headerMaxHeight + 60)  // 테이블뷰 스크롤의 초기 위치
-        self.accountListTableView.contentInset.top = TransferLayoutValues.headerMaxHeight + 60  // 테이블뷰 꼭대기의 내부간격
-        
         // 네비게이션 뷰
         self.navigationView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
             $0.height.equalTo(TransferLayoutValues.receiverListNavigationViewHeight)
+        }
+        
+        // 계좌번호 직접입력 버튼
+        self.accountNumberButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
+            $0.left.equalTo(self.view.safeAreaLayoutGuide).offset(15)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
+            $0.height.equalTo(60)
         }
         
         // 로딩 표시
@@ -182,8 +198,20 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         return self.db.count
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.viewModel.heightForHeaderInSection
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.viewModel.heightForRow
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.viewModel.viewForHeaderInSection(tableView: tableView, at: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return self.viewModel.viewForFooterInSection(at: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -194,7 +222,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         cell.applyCellUI(
             image: data.bankIcon,
-            type: BankType.woori,
+            type: BankType.kakao,
             name: data.receiverName,
             number: data.receiverAccountNumber
         )

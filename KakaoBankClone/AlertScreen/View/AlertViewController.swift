@@ -24,30 +24,48 @@ final class AlertViewController: UIViewController {
     }()
     
     // 알림 테이블뷰
-    private let tableView: UITableView = {
-        let tv = UITableView()
-//        tv.register(
-//            AccountTopAdTableViewCell.self,
-//            forCellReuseIdentifier: AccountTopAdTableViewCell.identifier
-//        )
+    private let alertTableView: UITableView = {
+        let tv = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
+        tv.register(
+            AlertTableViewCell.self,
+            forCellReuseIdentifier: AlertTableViewCell.identifier
+        )
+        tv.backgroundColor = UIColor(themeColor: .white)
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
+        tv.layer.borderColor = UIColor.red.cgColor
+        tv.layer.borderWidth = 0
         return tv
     }()
 
+    //MARK: - 인스턴스 및 기타 속성
+    
+    // 뷰모델의 인스턴스
+    private let viewModel = AlertViewModel()
+    
     //MARK: - 생명주기
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         self.setupView()
-        self.addSubview()
-        self.setupLayout()
-        self.setupDelegate()
+        
+        // Firestore에서 DB를 가져온 후에 실행할 내용
+        self.viewModel.fetchTransactionDataFromServer {
+            self.addSubview()
+            self.setupLayout()
+            self.setupDelegate()
+            
+            self.viewModel.setupSnapshotListenerForAlertList {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    // 스냅샷 리스너를 통해 새로운 거래가 발생하면 알림 목록 갱신하기
+                    self.alertTableView.reloadData()
+                }
+            }
+        }
     }
 
     //MARK: - 메서드
-
     
     // 뷰 설정
     private func setupView() {
@@ -57,7 +75,7 @@ final class AlertViewController: UIViewController {
     
     // 하위 뷰 추가
     private func addSubview() {
-        self.view.addSubview(self.tableView)
+        self.view.addSubview(self.alertTableView)
         self.view.addSubview(self.headerView)
     }
     
@@ -71,18 +89,18 @@ final class AlertViewController: UIViewController {
         }
         
         // 테이블뷰
-        self.tableView.snp.makeConstraints {
+        self.alertTableView.snp.makeConstraints {
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.top.equalTo(self.headerView.snp.bottom)
         }
         
-        self.tableView.contentInset.top = 10  // 테이블뷰 꼭대기의 내부간격
+        self.alertTableView.contentInset.top = 10  // 테이블뷰 꼭대기의 내부간격
     }
     
     // 대리자 설정
     private func setupDelegate() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.alertTableView.delegate = self
+        self.alertTableView.dataSource = self
     }
 
 }
@@ -92,17 +110,45 @@ final class AlertViewController: UIViewController {
 extension AlertViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.viewModel.numberOfRowsInSection
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return self.viewModel.heightForHeaderInSection
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.viewModel.heightForRow
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.viewModel.viewForHeaderInSection(tableView: tableView, at: section)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return self.viewModel.viewForFooterInSection(at: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AlertTableViewCell.identifier, for: indexPath)
+                as? AlertTableViewCell else { return UITableViewCell() }
+ 
+        cell.selectionStyle = .none
+        cell.accessoryType = .disclosureIndicator
+        cell.setCellUI(
+            image: self.viewModel.getAlertLogoImage(at: indexPath.row),
+            title: self.viewModel.getAlertTitle(at: indexPath.row),
+            content: self.viewModel.getAlertContent(at: indexPath.row),
+            date: self.viewModel.getTransactionDate(at: indexPath.row)
+        )
+        
+        return cell
     }
     
     // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
-        guard scrollView == self.tableView else { return }
+        guard scrollView == self.alertTableView else { return }
         
         // 현재 테이블뷰의 스크롤의 위치
         let currentOffset: CGFloat = -scrollView.contentOffset.y

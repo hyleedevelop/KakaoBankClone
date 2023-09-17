@@ -19,7 +19,8 @@ class ReceiverListTableViewCell: UITableViewCell {
     // 은행 로고
     private let bankLogoImage: UIImageView = {
         let view = UIImageView()
-        view.tintColor = UIColor(themeColor: .blue)
+        view.layer.cornerRadius = 25
+        view.clipsToBounds = true
         return view
     }()
     
@@ -85,7 +86,7 @@ class ReceiverListTableViewCell: UITableViewCell {
         
         // 계좌 정보 스택뷰
         self.accountStackView.snp.makeConstraints {
-            $0.left.equalTo(self.bankLogoImage.snp.right).offset(10)
+            $0.left.equalTo(self.bankLogoImage.snp.right).offset(15)
             $0.centerY.equalTo(self.bankLogoImage.snp.centerY)
             $0.height.equalTo(40)
         }

@@ -248,6 +248,9 @@ extension TransferInfoViewController: TransferInfoNavigationViewDelegate {
     
     // 취소 버튼을 눌렀을 때 실행할 내용
     func cancelButtonTapped() {
+        // "이체를 종료하시겠습니까?" 팝업창 띄우기
+        
+        
         // 화면 빠져나오기
         self.dismiss(animated: true, completion: nil)
     }

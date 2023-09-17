@@ -31,6 +31,7 @@
 		0774D9472A99F2D700F4A05C /* TransferCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0774D9462A99F2D700F4A05C /* TransferCompleteViewModel.swift */; };
 		07755D0B2A7E3A790076253B /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0A2A7E3A790076253B /* Int.swift */; };
 		07755D0D2A7E72220076253B /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755D0C2A7E72220076253B /* AccountModel.swift */; };
+		0778821A2AB6E95C00580937 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077882192AB6E95C00580937 /* AlertModel.swift */; };
 		07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */; };
 		07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */; };
 		07AA675F2A7BB7C3009DB3F0 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA675E2A7BB7C3009DB3F0 /* AccountViewController.swift */; };
@@ -113,6 +114,7 @@
 		0774D9462A99F2D700F4A05C /* TransferCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCompleteViewModel.swift; sourceTree = "<group>"; };
 		07755D0A2A7E3A790076253B /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		07755D0C2A7E72220076253B /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		077882192AB6E95C00580937 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		07AA67572A7BB7C3009DB3F0 /* KakaoBankClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaoBankClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AA675A2A7BB7C3009DB3F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07AA675C2A7BB7C3009DB3F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		075FBE882A8B40F300A82EC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				077882192AB6E95C00580937 /* AlertModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */,
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
+				0778821A2AB6E95C00580937 /* AlertModel.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
 				075FBEA42A8B792000A82EC1 /* ReceiverListModel.swift in Sources */,
 				07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */,

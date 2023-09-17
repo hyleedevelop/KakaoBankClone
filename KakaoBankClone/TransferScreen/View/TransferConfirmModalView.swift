@@ -20,7 +20,8 @@ class TransferConfirmModalView: UIView {
     // 은행 로고
     private let bankLogoImage: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = UIColor(themeColor: .blue)
+        view.image = UIImage(named: "Kakao_Bank_of_Korea_Logo")
+        //view.backgroundColor = UIColor(themeColor: .blue)
         view.layer.cornerRadius = 25
         view.clipsToBounds = true
         return view
@@ -173,7 +174,7 @@ class TransferConfirmModalView: UIView {
             string: "\(selectedUserName)님에게 \(currentInputAmount.commaSeparatedWon)원\n이체하시겠습니까?"
         ).withLineSpacing(5)
         
-        self.accountLabel.text = "받는계좌: \(BankType.woori.rawValue) \(selectedUserAccount)"
+        self.accountLabel.text = "받는계좌: \(BankType.kakao.rawValue) \(selectedUserAccount)"
     }
     
 }

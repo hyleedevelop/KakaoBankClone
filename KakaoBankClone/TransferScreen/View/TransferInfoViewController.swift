@@ -31,7 +31,7 @@ final class TransferInfoViewController: UIViewController {
     internal let amountLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .transparentBlack)
-        label.font = UIFont.systemFont(ofSize: 40, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 40, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.text = "보낼금액"
@@ -96,7 +96,10 @@ final class TransferInfoViewController: UIViewController {
     // 받는 분에게 표기 텍스트필드
     internal lazy var yourTransactionNicknameTextfield: UITextField = {
         let tf = UITextField()
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14, weight: .light)]
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14, weight: .light),
+            .strokeColor: UIColor(themeColor: .black)
+        ]
         tf.attributedPlaceholder = NSAttributedString(string: self.viewModel.userName, attributes: attributes)
         tf.textAlignment = .right
         return tf

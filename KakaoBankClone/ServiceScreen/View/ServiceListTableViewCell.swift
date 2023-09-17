@@ -105,7 +105,7 @@ class ServiceListTableViewCell: UITableViewCell {
     //MARK: - 외부에서 호출하는 메서드
     
     // 레이블에 표시할 값 설정
-    func setValue(title: String, subtitle: String, interest: String, color: UIColor) {
+    func setCellUI(title: String, subtitle: String, interest: String, color: UIColor) {
         self.titleLabel.text = title
         self.subtitleLabel.text = subtitle
         self.interestLabel.text = interest

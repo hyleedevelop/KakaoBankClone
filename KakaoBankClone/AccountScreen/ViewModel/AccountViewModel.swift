@@ -139,8 +139,7 @@ final class AccountViewModel {
     }
     
     // 스냅샷 리스너 설정하기
-    func setupSnapshotListener(completion: @escaping () -> Void) {
-        print(#function)
+    func setupSnapshotListenerForPushNotification(completion: @escaping () -> Void) {
         // 리스너 등록 후 첫번째로 실행되는지의 여부 (앱 최초 실행 시 리스너가 등록됨과 동시에 클로저 내부 코드가 한번 실행됨)
         var isFirstListenerCall = true
         
@@ -167,37 +166,20 @@ final class AccountViewModel {
                           let receiverName = document.get("receiverName") as? String,
                           let amount = document.get("amount") as? Int else { return }
                     
-                    //
-                    switch UserDefaults.standard.userID {
-                    case senderID:
-                        // 푸시 알림 요청
-                        self.requestLocalPushNotification(
-                            type: .send,
-                            senderID: senderID,
-                            senderName: senderName,
-                            receiverID: receiverID,
-                            receiverName: receiverName,
-                            amount: amount,
-                            myAccountName: self.accountData[0].accountName,
-                            myAccountNumber: self.accountData[0].accountNumber,
-                            myAccountBalance: self.accountData[0].accountBalance
-                        )
-                    case receiverID:
-                        // 푸시 알림 요청
-                        self.requestLocalPushNotification(
-                            type: .receive,
-                            senderID: senderID,
-                            senderName: senderName,
-                            receiverID: receiverID,
-                            receiverName: receiverName,
-                            amount: amount,
-                            myAccountName: self.accountData[0].accountName,
-                            myAccountNumber: self.accountData[0].accountNumber,
-                            myAccountBalance: self.accountData[0].accountBalance
-                        )
-                    default:
-                        return
-                    }
+                    // 현재 로그인한 사용자의 ID가 수신인 또는 발신인인 경우에만 푸시 알림을 요청
+                    guard UserDefaults.standard.userID == senderID || UserDefaults.standard.userID == receiverID else { return }
+                    
+                    self.requestLocalPushNotification(
+                        type: UserDefaults.standard.userID == senderID ? .send : .receive,
+                        senderID: senderID,
+                        senderName: senderName,
+                        receiverID: receiverID,
+                        receiverName: receiverName,
+                        amount: amount,
+                        myAccountName: self.accountData[0].accountName,
+                        myAccountNumber: self.accountData[0].accountNumber,
+                        myAccountBalance: self.accountData[0].accountBalance
+                    )
                     
                     completion()
                 }

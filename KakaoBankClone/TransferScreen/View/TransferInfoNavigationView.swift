@@ -33,7 +33,6 @@ class TransferInfoNavigationView: UIView {
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textAlignment = .center
         label.numberOfLines = 1
-        //label.text = "사용자3"
         return label
     }()
     
@@ -44,7 +43,6 @@ class TransferInfoNavigationView: UIView {
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 1
-        //label.text = "우리 1357924680"
         return label
     }()
     
@@ -140,7 +138,7 @@ class TransferInfoNavigationView: UIView {
     //MARK: - 뷰컨트롤러에서 호출되는 메서드
     
     func setupNavigationView(name: String, account: String) {
-        self.userNameLabel.text = name
+        self.userNameLabel.text = name + " ▼"
         self.accountNumberLabel.text = account
     }
     
