@@ -19,6 +19,16 @@ extension UserDefaults {
         }
     }
     
+    // 사용자의 이름
+    var userName: String {
+        get {
+            return self.object(forKey: "userName") as? String ?? "익명"
+        }
+        set {
+            return self.setValue(newValue, forKey: "userName")
+        }
+    }
+    
     // 계좌 화면에서 테이블뷰 셀 애니메이션을 보여줄지의 여부
     var showCellAnimation: Bool {
         get {

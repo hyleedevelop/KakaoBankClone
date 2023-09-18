@@ -10,11 +10,13 @@
 		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
 		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
 		0749CD7E2A8F266900D091BE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749CD7D2A8F266900D091BE /* UserDefaults.swift */; };
+		0752EEA92AB819F800836584 /* MoreTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752EEA82AB819F800836584 /* MoreTopAdTableViewCell.swift */; };
+		0752EEAB2AB824DB00836584 /* MoreBottomAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752EEAA2AB824DB00836584 /* MoreBottomAdTableViewCell.swift */; };
 		075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */; };
 		075FBE932A8B434800A82EC1 /* AlertHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */; };
 		075FBE952A8B436D00A82EC1 /* MoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */; };
 		075FBE972A8B5C4200A82EC1 /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE962A8B5C4200A82EC1 /* AlertTableViewCell.swift */; };
-		075FBE992A8B5C4D00A82EC1 /* MoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */; };
+		075FBE992A8B5C4D00A82EC1 /* MoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE982A8B5C4D00A82EC1 /* MoreListTableViewCell.swift */; };
 		075FBEA02A8B78B800A82EC1 /* ReceiverListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBE9F2A8B78B800A82EC1 /* ReceiverListViewController.swift */; };
 		075FBEA22A8B78C500A82EC1 /* ReceiverListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA12A8B78C500A82EC1 /* ReceiverListViewModel.swift */; };
 		075FBEA42A8B792000A82EC1 /* ReceiverListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA32A8B792000A82EC1 /* ReceiverListModel.swift */; };
@@ -46,8 +48,8 @@
 		07AA67942A7BC20A009DB3F0 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */; };
 		07AA67962A7BC215009DB3F0 /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */; };
 		07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */; };
-		07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */; };
-		07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */; };
+		07AA679A2A7BC22A009DB3F0 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67992A7BC22A009DB3F0 /* MoreViewModel.swift */; };
+		07AA679C2A7BC552009DB3F0 /* MoreListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA679B2A7BC552009DB3F0 /* MoreListModel.swift */; };
 		07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */; };
 		07AA67A42A7BF17E009DB3F0 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */; };
 		07AA67A62A7BF213009DB3F0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA67A52A7BF213009DB3F0 /* UIColor.swift */; };
@@ -93,11 +95,13 @@
 		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
 		0749CD7D2A8F266900D091BE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		0752EEA82AB819F800836584 /* MoreTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTopAdTableViewCell.swift; sourceTree = "<group>"; };
+		0752EEAA2AB824DB00836584 /* MoreBottomAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreBottomAdTableViewCell.swift; sourceTree = "<group>"; };
 		075FBE902A8B42A300A82EC1 /* AccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderView.swift; sourceTree = "<group>"; };
 		075FBE922A8B434800A82EC1 /* AlertHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHeaderView.swift; sourceTree = "<group>"; };
 		075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreHeaderView.swift; sourceTree = "<group>"; };
 		075FBE962A8B5C4200A82EC1 /* AlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
-		075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTableViewCell.swift; sourceTree = "<group>"; };
+		075FBE982A8B5C4D00A82EC1 /* MoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreListTableViewCell.swift; sourceTree = "<group>"; };
 		075FBE9F2A8B78B800A82EC1 /* ReceiverListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListViewController.swift; sourceTree = "<group>"; };
 		075FBEA12A8B78C500A82EC1 /* ReceiverListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListViewModel.swift; sourceTree = "<group>"; };
 		075FBEA32A8B792000A82EC1 /* ReceiverListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListModel.swift; sourceTree = "<group>"; };
@@ -133,8 +137,8 @@
 		07AA67932A7BC20A009DB3F0 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		07AA67952A7BC215009DB3F0 /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		07AA67972A7BC21C009DB3F0 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
-		07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewModel.swift; sourceTree = "<group>"; };
-		07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuCellData.swift; sourceTree = "<group>"; };
+		07AA67992A7BC22A009DB3F0 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		07AA679B2A7BC552009DB3F0 /* MoreListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreListModel.swift; sourceTree = "<group>"; };
 		07AA67A02A7BEF6F009DB3F0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		07AA67A32A7BF17E009DB3F0 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		07AA67A52A7BF213009DB3F0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -324,7 +328,9 @@
 			children = (
 				07AA67912A7BC1F6009DB3F0 /* MoreViewController.swift */,
 				075FBE942A8B436D00A82EC1 /* MoreHeaderView.swift */,
-				075FBE982A8B5C4D00A82EC1 /* MoreTableViewCell.swift */,
+				075FBE982A8B5C4D00A82EC1 /* MoreListTableViewCell.swift */,
+				0752EEA82AB819F800836584 /* MoreTopAdTableViewCell.swift */,
+				0752EEAA2AB824DB00836584 /* MoreBottomAdTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,7 +338,7 @@
 		075FBE8C2A8B411A00A82EC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				07AA67992A7BC22A009DB3F0 /* MoreMenuViewModel.swift */,
+				07AA67992A7BC22A009DB3F0 /* MoreViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -340,7 +346,7 @@
 		075FBE8D2A8B411D00A82EC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				07AA679B2A7BC552009DB3F0 /* MoreMenuCellData.swift */,
+				07AA679B2A7BC552009DB3F0 /* MoreListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -774,19 +780,21 @@
 				07DEB90B2A92044900E75BC4 /* TransferInfoViewModel.swift in Sources */,
 				075FBEA22A8B78C500A82EC1 /* ReceiverListViewModel.swift in Sources */,
 				076391072A9587870003E5BE /* TransferConfirmModalView.swift in Sources */,
-				07AA679A2A7BC22A009DB3F0 /* MoreMenuViewModel.swift in Sources */,
+				07AA679A2A7BC22A009DB3F0 /* MoreViewModel.swift in Sources */,
 				076848232A7D14ED00812353 /* AccountAddTableViewCell.swift in Sources */,
 				075FBE972A8B5C4200A82EC1 /* AlertTableViewCell.swift in Sources */,
 				07AA67922A7BC1F6009DB3F0 /* MoreViewController.swift in Sources */,
 				076848212A7CE96400812353 /* AccountTopAdTableViewCell.swift in Sources */,
 				07F30D652A83AAF1001D96FC /* ServiceHeaderView.swift in Sources */,
-				075FBE992A8B5C4D00A82EC1 /* MoreTableViewCell.swift in Sources */,
+				075FBE992A8B5C4D00A82EC1 /* MoreListTableViewCell.swift in Sources */,
+				0752EEA92AB819F800836584 /* MoreTopAdTableViewCell.swift in Sources */,
 				07D9E3772A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift in Sources */,
-				07AA679C2A7BC552009DB3F0 /* MoreMenuCellData.swift in Sources */,
+				07AA679C2A7BC552009DB3F0 /* MoreListModel.swift in Sources */,
 				07AA675D2A7BB7C3009DB3F0 /* SceneDelegate.swift in Sources */,
 				072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */,
 				07AA67902A7BC1D7009DB3F0 /* AlertViewController.swift in Sources */,
 				07B85F502A8CECF000619D11 /* LoginViewController.swift in Sources */,
+				0752EEAB2AB824DB00836584 /* MoreBottomAdTableViewCell.swift in Sources */,
 				075FBE912A8B42A300A82EC1 /* AccountHeaderView.swift in Sources */,
 				075FBEA02A8B78B800A82EC1 /* ReceiverListViewController.swift in Sources */,
 				07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */,

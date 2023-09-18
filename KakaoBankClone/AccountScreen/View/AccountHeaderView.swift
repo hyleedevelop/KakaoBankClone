@@ -19,7 +19,6 @@ class AccountHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.text = NavigationBarTitle.account.rawValue
         return label
     }()
     

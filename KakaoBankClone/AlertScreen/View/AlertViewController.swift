@@ -33,8 +33,6 @@ final class AlertViewController: UIViewController {
         tv.backgroundColor = UIColor(themeColor: .white)
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .none
-        tv.layer.borderColor = UIColor.red.cgColor
-        tv.layer.borderWidth = 0
         return tv
     }()
 

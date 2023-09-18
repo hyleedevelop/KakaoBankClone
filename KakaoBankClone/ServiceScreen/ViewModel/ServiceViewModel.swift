@@ -202,7 +202,9 @@ final class ServiceViewModel {
     //MARK: - 테이블뷰 관련
     
     // section의 개수
-    lazy var numberOfSections: Int = 1 + self.serviceListData.count
+    var numberOfSections: Int {
+        return 1 + self.serviceListData.count
+    }
     
     // section당 row의 개수
     func numberOfRowsInSection(at section: Int) -> Int {
@@ -210,17 +212,17 @@ final class ServiceViewModel {
     }
     
     // header 높이
-    func headerHeight(at section: Int) -> CGFloat {
+    func heightForHeaderInSection(at section: Int) -> CGFloat {
         return section == 0 ? 0 : 40
     }
     
     // footer 높이
-    func footerHeight(at section: Int) -> CGFloat {
+    func heightForFooterInSection(at section: Int) -> CGFloat {
         return section == 0 ? 50 : 150
     }
     
     // cell 높이
-    func cellHeight(at section: Int) -> CGFloat {
+    func heightForRow(at section: Int) -> CGFloat {
         return section == 0 ? 290 : 85
     }
     
@@ -277,7 +279,9 @@ final class ServiceViewModel {
     let numberOfSectionsInCollectionView: Int = 1
     
     // item의 개수
-    lazy var numberOfItemsInSections: Int = self.categoryName.count
+    var numberOfItemsInSections: Int {
+        return self.categoryName.count
+    }
     
     // item의 셀 높이
     func sizeForItemAt(at item: Int) -> CGSize {

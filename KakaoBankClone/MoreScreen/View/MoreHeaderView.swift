@@ -19,7 +19,6 @@ class MoreHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.text = NavigationBarTitle.account.rawValue
         return label
     }()
     
@@ -94,6 +93,12 @@ class MoreHeaderView: UIView {
             $0.height.equalTo(30)
             $0.width.equalTo(60)
         }
+    }
+    
+    //MARK: - 뷰컨트롤러에서 호출되는 메서드
+    
+    func setTitle(title: String) {
+        self.tabTitleLabel.text = title
     }
 
 }

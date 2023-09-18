@@ -90,17 +90,17 @@ class ServiceListTableViewCell: UITableViewCell {
         }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        // section header의 구분선만 제거하기
-        let width = subviews[0].frame.width
-        for view in subviews where view != contentView {
-            if view.frame.width == width {
-                view.removeFromSuperview()
-            }
-        }
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        // section header의 구분선만 제거하기
+//        let width = subviews[0].frame.width
+//        for view in subviews where view != contentView {
+//            if view.frame.width == width {
+//                view.removeFromSuperview()
+//            }
+//        }
+//    }
     
     //MARK: - 외부에서 호출하는 메서드
     

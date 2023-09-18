@@ -260,17 +260,17 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // row의 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.viewModel.cellHeight(at: indexPath.section)
+        return self.viewModel.heightForRow(at: indexPath.section)
     }
     
     // header의 높이
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.viewModel.headerHeight(at: section)
+        return self.viewModel.heightForHeaderInSection(at: section)
     }
     
     // footer의 높이
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.viewModel.footerHeight(at: section)
+        return self.viewModel.heightForFooterInSection(at: section)
     }
     
     // header view

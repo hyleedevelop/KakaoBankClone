@@ -25,7 +25,7 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     //MARK: - 제목 관련 속성
     
     // 제목
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
@@ -35,7 +35,7 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     }()
     
     // 부제목
-    let subtitleLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
@@ -54,7 +54,7 @@ class ServiceTopAdCollectionViewCell: UICollectionViewCell {
     
     //MARK: - 이미지 관련 속성
     
-    let adImage: UIImageView = {
+    private let adImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.tintColor = UIColor.black

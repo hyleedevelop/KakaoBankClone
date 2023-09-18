@@ -60,10 +60,11 @@ enum ButtonTitle: String {
 
 //MARK: - 셀 제목 옆에 붙는 배지 타입
 
-enum BadgeType {
-    case none
-    case new
-    case event
+enum BadgeType: String {
+    case none = ""
+    case new = "NEW"
+    case event = "EVENT"
+    case up = "UP"
 }
 
 //MARK: - 이체 화면의 레이아웃 관련 설정값

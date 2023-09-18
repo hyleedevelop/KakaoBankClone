@@ -208,7 +208,7 @@ final class LoginViewController: UIViewController {
     
 }
 
-//MARK: - 테이블뷰 델리게이트 메서드
+//MARK: - 텍스트필드 델리게이트 메서드
 
 extension LoginViewController: UITextFieldDelegate {
     

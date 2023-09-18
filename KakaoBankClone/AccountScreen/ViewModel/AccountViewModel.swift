@@ -25,7 +25,7 @@ final class AccountViewModel {
         self.accountTopAdData.append(self.accountTopAdData[1])
     }
     
-    //MARK: - Firestore 관련
+    //MARK: - Firestore 및 데이터 관련
     
     // Firestore의 인스턴스
     private let firestore = Firestore.firestore()
@@ -49,6 +49,9 @@ final class AccountViewModel {
                           let accountBalance = document.get("accountBalance") as? Int,
                           let hasSafeBox = document.get("hasSafeBox") as? Bool,
                           let safeBoxBalance = document.get("safeBoxBalance") as? Int else { return }
+                    
+                    // 유저 이름은 따로 로컬에 저장
+                    UserDefaults.standard.userName = userName
                     
                     // 데이터 배열에 추가 (1)
                     self.accountData.append(
