@@ -13,7 +13,7 @@ class MoreTopAdTableViewCell: UITableViewCell {
     
     static let identifier = "MoreTopAdTableViewCell"
     
-    //MARK: - 상단 광고 관련 속성
+    //MARK: - UI 관련 속성
     
     // 컨테이너 뷰
     private let containerView: UIView = {
@@ -52,7 +52,7 @@ class MoreTopAdTableViewCell: UITableViewCell {
     }()
 
     // 4개의 버튼에 대한 스택뷰
-    internal let buttonStackView: UIStackView = {
+    private let buttonStackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
         sv.alignment = .fill
@@ -60,9 +60,6 @@ class MoreTopAdTableViewCell: UITableViewCell {
         sv.spacing = 20
         return sv
     }()
-    
-    //MARK: - 4개의 버튼 관련 속성
-    
     
     //MARK: - 생성자
     

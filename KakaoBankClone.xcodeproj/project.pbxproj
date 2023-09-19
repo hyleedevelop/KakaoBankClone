@@ -68,6 +68,8 @@
 		07DEB9092A9203C500E75BC4 /* TransferInfoNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEB9082A9203C500E75BC4 /* TransferInfoNavigationView.swift */; };
 		07DEB90B2A92044900E75BC4 /* TransferInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DEB90A2A92044900E75BC4 /* TransferInfoViewModel.swift */; };
 		07F30D652A83AAF1001D96FC /* ServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */; };
+		07F3431C2AB9D14200750832 /* ServiceFooterAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3431B2AB9D14200750832 /* ServiceFooterAdModel.swift */; };
+		07F3431E2AB9D63700750832 /* ServiceFooterAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3431D2AB9D63700750832 /* ServiceFooterAdView.swift */; };
 		A37612E51FCED7E5EC69CD8D /* Pods_KakaoBankClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCED9299102A2A6CB6DBB08F /* Pods_KakaoBankClone.framework */; };
 		DE9DB6893F405A81D1321244 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */; };
 		E45BFED7CA6B2ACA96A8EAAE /* Pods_KakaoBankCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */; };
@@ -158,6 +160,8 @@
 		07DEB9082A9203C500E75BC4 /* TransferInfoNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInfoNavigationView.swift; sourceTree = "<group>"; };
 		07DEB90A2A92044900E75BC4 /* TransferInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferInfoViewModel.swift; sourceTree = "<group>"; };
 		07F30D642A83AAF1001D96FC /* ServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHeaderView.swift; sourceTree = "<group>"; };
+		07F3431B2AB9D14200750832 /* ServiceFooterAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFooterAdModel.swift; sourceTree = "<group>"; };
+		07F3431D2AB9D63700750832 /* ServiceFooterAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFooterAdView.swift; sourceTree = "<group>"; };
 		0B6D679472150FFD9CA2A64F /* Pods_KakaoBankCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320FC54D3122EAEAE00BC82A /* Pods-KakaoBankClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone/Pods-KakaoBankClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A520A21DEE10BBBFDE272393 /* Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaoBankClone-KakaoBankCloneUITests/Pods-KakaoBankClone-KakaoBankCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 			children = (
 				07D9E3782A7FE6DB000EDF9B /* ServiceListModel.swift */,
 				072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */,
+				07F3431B2AB9D14200750832 /* ServiceFooterAdModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				07D9E3742A7FCF43000EDF9B /* ServiceListTableViewCell.swift */,
 				07D9E3762A7FD683000EDF9B /* ServiceTopAdTableViewCell.swift */,
 				072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */,
+				07F3431D2AB9D63700750832 /* ServiceFooterAdView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				07AA67A82A7BFB85009DB3F0 /* AccountTableViewCell.swift in Sources */,
 				07AA675B2A7BB7C3009DB3F0 /* AppDelegate.swift in Sources */,
 				0778821A2AB6E95C00580937 /* AlertModel.swift in Sources */,
+				07F3431E2AB9D63700750832 /* ServiceFooterAdView.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
 				075FBEA42A8B792000A82EC1 /* ReceiverListModel.swift in Sources */,
 				07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */,
@@ -799,6 +806,7 @@
 				075FBEA02A8B78B800A82EC1 /* ReceiverListViewController.swift in Sources */,
 				07CA4ED62A80FF9800F81E6F /* NSAttributedString.swift in Sources */,
 				075FBE932A8B434800A82EC1 /* AlertHeaderView.swift in Sources */,
+				07F3431C2AB9D14200750832 /* ServiceFooterAdModel.swift in Sources */,
 				0774D9472A99F2D700F4A05C /* TransferCompleteViewModel.swift in Sources */,
 				07AA67A12A7BEF6F009DB3F0 /* TabBarController.swift in Sources */,
 				07AA678E2A7BC1BF009DB3F0 /* ServiceViewController.swift in Sources */,

@@ -43,7 +43,7 @@ final class AccountViewController: UIViewController {
             AccountAddTableViewCell.self,
             forCellReuseIdentifier: AccountAddTableViewCell.identifier
         )
-        tv.showsVerticalScrollIndicator = false
+        tv.showsVerticalScrollIndicator = true
         tv.separatorStyle = .none
         return tv
     }()

@@ -31,7 +31,7 @@ final class AlertViewController: UIViewController {
             forCellReuseIdentifier: AlertTableViewCell.identifier
         )
         tv.backgroundColor = UIColor(themeColor: .white)
-        tv.showsVerticalScrollIndicator = false
+        tv.showsVerticalScrollIndicator = true
         tv.separatorStyle = .none
         return tv
     }()
@@ -92,7 +92,7 @@ final class AlertViewController: UIViewController {
             $0.top.equalTo(self.headerView.snp.bottom)
         }
         
-        self.alertTableView.contentInset.top = 10  // 테이블뷰 꼭대기의 내부간격
+        self.alertTableView.contentInset.top = 0  // 테이블뷰 꼭대기의 내부간격
     }
     
     // 대리자 설정
@@ -151,7 +151,7 @@ extension AlertViewController: UITableViewDataSource, UITableViewDelegate {
         // 현재 테이블뷰의 스크롤의 위치
         let currentOffset: CGFloat = -scrollView.contentOffset.y
         // 스크롤뷰 오프셋의 기준값
-        let thresholdOffset: CGFloat = 10
+        let thresholdOffset: CGFloat = 0
         
         // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
         if currentOffset >= thresholdOffset {

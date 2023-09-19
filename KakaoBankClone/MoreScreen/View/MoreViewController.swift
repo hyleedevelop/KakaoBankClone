@@ -40,7 +40,7 @@ final class MoreViewController: UIViewController {
         )
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         tv.backgroundColor = UIColor(themeColor: .white)
-        tv.showsVerticalScrollIndicator = false
+        tv.showsVerticalScrollIndicator = true
         tv.separatorStyle = .none
         //tv.layer.borderColor = UIColor.red.cgColor
         //tv.layer.borderWidth = 1
@@ -146,7 +146,7 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
     // 셀에 표출할 내용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:  // 0번째 section: 상단 광고 컬렉션뷰
+        case 0:  // 0번째 section: 상단 광고
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MoreTopAdTableViewCell.identifier, for: indexPath)
                     as? MoreTopAdTableViewCell else { return UITableViewCell() }
             
@@ -158,16 +158,20 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
 
-        case self.viewModel.numberOfSections-1:  // 마지막 section: 하단 광고 컬렉션뷰
+        case self.viewModel.numberOfSections-1:  // 마지막 section: 하단 광고
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MoreBottomAdTableViewCell.identifier, for: indexPath)
                     as? MoreBottomAdTableViewCell else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            //cell.setAd(model: self.viewModel.getTopAdData)
+            cell.setCellUI(
+                image: UIImage(named: "krw-money")!,
+                title: "추석 맞이 [1+1] 특가",
+                subtitle: "지금 놓치면 내년에 봐요 >>"
+            )
             
             return cell
             
-        default:  // 나머지 section: 더보기 메뉴 목록 테이블뷰
+        default:  // 나머지 section: 더보기 메뉴 목록
             let data = self.viewModel.getMoreListData(at: indexPath)
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MoreListTableViewCell.identifier, for: indexPath)
                     as? MoreListTableViewCell else { return UITableViewCell() }

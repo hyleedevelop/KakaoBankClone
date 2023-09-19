@@ -43,7 +43,7 @@ final class ServiceViewModel {
         ),
     ]
     
-    let serviceListData: [[ServiceListModel]] = [[
+    private let serviceListData: [[ServiceListModel]] = [[
         ServiceListModel(
             tintColor: UIColor(themeColor: .green), title: "입출금통장",
             subtitle: "까다로운 계좌개설도 손쉽게", hasInterest: true, interest: "연 0.10%"
@@ -194,10 +194,36 @@ final class ServiceViewModel {
     
     let categoryName: [String] = ["전체", "예적금", "카드", "대출", "서비스", "투자", "mini", "사업자"]
     
-    // 뷰컨트롤러와 뷰모델의 데이터 사이의 연결고리
-    var getTopAdData: [ServiceTopAdModel] {
-        return self.serviceTopAdData
-    }
+    private let serviceFooterAdData: [ServiceFooterAdModel] = [
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .pink), title: "세이프박스",
+            subtitle: "하루만 맡겨도 이자가 쏠쏠", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .blue), title: "신용카드 발급했다면",
+            subtitle: "청구금액 알림을 받아보세요", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .green), title: "비상금대출",
+            subtitle: "대출까지 평균 60초!", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .darkGray), title: "나의 정보도 맡기고 싶다면",
+            subtitle: "돈 뿐만 아니라 정보도 편리하게", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .yellow), title: "해외주식투자",
+            subtitle: "테슬라, 스타벅스 천원부터", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .pink), title: "mini 생활",
+            subtitle: "청소년을 위한 mini 서비스", image: UIImage(named: "krw-money")!
+        ),
+        ServiceFooterAdModel(
+            backgroundColor: UIColor(themeColor: .blue), title: "개인사업자 보증서대출",
+            subtitle: "보증기관 방문없이 편리하게", image: UIImage(named: "krw-money")!
+        ),
+    ]
     
     //MARK: - 테이블뷰 관련
     
@@ -241,37 +267,31 @@ final class ServiceViewModel {
 
             let headerView = UIView()
             headerView.addSubview(titleLabel)
-            headerView.layer.borderColor = UIColor.cyan.cgColor
-            headerView.layer.borderWidth = 0
 
+            // 하얀색 뷰로 섹션 내부와 헤더 사이의 경계선을 덮어서 보이지 않게끔 설정
+            let whiteView = UIView(frame: CGRect(x: 0, y: 40, width: tableView.frame.size.width, height: 2))
+            whiteView.backgroundColor = UIColor(themeColor: .white)
+            headerView.addSubview(whiteView)
+            
             return headerView
         }
     }
     
-    // custom footer view
-    func viewForFooterInSection(at section: Int) -> UIView? {
-        if section == 0 {
-            return nil
-        } else {
-            let containerView = UIView()
-            containerView.backgroundColor = UIColor(themeColor: .pink)
-            containerView.layer.cornerRadius = 15
-            containerView.clipsToBounds = true
-            
-            let footerView = UIView()
-            footerView.addSubview(containerView)
-            footerView.layer.borderColor = UIColor.orange.cgColor
-            footerView.layer.borderWidth = 0
-            containerView.snp.makeConstraints {
-                $0.left.equalToSuperview().offset(20)
-                $0.right.equalToSuperview().offset(-20)
-                $0.top.equalToSuperview().offset(20)
-                $0.height.equalTo(55)
-            }
-            
-            return footerView
-        }
+    // 상단 광고 데이터 가져오기
+    var getTopAdData: [ServiceTopAdModel] {
+        return self.serviceTopAdData
     }
+    
+    // 서비스 리스트 데이터 가져오기
+    func getServiceListData(at indexPath: IndexPath) -> ServiceListModel {
+        return self.serviceListData[indexPath.section-1][indexPath.row]
+    }
+    
+    // 상단 광고 데이터 가져오기
+    func getFooterAdData(at section: Int) -> ServiceFooterAdModel {
+        return self.serviceFooterAdData[section-1]
+    }
+    
  
     //MARK: - 컬렉션뷰 관련
 

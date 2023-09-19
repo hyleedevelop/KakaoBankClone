@@ -64,7 +64,7 @@ final class ServiceViewController: UIViewController {
             ServiceListTableViewCell.self,
             forCellReuseIdentifier: ServiceListTableViewCell.identifier
         )
-        tv.showsVerticalScrollIndicator = false
+        tv.showsVerticalScrollIndicator = true
         tv.separatorInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
         tv.backgroundColor = UIColor(themeColor: .white)
         tv.layer.borderColor = UIColor.green.cgColor
@@ -83,8 +83,7 @@ final class ServiceViewController: UIViewController {
         super.viewDidLoad()
     
         self.setupView()
-        self.addSubview()
-        self.setupLayout()
+        self.setupAutoLayout()
         self.setupDelegate()
     }
 
@@ -96,23 +95,17 @@ final class ServiceViewController: UIViewController {
         self.view.backgroundColor = UIColor(themeColor: .white)
     }
     
-    // 하위 뷰 추가
-    private func addSubview() {
-        self.view.addSubview(self.tableView)
-        self.view.addSubview(self.headerView)
-        self.view.addSubview(self.collectionView)
-        self.collectionView.addSubview(self.highlightBar)
-    }
-    
-    // 레이아웃 설정
-    private func setupLayout() {
+    // 오토레이아웃 설정
+    private func setupAutoLayout() {
         // 테이블뷰
+        self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.bottom.left.right.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         // 헤더뷰
+        self.view.addSubview(self.headerView)
         self.headerView.snp.makeConstraints {
             $0.top.equalTo(self.view)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
@@ -120,6 +113,7 @@ final class ServiceViewController: UIViewController {
         }
         
         // 메뉴 컬렉션뷰
+        self.view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints {
             $0.top.equalTo(self.headerView.snp.bottom)
             $0.left.right.equalTo(self.view.safeAreaLayoutGuide)
@@ -133,6 +127,7 @@ final class ServiceViewController: UIViewController {
         let minX = self.viewModel.sizeForheaderAndFooter.width + 7.5
         let maxX = minX + self.viewModel.sizeForItemAt(at: 0).width - 15
         
+        self.collectionView.addSubview(self.highlightBar)
         self.highlightBar.snp.makeConstraints {
             $0.left.equalToSuperview().offset(minX)
             $0.right.equalToSuperview().offset(maxX)
@@ -280,7 +275,21 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
     
     // footer view
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return self.viewModel.viewForFooterInSection(at: section)
+        if section == 0 {
+            return nil
+        } else {
+            let data = self.viewModel.getFooterAdData(at: section)
+            let footerView = ServiceFooterAdView()
+            
+            footerView.setupUI(
+                backgroundColor: data.backgroundColor,
+                title: data.title,
+                subtitle: data.subtitle,
+                image: data.image
+            )
+            
+            return footerView
+        }
     }
     
     // 셀에 표출할 내용
@@ -288,14 +297,17 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {  // 0번째 section: 상단 광고 컬렉션뷰
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceTopAdTableViewCell.identifier, for: indexPath)
                     as? ServiceTopAdTableViewCell else { return UITableViewCell() }
+            
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.getTopAdData)
+            
             return cell
         }
         else {  // 나머지 section: 서비스 목록 테이블뷰
-            let data = self.viewModel.serviceListData[indexPath.section-1][indexPath.row]
+            let data = self.viewModel.getServiceListData(at: indexPath)
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ServiceListTableViewCell.identifier, for: indexPath)
                     as? ServiceListTableViewCell else { return UITableViewCell() }
+            
             cell.selectionStyle = .none
             cell.accessoryType = data.hasInterest ? .none : .disclosureIndicator
             cell.setCellUI(
@@ -304,6 +316,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate {
                 interest: data.interest ?? "",
                 color: data.tintColor
             )
+            
             return cell
         }
     }
