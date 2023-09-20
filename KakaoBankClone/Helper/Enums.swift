@@ -29,6 +29,7 @@ enum ThemeColor {
     case black
     case white
     case lightGray
+    case faintGray
     case darkGray
     case pink
     case red
@@ -80,10 +81,10 @@ enum TransferLayoutValues {
 //MARK: - 상품/서비스 화면의 레이아웃 관련 설정값
 
 enum ServiceLayoutValues {
-    static let topSafeAreaHeight: CGFloat = 59
-    static let menuCollectionViewHeight: CGFloat = 35
+    static let topSafeAreaHeight: CGFloat = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 59
+    static let menuCollectionViewHeight: CGFloat = 38
     static let headerMinHeight: CGFloat = 75
-    static let headerMaxHeight: CGFloat = headerMinHeight + 55
+    static let headerMaxHeight: CGFloat = headerMinHeight + 57
 }
 
 //MARK: - 은행 종류

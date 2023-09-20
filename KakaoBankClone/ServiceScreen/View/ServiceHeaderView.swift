@@ -48,8 +48,8 @@ class ServiceHeaderView: UIView {
         self.addSubview(self.tabTitleLabel)
         
         self.tabTitleLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-15)
-            $0.left.equalToSuperview().offset(25)
+            $0.bottom.equalToSuperview().offset(-16)
+            $0.left.equalToSuperview().offset(24)
         }
     }
 }

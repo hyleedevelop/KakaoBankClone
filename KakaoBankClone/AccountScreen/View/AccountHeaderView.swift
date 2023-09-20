@@ -77,8 +77,8 @@ class AccountHeaderView: UIView {
     private func setupLayout() {
         // 제목 레이블
         self.tabTitleLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-15)
-            $0.left.equalToSuperview().offset(25)
+            $0.bottom.equalToSuperview().offset(-16)
+            $0.left.equalToSuperview().offset(24)
         }
         
         // 내 계좌 버튼

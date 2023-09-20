@@ -261,11 +261,13 @@ final class ServiceViewModel {
                 frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
             )
             titleLabel.textAlignment = .left
-            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             titleLabel.textColor = UIColor.black
             titleLabel.text = self.categoryName[section]
 
             let headerView = UIView()
+            headerView.layer.borderColor = UIColor.red.cgColor
+            headerView.layer.borderWidth = 0
             headerView.addSubview(titleLabel)
 
             // 하얀색 뷰로 섹션 내부와 헤더 사이의 경계선을 덮어서 보이지 않게끔 설정
@@ -274,6 +276,25 @@ final class ServiceViewModel {
             headerView.addSubview(whiteView)
             
             return headerView
+        }
+    }
+    
+    // custom footer view
+    func viewForFooterInSection(tableView: UITableView, at section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        } else {
+            let data = self.getFooterAdData(at: section)
+            let footerView = ServiceFooterAdView()
+            
+            footerView.setupUI(
+                backgroundColor: data.backgroundColor,
+                title: data.title,
+                subtitle: data.subtitle,
+                image: data.image
+            )
+            
+            return footerView
         }
     }
     
@@ -325,14 +346,7 @@ final class ServiceViewModel {
     
     // header와 footer의 크기
     var sizeForheaderAndFooter: CGSize {
-        return CGSize(width: 20, height: ServiceLayoutValues.menuCollectionViewHeight)
-    }
-    
-    // 셀의 선택/해제 여부에 따른 UI 변경
-    func changeCellUI(cell: ServiceMenuCollectionViewCell, isSelected: Bool) {
-        DispatchQueue.main.async {
-            cell.serviceNameLabel.textColor = UIColor(white: isSelected ? 0.0 : 0.5, alpha: 1)
-        }
+        return CGSize(width: 17, height: ServiceLayoutValues.menuCollectionViewHeight)
     }
     
 }

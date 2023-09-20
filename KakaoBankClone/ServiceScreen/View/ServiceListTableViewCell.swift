@@ -20,7 +20,7 @@ class ServiceListTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -89,18 +89,6 @@ class ServiceListTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-20)
         }
     }
-
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        // section header의 구분선만 제거하기
-//        let width = subviews[0].frame.width
-//        for view in subviews where view != contentView {
-//            if view.frame.width == width {
-//                view.removeFromSuperview()
-//            }
-//        }
-//    }
     
     //MARK: - 외부에서 호출하는 메서드
     

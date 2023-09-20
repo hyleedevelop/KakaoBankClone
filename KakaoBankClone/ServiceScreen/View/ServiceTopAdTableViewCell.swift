@@ -16,6 +16,17 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     
     //MARK: - 컬렉션뷰 관련 속성
     
+    private let containerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = false
+        view.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowRadius = 3
+        return view
+    }()
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -31,7 +42,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
             forCellWithReuseIdentifier: ServiceTopAdCollectionViewCell.identifier
         )
         cv.layer.cornerRadius = 10
-        cv.clipsToBounds = true
+        cv.layer.masksToBounds = true
         return cv
     }()
     
@@ -67,13 +78,17 @@ class ServiceTopAdTableViewCell: UITableViewCell {
     
     // 컬렉션뷰 설정
     private func setupCollectionView() {
-        self.contentView.addSubview(self.collectionView)
+        self.contentView.addSubview(self.containerView)
+        self.containerView.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(18)
+            $0.right.equalToSuperview().offset(-18)
+            $0.top.equalToSuperview().offset(0)
+            $0.height.equalTo(283)
+        }
         
+        self.containerView.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.left.right.top.bottom.equalToSuperview()
         }
         
         self.collectionView.delegate = self
@@ -85,7 +100,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.pageControl)
         
         self.pageControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
+            $0.top.equalToSuperview().offset(10)
             $0.right.equalToSuperview().offset(5)
         }
 

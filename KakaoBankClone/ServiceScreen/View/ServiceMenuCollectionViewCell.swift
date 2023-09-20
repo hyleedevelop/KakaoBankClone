@@ -17,10 +17,10 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
     //MARK: - UI 속성
     
     // 메뉴 이름
-    let serviceNameLabel: UILabel = {
+    private let serviceNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(white: 0.5, alpha: 1.0)
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textColor = UIColor(white: 0.7, alpha: 1.0)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.textAlignment = .center
         label.numberOfLines = 1
         return label
@@ -50,6 +50,20 @@ class ServiceMenuCollectionViewCell: UICollectionViewCell {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview()
         }
+    }
+    
+    //MARK: - 외부에서 호출하는 메서드
+    
+    // 레이블에 표시할 값 설정
+    func setupUI(text: String, textColor: UIColor, font: UIFont) {
+        self.serviceNameLabel.text = text
+        self.serviceNameLabel.textColor = textColor
+        self.serviceNameLabel.font = font
+    }
+    
+    // 레이블 색상 변경
+    func changeTextColor(textColor: UIColor) {
+        self.serviceNameLabel.textColor = textColor
     }
     
 }

@@ -48,6 +48,8 @@ extension UIColor {
             self.init(hexCode: "#FFFFFF", alpha: 1.0)
         case .lightGray:
             self.init(hexCode: "#F7F7F6", alpha: 1.0)
+        case .faintGray:
+            self.init(white: 0.9, alpha: 1.0)
         case .darkGray:
             self.init(hexCode: "#666666", alpha: 1.0)
         case .pink:

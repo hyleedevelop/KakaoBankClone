@@ -41,28 +41,28 @@ class TabBarController: UITabBarController {
         vc1.tabBarItem.image = UIImage(
             systemName: "person.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 16)
+        )?.withBaselineOffset(fromBottom: 12)
         
         // 서비스 탭
         let vc2 = UINavigationController(rootViewController: ServiceViewController())
         vc2.tabBarItem.image = UIImage(
             systemName: "square.grid.2x2.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 16)
+        )?.withBaselineOffset(fromBottom: 12)
         
         // 알림 탭
         let vc3 = UINavigationController(rootViewController: AlertViewController())
         vc3.tabBarItem.image = UIImage(
             systemName: "bell.fill",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 16)
+        )?.withBaselineOffset(fromBottom: 12)
         
         // 서비스 탭
         let vc4 = UINavigationController(rootViewController: MoreViewController())
         vc4.tabBarItem.image = UIImage(
             systemName: "ellipsis",
             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 17))
-        )?.withBaselineOffset(fromBottom: 8)
+        )?.withBaselineOffset(fromBottom: 4)
         
         self.viewControllers = [vc1, vc2, vc3, vc4]
         
