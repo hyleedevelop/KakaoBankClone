@@ -20,7 +20,7 @@ class ServiceListTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label

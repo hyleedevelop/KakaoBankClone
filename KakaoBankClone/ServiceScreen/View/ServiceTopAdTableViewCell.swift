@@ -82,7 +82,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         self.containerView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(18)
             $0.right.equalToSuperview().offset(-18)
-            $0.top.equalToSuperview().offset(0)
+            $0.top.equalToSuperview().offset(ServiceLayoutValues.headerMaxHeight)
             $0.height.equalTo(283)
         }
         
@@ -100,7 +100,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.pageControl)
         
         self.pageControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(140)
             $0.right.equalToSuperview().offset(5)
         }
 

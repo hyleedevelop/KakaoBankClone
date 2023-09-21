@@ -192,7 +192,7 @@ final class ServiceViewModel {
         ),
     ]]
     
-    let categoryName: [String] = ["전체", "예적금", "카드", "대출", "서비스", "투자", "mini", "사업자"]
+    private let categoryName: [String] = ["전체", "예적금", "카드", "대출", "서비스", "투자", "mini", "사업자"]
     
     private let serviceFooterAdData: [ServiceFooterAdModel] = [
         ServiceFooterAdModel(
@@ -239,26 +239,26 @@ final class ServiceViewModel {
     
     // header 높이
     func heightForHeaderInSection(at section: Int) -> CGFloat {
-        return section == 0 ? 0 : 40
+        return section == 0 ? 0 : 90
     }
     
     // footer 높이
     func heightForFooterInSection(at section: Int) -> CGFloat {
-        return section == 0 ? 50 : 150
+        return section == 0 ? 0 : 100
     }
     
     // cell 높이
     func heightForRow(at section: Int) -> CGFloat {
-        return section == 0 ? 290 : 85
+        return section == 0 ? 420 : 85
     }
     
     // custom header view
     func viewForHeaderInSection(tableView: UITableView, at section: Int) -> UIView? {
         if section == 0 {
-            return nil
+            return UIView()
         } else {
             let titleLabel = UILabel(
-                frame: CGRect(x: 25, y: 0, width: tableView.frame.width, height: 22)
+                frame: CGRect(x: 25, y: 50, width: tableView.frame.width, height: 22)
             )
             titleLabel.textAlignment = .left
             titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -267,7 +267,7 @@ final class ServiceViewModel {
 
             let headerView = UIView()
             headerView.layer.borderColor = UIColor.red.cgColor
-            headerView.layer.borderWidth = 0
+            headerView.layer.borderWidth = 2
             headerView.addSubview(titleLabel)
 
             // 하얀색 뷰로 섹션 내부와 헤더 사이의 경계선을 덮어서 보이지 않게끔 설정
@@ -282,7 +282,7 @@ final class ServiceViewModel {
     // custom footer view
     func viewForFooterInSection(tableView: UITableView, at section: Int) -> UIView? {
         if section == 0 {
-            return nil
+            return UIView()
         } else {
             let data = self.getFooterAdData(at: section)
             let footerView = ServiceFooterAdView()

@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+enum ChangeUIBy {
+    case collectionViewItem
+    case tableViewScroll
+}
+
 final class ServiceViewController: UIViewController {
     
     //MARK: - UI 속성
@@ -80,15 +85,19 @@ final class ServiceViewController: UIViewController {
     // 뷰모델의 인스턴스
     private let viewModel = ServiceViewModel()
     
-    // 현재 선택된 테이블뷰의 섹션 번호
-    private var currentTableViewSection: Int = 0 {
+    // 현재 선택된 테이블뷰(컬렉션뷰)의 섹션(아이템) 번호
+    private var currentItemNumber: Int = 0 {
         didSet {
-            self.changeCollectionViewUI()
+            //self.changeCurrentItemUI()
         }
     }
     
-    // 현재 선택된 컬렉션뷰의 IndexPath
-    private var selectedCollectionViewIndexPath: IndexPath?
+    // 이전에 선택된 테이블뷰(컬렉션뷰)의 섹션(아이템) 번호
+    private var previousItemNumber: Int = 0 {
+        didSet {
+            //self.changePreviousItemUI()
+        }
+    }
     
     //MARK: - 생명주기
     
@@ -99,35 +108,16 @@ final class ServiceViewController: UIViewController {
         self.addSubview()
         self.setupAutoLayout()
         self.setupDelegate()
-    }
-
-    //MARK: - 메서드
-    
-    private func changeCollectionViewUI() {
-        print(#function)
         
-        // frame은 컬렉션뷰 내부 좌표계에 대한 값을 가지므로 frame 속성을 이용해 minX, maxX에 접근하면 안된다.
-        // 따라서 컬렉션뷰의 좌표계로 변환하고 여기서의 minX, maxX를 구해야 한다.
-        let collectionViewIndexPath = IndexPath(item: self.currentTableViewSection, section: 0)
-        guard let selectedCell = self.collectionView.cellForItem(at: collectionViewIndexPath) else { return }
-        let minX = selectedCell.convert(selectedCell.bounds, to: collectionView).minX + 7.5
-        let maxX = selectedCell.convert(selectedCell.bounds, to: collectionView).maxX - 7.5
-        
-        // 컬렉션뷰의 아이템 선택하기
-//        self.collectionView.selectItem(
-//            at: IndexPath(item: self.currentTableViewSection, section: 0),
-//            animated: true,
-//            scrollPosition: .centeredHorizontally
-//        )
-        
-        // 컬렉션뷰의 스크롤 이동하기
-        self.scrollCollectionView(
-            minX: minX,
-            maxX: maxX,
-            indexPath: IndexPath(item: self.currentTableViewSection, section: 0),
-            animated: false
+        // 초기화 시 선택되어 있을 셀 지정하기
+        self.collectionView.selectItem(
+            at: IndexPath(item: 0, section: 0),
+            animated: true,
+            scrollPosition: .centeredHorizontally
         )
     }
+
+    //MARK: - 초기 실행 메서드
     
     // 뷰 설정
     private func setupView() {
@@ -165,9 +155,6 @@ final class ServiceViewController: UIViewController {
             $0.height.equalTo(ServiceLayoutValues.menuCollectionViewHeight)
         }
         
-        self.tableView.contentOffset.y = -ServiceLayoutValues.headerMaxHeight  // 테이블뷰 스크롤의 위치
-        self.tableView.contentInset.top = ServiceLayoutValues.headerMaxHeight  // 테이블뷰 꼭대기의 내부간격
-        
         // 강조 막대
         let minX = self.viewModel.sizeForheaderAndFooter.width + 7.5 - 1
         let maxX = minX + self.viewModel.sizeForItemAt(at: 0).width - 15 + 2
@@ -187,27 +174,27 @@ final class ServiceViewController: UIViewController {
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-    
-        // 초기화 시 선택되어 있을 셀 지정하기
-        self.collectionView.selectItem(
-            at: IndexPath(item: 0, section: 0),
-            animated: true,
-            scrollPosition: .centeredHorizontally
-        )
     }
     
-    // 컬렉션뷰의 스크롤 이동하기
-    private func scrollCollectionView(minX: CGFloat, maxX: CGFloat, indexPath: IndexPath, animated: Bool) {
-        UIView.animate(withDuration: 0.3) {
-            guard let cell = self.collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
-                
-            // 특정 셀의 폰트 색상 변경
-            cell.changeTextColor(textColor: UIColor(white: 0.0, alpha: 1))
+    //MARK: - 내부 메서드
+    
+    // 현재 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
+    private func changeCurrentItemUI() {
+        let indexPath = IndexPath(item: self.currentItemNumber, section: 0)
+        
+        // frame은 컬렉션뷰 내부 좌표계에 대한 값을 가지므로 frame 속성을 이용해 minX, maxX에 접근하면 안된다.
+        // 따라서 컬렉션뷰의 좌표계로 변환하고 여기서의 minX, maxX를 구해야 한다.
+        let collectionViewIndexPath = IndexPath(item: self.currentItemNumber, section: 0)
+        guard let selectedCell = self.collectionView.cellForItem(at: collectionViewIndexPath) else { return }
+        let minX = selectedCell.convert(selectedCell.bounds, to: self.collectionView).minX + 7.5
+        let maxX = selectedCell.convert(selectedCell.bounds, to: self.collectionView).maxX - 7.5
+        
+        // 애니메이션
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.preferredFramesPerSecond60, .curveEaseOut]) {
+            // 선택한 컬렉션뷰 아이템이 최대한 중앙으로 오도록 스크롤
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             
-            // 컬렉션뷰의 스크롤을 최대한 화면 중앙으로 이동시키기
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
-            
-            // 메뉴 하단의 강조 막대 움직이기
+            // 컬렉션뷰 하단의 강조 막대 움직이기
             self.highlightBar.snp.updateConstraints {
                 $0.left.equalToSuperview().offset(minX)
                 $0.right.equalToSuperview().offset(maxX)
@@ -215,6 +202,25 @@ final class ServiceViewController: UIViewController {
             
             // 하위뷰의 레이아웃 즉시 업데이트
             self.collectionView.layoutIfNeeded()
+            
+            // UI를 변경하려는 셀 가져오기
+            guard let cell = self.collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
+            
+            // 해당 셀의 폰트 색상 변경
+            cell.changeTextColor(textColor: UIColor(white: 0.0, alpha: 1))
+        }
+    }
+
+    // 이전 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
+    private func changePreviousItemUI() {
+        let indexPath = IndexPath(item: self.previousItemNumber, section: 0)
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.preferredFramesPerSecond60, .curveEaseOut]) {
+            // UI를 변경하려는 셀 가져오기
+            guard let cell = self.collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
+            
+            // 해당 셀의 폰트 색상 변경
+            cell.changeTextColor(textColor: UIColor(white: 0.7, alpha: 1))
         }
     }
     
@@ -243,59 +249,70 @@ extension ServiceViewController: UICollectionViewDelegate, UICollectionViewDataS
         // (스크롤 해도 선택되어 있는 셀의 경우 항상 검정색 글자를 유지하고 그렇지 않은 경우 회색 글자를 유지하도록 설정)
         cell.setupUI(
             text: self.viewModel.titleForItemAt(at: indexPath.item),
-            textColor: UIColor(white: cell.isSelected ? 0.0 : 0.7, alpha: 1),
+            textColor: UIColor(white: indexPath.item == 0 ? 0.0 : 0.7, alpha: 1),
             font: UIFont.systemFont(ofSize: 15, weight: .bold)
         )
-        
-//        // 선택된 섹션에 따라 글꼴 굵기 변경
-//        if indexPath.item == self.selectedTableViewSection {
-//            cell.setupUI(
-//                text: self.viewModel.titleForItemAt(at: indexPath.item),
-//                textColor: UIColor(white: 0.0, alpha: 1),
-//                font: UIFont.systemFont(ofSize: 15, weight: .semibold)
-//            )
-//        } else {
-//            cell.setupUI(
-//                text: self.viewModel.titleForItemAt(at: indexPath.item),
-//                textColor: UIColor(white: 0.5, alpha: 1),
-//                font: UIFont.systemFont(ofSize: 15, weight: .regular)
-//            )
-//        }
         
         return cell
     }
     
     // 아이템이 선택되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
+        var yPosition: CGFloat = 0
         
-        // frame은 컬렉션뷰 내부 좌표계에 대한 값을 가지므로 frame 속성을 이용해 minX, maxX에 접근하면 안된다.
-        // 따라서 컬렉션뷰의 좌표계로 변환하고 여기서의 minX, maxX를 구해야 한다.
-        guard let selectedCell = self.collectionView.cellForItem(at: indexPath) else { return }
-        let minX = selectedCell.convert(selectedCell.bounds, to: collectionView).minX + 7.5
-        let maxX = selectedCell.convert(selectedCell.bounds, to: collectionView).maxX - 7.5
+        if indexPath.item == 0 {
+            yPosition -= ServiceLayoutValues.topSafeAreaHeight
+            print("yPosition: \(yPosition)")
+        }
+        else {
+            for section in 1..<indexPath.item {
+                yPosition += (
+                    self.viewModel.heightForHeaderInSection(at: section) +
+                    self.viewModel.heightForRow(at: section) * CGFloat(self.viewModel.numberOfRowsInSection(at: section)) +
+                    self.viewModel.heightForFooterInSection(at: section)
+                )
+            }
+            //yPosition += 323
+            yPosition += self.viewModel.heightForRow(at: 0) - ServiceLayoutValues.headerMinHeight - 20
+            print("yPosition: \(yPosition)")
+        }
         
-        // 컬렉션뷰의 스크롤 이동하기
-//        self.scrollCollectionView(minX: minX, maxX: maxX, indexPath: indexPath, animated: true)
+        self.previousItemNumber = self.currentItemNumber
+        self.currentItemNumber = indexPath.item
+        
+        if self.previousItemNumber > self.currentItemNumber {
+            yPosition += ServiceLayoutValues.topSafeAreaHeight
+        }
         
         // 테이블뷰 스크롤을 특정 위치로 이동시키기
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: indexPath.item), at: .top, animated: true)
+        self.tableView.scrollRectToVisible(
+            CGRect(
+                x: 0,
+                y: yPosition,
+                width: self.tableView.bounds.size.width,
+                height: self.tableView.bounds.size.height
+            ),
+            animated: true
+        )
         
         // 햅틱 반응
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         
-        // 선택된 셀의 텍스트 색상을 검정색으로 변경 (dequeueReusableCell 메서드를 이용하면 안됨)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
-        cell.changeTextColor(textColor: UIColor(white: 0.0, alpha: 1))
+//        self.currentItemNumber = indexPath.item
+//        self.changeCurrentItemUI(mode: .collectionViewItem, number: indexPath.item)
+        
+//        // 선택된 셀의 텍스트 색상을 검정색으로 변경 (dequeueReusableCell 메서드를 이용하면 안됨)
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
+//        cell.changeTextColor(textColor: UIColor(white: 0.0, alpha: 1))
     }
     
     // 아이템이 해제되었을 때 실행할 내용
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print(#function)
+        //self.previousItemNumber = self.currentItemNumber
         
-        // 선택되지 않은 셀의 텍스트 색상을 회색으로 변경 (dequeueReusableCell 메서드를 이용하면 안됨)
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
-        cell.changeTextColor(textColor: UIColor(white: 0.7, alpha: 1))
+        // 선택된 셀의 텍스트 색상을 검정색으로 변경 (dequeueReusableCell 메서드를 이용하면 안됨)
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? ServiceMenuCollectionViewCell else { return }
+//        cell.changeTextColor(textColor: UIColor(white: 0.7, alpha: 1))
     }
     
 }
@@ -392,72 +409,66 @@ extension ServiceViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
-        guard scrollView == self.tableView else { return }
-        
-        // 현재 테이블뷰의 스크롤의 위치
-        let currentOffset: CGFloat = -scrollView.contentOffset.y
-//        // 다이내믹한 오토레이아웃 설정을 위한 스크롤뷰 오프셋의 최소 및 최대 기준값
-//        let minOffset: CGFloat = -ServiceLayoutValues.headerMaxHeight
-//        let maxOffset: CGFloat = -ServiceLayoutValues.topSafeAreaHeight
-        let minOffset: CGFloat = ServiceLayoutValues.headerMinHeight + ServiceLayoutValues.topSafeAreaHeight
-        let maxOffset: CGFloat = ServiceLayoutValues.headerMaxHeight + ServiceLayoutValues.topSafeAreaHeight
-        
-        // 현재 제목의 투명도
-        let currentTitleAlpha = 1 - ((maxOffset - currentOffset) / (maxOffset - minOffset))
-        
-        // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
-        self.headerView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
-        
-        // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
-        // 1) 헤더뷰 높이가 최대값으로 유지되는 구간
-        if currentOffset >= maxOffset {
-            //print("1) 헤더뷰 높이가 최대값으로 유지되는 구간")
-            self.headerView.alpha = 1
-            self.collectionView.alpha = 1
-            self.collectionView.layer.shadowOpacity = 0
-            self.headerView.snp.updateConstraints {
-                $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
+        // ⚠️ 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
+        if scrollView == self.tableView {
+            // 동적 오토레이아웃을 설정하기 위해 필요한 테이블뷰 스크롤의 현재 위치, 최소 기준값, 최대 기준값
+            let currentOffset: CGFloat = -scrollView.contentOffset.y
+            let minOffset: CGFloat = 0
+            let maxOffset: CGFloat = ServiceLayoutValues.topSafeAreaHeight
+            
+            // 현재 제목의 투명도
+            let currentTitleAlpha = 1 - ((maxOffset - currentOffset) / (maxOffset - minOffset))
+            
+            // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
+            self.headerView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
+            
+            // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
+            // 1) 헤더뷰 높이가 최대값으로 유지되는 구간
+            if currentOffset >= maxOffset {
+                print("1) 헤더뷰 높이가 최대값으로 유지되는 구간")
+                self.headerView.alpha = 1
+                self.collectionView.alpha = 1
+                self.collectionView.layer.shadowOpacity = 0
+                self.headerView.snp.updateConstraints {
+                    $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
+                }
+            }
+            
+            // 2) 헤더뷰 높이가 변하는 구간
+            else if currentOffset >= minOffset && currentOffset < maxOffset {
+                print("2) 헤더뷰 높이가 변하는 구간")
+                self.headerView.alpha = 1
+                self.collectionView.alpha = 1
+                self.collectionView.layer.shadowOpacity = 0
+                self.headerView.snp.updateConstraints {
+                    $0.height.equalTo(ServiceLayoutValues.headerMaxHeight - (ServiceLayoutValues.topSafeAreaHeight - currentOffset))
+                }
+            }
+            
+            // 3) 헤더뷰 높이가 최소값으로 유지되는 구간
+            else {
+                print("3) 헤더뷰 높이가 최소값으로 유지되는 구간")
+                self.headerView.alpha = 0.98
+                self.collectionView.alpha = 0.98
+                self.collectionView.layer.shadowOpacity = 0.1
+                self.headerView.snp.updateConstraints {
+                    $0.height.equalTo(ServiceLayoutValues.headerMinHeight)
+                }
+            }
+            
+            print(currentOffset)
+            
+            // 테이블뷰가 스크롤되면 현재 화면에 보이는 섹션을 확인
+            self.previousItemNumber = self.currentItemNumber
+            self.changePreviousItemUI()
+            
+            self.currentItemNumber = self.tableView.indexPathsForVisibleRows?.map { $0.section }.first ?? 0
+            self.changeCurrentItemUI()
+            
+            if self.currentItemNumber != self.previousItemNumber {
+                print("\(self.previousItemNumber)" + "->" + "\(self.currentItemNumber)")
             }
         }
-        
-        // 2) 헤더뷰 높이가 변하는 구간
-        else if currentOffset >= minOffset && currentOffset < maxOffset {
-            //print("2) 헤더뷰 높이가 변하는 구간")
-            self.headerView.alpha = 1
-            self.collectionView.alpha = 1
-            self.collectionView.layer.shadowOpacity = 0
-            self.headerView.snp.updateConstraints {
-                $0.height.equalTo(currentOffset - ServiceLayoutValues.topSafeAreaHeight)
-            }
-        }
-        
-        // 3) 헤더뷰 높이가 최소값으로 유지되는 구간
-        else {
-            //print("3) 헤더뷰 높이가 최소값으로 유지되는 구간")
-            self.headerView.alpha = 0.98
-            self.collectionView.alpha = 0.98
-            self.collectionView.layer.shadowOpacity = 0.1
-            self.headerView.snp.updateConstraints {
-                $0.height.equalTo(ServiceLayoutValues.headerMinHeight)
-            }
-        }
-        
-        //print(currentOffset)
-        
-        // 테이블뷰가 스크롤되면 현재 화면에 보이는 섹션을 확인
-        self.currentTableViewSection = self.tableView.indexPathsForVisibleRows?.map { $0.section }.first ?? 0
-
-//        print(currentOffset, visibleSections)
-//
-//        self.collectionView.selectItem(
-//            at: IndexPath(item: visibleSections, section: 0),
-//            animated: true,
-//            scrollPosition: .centeredHorizontally
-//        )
-        
-        
-        
     }
     
 }

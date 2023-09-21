@@ -23,13 +23,13 @@ extension UITableViewCell {
         // true인 경우에만 애니메이션 시작
         guard startAnimation else { return }
         
-        self.transform = CGAffineTransform(translationX: 0, y: 500)
+        self.transform = CGAffineTransform(translationX: 0, y: 800)
         self.alpha = 0
         
         UIView.animate(
             withDuration: 0.5,
             delay: 0.1 * Double(sequence),
-            options: [.transitionCurlUp, .preferredFramesPerSecond60],
+            options: [.transitionCurlDown, .preferredFramesPerSecond60],
             animations: {
                 self.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.alpha = 1

@@ -261,6 +261,10 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     as? AccountTopAdTableViewCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             cell.setAd(model: self.viewModel.getTopAdData)
+            cell.playTableViewCellAnimation(
+                sequence: 0,
+                startAnimation: UserDefaults.standard.showCellAnimation
+            )
             
             return cell
 
@@ -283,7 +287,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                 )
                 cell.transferButton.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .touchUpInside)
                 cell.playTableViewCellAnimation(
-                    sequence: indexPath.row,
+                    sequence: 1 + indexPath.row,
                     startAnimation: UserDefaults.standard.showCellAnimation
                 )
 
@@ -303,7 +307,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate {
                     safeBoxBalance: data.accountBalance.commaSeparatedWon + "원"
                 )
                 cell.playTableViewCellAnimation(
-                    sequence: indexPath.row,
+                    sequence: 1 + indexPath.row,
                     startAnimation: UserDefaults.standard.showCellAnimation
                 )
                 
