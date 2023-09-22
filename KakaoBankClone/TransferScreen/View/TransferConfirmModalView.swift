@@ -31,7 +31,7 @@ class TransferConfirmModalView: UIView {
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(themeColor: .black)
-        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
@@ -134,11 +134,13 @@ class TransferConfirmModalView: UIView {
             $0.height.equalTo(60)
         }
         
+        // 취소 버튼
         self.cancelButton.snp.makeConstraints {
             $0.width.equalToSuperview().offset(-5).multipliedBy(0.4)
             $0.top.bottom.equalToSuperview()
         }
         
+        // 이체하기 버튼
         self.transferButton.snp.makeConstraints {
             $0.width.equalToSuperview().offset(-5).multipliedBy(0.6)
             $0.top.bottom.equalToSuperview()
@@ -152,6 +154,7 @@ class TransferConfirmModalView: UIView {
             $0.right.equalToSuperview().offset(-15)
         }
         
+        // 은행 로고 이미지
         self.bankLogoImage.snp.makeConstraints {
             $0.width.height.equalTo(50)
         }
@@ -170,10 +173,22 @@ class TransferConfirmModalView: UIView {
     //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
     func setupMessage(selectedUserName: String, selectedUserAccount: String, currentInputAmount: Int) {
-        self.messageLabel.attributedText = NSAttributedString(
-            string: "\(selectedUserName)님에게 \(currentInputAmount.commaSeparatedWon)원\n이체하시겠습니까?"
-        ).withLineSpacing(5)
-        
+        // 질문 메세지 문장 구성
+        let fullText = "\(selectedUserName)님에게 \(currentInputAmount.commaSeparatedWon)원\n이체하시겠습니까?"
+
+        // 전체 텍스트의 스타일을 설정
+        let attributedText = NSMutableAttributedString(string: fullText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19.0)])
+
+        // 볼드 처리할 부분의 범위 설정
+        let boldRange1 = (fullText as NSString).range(of: selectedUserName)
+        let boldRange2 = (fullText as NSString).range(of: "\(currentInputAmount.commaSeparatedWon)")
+
+        // 해당 범위에 대해 볼드 폰트로 설정
+        attributedText.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 19.0), range: boldRange1)
+        attributedText.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 19.0), range: boldRange2)
+
+        // 질문 메세지와 받는계좌 텍스트 내용 설정
+        self.messageLabel.attributedText = attributedText.withLineSpacing(spacing: 5, alignment: .center)
         self.accountLabel.text = "받는계좌: \(BankType.kakao.rawValue) \(selectedUserAccount)"
     }
     

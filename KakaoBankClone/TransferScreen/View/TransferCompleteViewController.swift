@@ -32,7 +32,7 @@ class TransferCompleteViewController: UIViewController {
         label.numberOfLines = 2
         label.attributedText = NSAttributedString(
             string: "\(self.viewModel.selectedReceiverName)님에게\n\(self.viewModel.amount.commaSeparatedWon)원 보냈어요"
-        ).withLineSpacing(2)
+        ).withLineSpacing(spacing: 2, alignment: .center)
         return label
     }()
     

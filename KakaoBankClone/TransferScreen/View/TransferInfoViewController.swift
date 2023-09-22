@@ -30,7 +30,7 @@ final class TransferInfoViewController: UIViewController {
     // 금액 레이블
     internal let amountLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(themeColor: .transparentBlack)
+        label.textColor = UIColor(themeColor: .faintGray)
         label.font = UIFont.systemFont(ofSize: 40, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -239,8 +239,9 @@ final class TransferInfoViewController: UIViewController {
         self.setupDelegate()
         
         self.navigationView.setupNavigationView(
-            name: self.viewModel.selectedReceiverName,
-            account: self.viewModel.selectedReceiverAccount
+            bankName: "카카오",
+            userName: self.viewModel.selectedReceiverName,
+            userAccountNumber: self.viewModel.selectedReceiverAccount
         )
     }
     

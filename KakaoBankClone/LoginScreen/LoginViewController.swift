@@ -21,10 +21,9 @@ final class LoginViewController: UIViewController {
     // 로고 이미지
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(systemName: "b.circle")
+        iv.image = UIImage(named: "Kakao_Bank_of_Korea_Logo")
         iv.tintColor = UIColor(themeColor: .black)
-        iv.layer.cornerRadius = 40
-        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFit
         return iv
     }()
     
@@ -111,9 +110,9 @@ final class LoginViewController: UIViewController {
     private func setupLayout() {
         // 로고 이미지뷰
         self.logoImageView.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(100)
-            $0.centerX.equalTo(self.view.safeAreaLayoutGuide)
-            $0.width.height.equalTo(80)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(80)
+            $0.left.right.centerX.equalTo(self.view.safeAreaLayoutGuide)
+            $0.height.equalTo(100)
         }
         
         // 이메일 텍스트필드

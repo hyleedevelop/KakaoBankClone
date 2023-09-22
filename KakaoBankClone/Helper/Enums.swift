@@ -85,6 +85,9 @@ enum ServiceLayoutValues {
     static let menuCollectionViewHeight: CGFloat = 38
     static let headerMinHeight: CGFloat = 75
     static let headerMaxHeight: CGFloat = headerMinHeight + 57
+    static let headerChangeHeight: CGFloat = headerMaxHeight - headerMinHeight
+    static let totalMinHeight: CGFloat = topSafeAreaHeight + headerMinHeight + menuCollectionViewHeight
+    static let totalMaxHeight: CGFloat = topSafeAreaHeight + headerMaxHeight + menuCollectionViewHeight
 }
 
 //MARK: - 은행 종류
@@ -94,6 +97,8 @@ enum BankType: String {
     case woori = "우리은행"
     case nonghyup = "농협은행"
     case kookmin = "국민은행"
+    case hana = "하나은행"
+    case shinhan = "신한은행"
 }
 
 //MARK: - 사용자 계정

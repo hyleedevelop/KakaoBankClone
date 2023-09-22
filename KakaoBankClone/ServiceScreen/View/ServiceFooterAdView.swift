@@ -74,7 +74,7 @@ class ServiceFooterAdView: UIView {
         super.init(frame: frame)
         
         self.layer.borderColor = UIColor.green.cgColor
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = 0
         self.setupAutoLayout()
     }
     

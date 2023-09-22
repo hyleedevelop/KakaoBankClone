@@ -119,7 +119,7 @@ class TransferInfoNavigationView: UIView {
         // 레이블 스택뷰
         self.labelStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(55)
-            $0.bottom.equalToSuperview().offset(-5)
+            $0.bottom.equalToSuperview().offset(0)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(150)
         }
@@ -137,9 +137,9 @@ class TransferInfoNavigationView: UIView {
     
     //MARK: - 뷰컨트롤러에서 호출되는 메서드
     
-    func setupNavigationView(name: String, account: String) {
-        self.userNameLabel.text = name + " ▼"
-        self.accountNumberLabel.text = account
+    func setupNavigationView(bankName: String, userName: String, userAccountNumber: String) {
+        self.userNameLabel.text = userName
+        self.accountNumberLabel.text = "\(bankName) \(userAccountNumber)"
     }
     
 }

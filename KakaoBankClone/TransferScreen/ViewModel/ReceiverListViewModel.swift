@@ -54,7 +54,8 @@ final class ReceiverListViewModel {
             
             // 가져오는데 성공한 경우
             for document in querySnapshot!.documents {
-                guard let userID = document.data()["userID"] as? String,
+                guard let bankName = document.data()["bank"] as? String,
+                      let userID = document.data()["userID"] as? String,
                       let userName = document.data()["userName"] as? String,
                       let accountNumber = document.data()["accountNumber"] as? String,
                       let accountBalance = document.data()["accountBalance"] as? Int else { return }
@@ -63,6 +64,7 @@ final class ReceiverListViewModel {
                 self.receiverAccountData.append(
                     ReceiverListModel(
                         bankIcon: UIImage(named: "Kakao_Bank_of_Korea_Logo.jpg") ?? UIImage(),
+                        receiverBankName: bankName,
                         receiverID: userID,
                         receiverName: userName,
                         receiverAccountNumber: accountNumber,

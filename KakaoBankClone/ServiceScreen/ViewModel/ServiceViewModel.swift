@@ -26,19 +26,19 @@ final class ServiceViewModel {
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .blue),
             title: "쉐보레, 더 뉴 트레일블레이저",
-            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요").withLineSpacing(3),
+            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요").withLineSpacing(spacing: 3, alignment: .left),
             image: UIImage(systemName: "car.side.fill")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .green),
             title: "유병자를 위한 보험",
-            subtitle: NSAttributedString(string: "삼성화재 다이렉트\nSmart 유병자\n간편보험").withLineSpacing(3),
+            subtitle: NSAttributedString(string: "삼성화재 다이렉트\nSmart 유병자\n간편보험").withLineSpacing(spacing: 3, alignment: .left),
             image: UIImage(systemName: "stethoscope")!
         ),
         ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .yellow),
             title: "돈이 되는 꿀팁",
-            subtitle: NSAttributedString(string: "돌아온 휴가 시즌\n기차 30% 할인\n받는 방법은?").withLineSpacing(3),
+            subtitle: NSAttributedString(string: "돌아온 휴가 시즌\n기차 30% 할인\n받는 방법은?").withLineSpacing(spacing: 3, alignment: .left),
             image: UIImage(systemName: "train.side.rear.car")!
         ),
     ]
@@ -244,7 +244,15 @@ final class ServiceViewModel {
     
     // footer 높이
     func heightForFooterInSection(at section: Int) -> CGFloat {
-        return section == 0 ? 0 : 100
+        switch section {
+        case 0:
+            return 0
+        case self.numberOfSections-1:
+            return 150
+        default:
+            return 100
+        }
+        //return section == 0 ? 0 : 100
     }
     
     // cell 높이
@@ -267,11 +275,11 @@ final class ServiceViewModel {
 
             let headerView = UIView()
             headerView.layer.borderColor = UIColor.red.cgColor
-            headerView.layer.borderWidth = 2
+            headerView.layer.borderWidth = 0
             headerView.addSubview(titleLabel)
 
             // 하얀색 뷰로 섹션 내부와 헤더 사이의 경계선을 덮어서 보이지 않게끔 설정
-            let whiteView = UIView(frame: CGRect(x: 0, y: 40, width: tableView.frame.size.width, height: 2))
+            let whiteView = UIView(frame: CGRect(x: 0, y: 90, width: tableView.frame.size.width, height: 1))
             whiteView.backgroundColor = UIColor(themeColor: .white)
             headerView.addSubview(whiteView)
             

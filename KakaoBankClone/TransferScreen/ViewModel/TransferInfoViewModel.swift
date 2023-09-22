@@ -58,10 +58,6 @@ final class TransferInfoViewModel {
     
     // 거래내역 히스토리 데이터를 Firestore에 저장하기
     func createTransactionHistory(amount: Int, completion: @escaping () -> Void) {
-//        print("currentBalance", self.currentBalance)
-//        print("selectedReceiverAccountBalance", self.selectedReceiverAccountBalance)
-//        print("amount", amount)
-        
         // 보내는 사람의 계좌 잔고 최신값을 Firebase에서 가져오기
         self.getAccountBalance(type: .send) { senderAccountBalance in
             // Firestore DB 업데이트: 보내는 사람의 계좌 잔고 감소 (-)
