@@ -21,7 +21,7 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 10
         view.clipsToBounds = false
         view.layer.shadowColor = UIColor(themeColor: .darkGray).cgColor
-        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOpacity = 0.3
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.shadowRadius = 3
         return view
@@ -50,15 +50,14 @@ class ServiceTopAdTableViewCell: UITableViewCell {
         let pc = UIPageControl()
         pc.direction = .leftToRight
         pc.currentPageIndicatorTintColor = UIColor(themeColor: .white)
-        pc.pageIndicatorTintColor = UIColor(themeColor: .darkGray)
+        pc.pageIndicatorTintColor = UIColor(themeColor: .faintGray)
         pc.hidesForSinglePage = false
         return pc
     }()
+
+    //MARK: - 모델 및 기타 속성
     
     private var nowPage = 0
-
-    //MARK: - 모델 관련 속성
-    
     private var serviceTopAdModel = [ServiceTopAdModel]()
     
     //MARK: - 생성자

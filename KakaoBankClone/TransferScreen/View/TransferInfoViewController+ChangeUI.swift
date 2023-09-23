@@ -63,6 +63,8 @@ extension TransferInfoViewController {
             // 하위뷰 등록 및 오토레이아웃 설정
             self.view.addSubview(self.yourTransactionContainerView)
             self.view.addSubview(self.myTransactionContainerView)
+            self.view.addSubview(self.additionalTransferLabel)
+            self.view.addSubview(self.seeMoreLabel)
             
             self.yourTransactionContainerView.addSubview(self.yourTransactionNicknameLabel)
             self.yourTransactionContainerView.addSubview(self.yourTransactionNicknameTextfield)
@@ -87,6 +89,7 @@ extension TransferInfoViewController {
                 $0.left.equalTo(self.yourTransactionNicknameLabel.snp.right).offset(10)
                 $0.right.equalToSuperview().offset(-20)
             }
+            self.yourTransactionNicknameTextfield.text = self.viewModel.userName
             
             self.myTransactionContainerView.snp.makeConstraints {
                 $0.top.equalTo(self.yourTransactionContainerView.snp.bottom).offset(10)
@@ -106,10 +109,22 @@ extension TransferInfoViewController {
                 $0.right.equalToSuperview().offset(-20)
             }
             
+            self.additionalTransferLabel.snp.makeConstraints {
+                $0.top.equalTo(self.myTransactionContainerView.snp.bottom).offset(20)
+                $0.left.equalTo(self.myTransactionContainerView.snp.left).offset(2)
+            }
+            
+            self.seeMoreLabel.snp.makeConstraints {
+                $0.top.equalTo(self.myTransactionContainerView.snp.bottom).offset(20)
+                $0.right.equalTo(self.myTransactionContainerView.snp.right).offset(-2)
+            }
+            
             // 받는 분에게 표기, 나에게 표기에 대한 UI를 화면에서 서서히 보여주기
             UIView.animate(withDuration: 0.1, delay: 0.05, options: .curveEaseInOut) {
                 self.yourTransactionContainerView.alpha = 1
                 self.myTransactionContainerView.alpha = 1
+                self.additionalTransferLabel.alpha = 1
+                self.seeMoreLabel.alpha = 1
             }
             
             self.nextButtonTapCount += 1
@@ -117,13 +132,14 @@ extension TransferInfoViewController {
             // 로딩 애니메이션 시작
             self.activityIndicator.startAnimating()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 // 로딩 애니메이션 종료
                 self.activityIndicator.stopAnimating()
                 
                 // modal view 띄우기 구현
                 self.popoverModalView(
-                    receiver: self.viewModel.selectedReceiverName,
+                    receiverBankName: self.viewModel.selectedReceiverBankName,
+                    receiverName: self.viewModel.selectedReceiverName,
                     receiverAccount: self.viewModel.selectedReceiverAccount,
                     amount: self.currentInputAmount
                 )
@@ -180,10 +196,11 @@ extension TransferInfoViewController {
     }
     
     // 이체 확인 모달뷰 화면에 띄우기
-    internal func popoverModalView(receiver: String, receiverAccount: String, amount: Int) {
+    internal func popoverModalView(receiverBankName: String, receiverName: String, receiverAccount: String, amount: Int) {
         // 모달뷰의 메세지 내용 작성
         self.transferConfirmModalView.setupMessage(
-            selectedUserName: receiver,
+            selectedUserBankName: receiverBankName,
+            selectedUserName: receiverName,
             selectedUserAccount: receiverAccount,
             currentInputAmount: amount
         )
@@ -294,6 +311,7 @@ extension TransferInfoViewController: TransferConfirmModalViewDelegate {
                 
                 // 바로 다음 화면으로 넘어가기
                 let nextVM = TransferCompleteViewModel(  // 다음 화면의 뷰모델
+                    selectedReceiverBankName: self.viewModel.selectedReceiverBankName,
                     selectedReceiverName: self.viewModel.selectedReceiverName,
                     selectedReceiverAccount: self.viewModel.selectedReceiverAccount,
                     amount: self.currentInputAmount

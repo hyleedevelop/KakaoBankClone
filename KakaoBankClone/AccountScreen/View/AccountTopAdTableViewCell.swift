@@ -41,6 +41,7 @@ class AccountTopAdTableViewCell: UITableViewCell {
         pc.currentPageIndicatorTintColor = UIColor(themeColor: .white)
         pc.pageIndicatorTintColor = UIColor(themeColor: .darkGray)
         pc.hidesForSinglePage = false
+        pc.alpha = 0.8
         return pc
     }()
     

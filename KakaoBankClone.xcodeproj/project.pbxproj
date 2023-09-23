@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		072FD52E2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */; };
 		072FD5302A809A49008AEF14 /* ServiceTopAdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */; };
+		074528212ABED294007FFCA4 /* TransferCompleteAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074528202ABED294007FFCA4 /* TransferCompleteAdView.swift */; };
 		0749CD7E2A8F266900D091BE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0749CD7D2A8F266900D091BE /* UserDefaults.swift */; };
 		0752EEA92AB819F800836584 /* MoreTopAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752EEA82AB819F800836584 /* MoreTopAdTableViewCell.swift */; };
 		0752EEAB2AB824DB00836584 /* MoreBottomAdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0752EEAA2AB824DB00836584 /* MoreBottomAdTableViewCell.swift */; };
@@ -96,6 +97,7 @@
 		05DCC6700C88B23420E52201 /* Pods_KakaoBankClone_KakaoBankCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaoBankClone_KakaoBankCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		072FD52D2A809531008AEF14 /* ServiceTopAdCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdCollectionViewCell.swift; sourceTree = "<group>"; };
 		072FD52F2A809A49008AEF14 /* ServiceTopAdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTopAdModel.swift; sourceTree = "<group>"; };
+		074528202ABED294007FFCA4 /* TransferCompleteAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCompleteAdView.swift; sourceTree = "<group>"; };
 		0749CD7D2A8F266900D091BE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0752EEA82AB819F800836584 /* MoreTopAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTopAdTableViewCell.swift; sourceTree = "<group>"; };
 		0752EEAA2AB824DB00836584 /* MoreBottomAdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreBottomAdTableViewCell.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				07DEB9082A9203C500E75BC4 /* TransferInfoNavigationView.swift */,
 				076391062A9587870003E5BE /* TransferConfirmModalView.swift */,
 				076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */,
+				074528202ABED294007FFCA4 /* TransferCompleteAdView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				07F3431E2AB9D63700750832 /* ServiceFooterAdView.swift in Sources */,
 				07AA67982A7BC21C009DB3F0 /* AlertViewModel.swift in Sources */,
 				075FBEA42A8B792000A82EC1 /* ReceiverListModel.swift in Sources */,
+				074528212ABED294007FFCA4 /* TransferCompleteAdView.swift in Sources */,
 				07D9E3792A7FE6DB000EDF9B /* ServiceListModel.swift in Sources */,
 				07D9E3712A7F8FAD000EDF9B /* AccountWithoutSafeBoxTableViewCell.swift in Sources */,
 				075FBEA62A8BA23500A82EC1 /* ReceiverListTableViewCell.swift in Sources */,

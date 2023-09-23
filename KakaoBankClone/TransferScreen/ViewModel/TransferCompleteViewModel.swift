@@ -11,7 +11,8 @@ final class TransferCompleteViewModel {
  
     //MARK: - 생성자
     
-    init(selectedReceiverName: String, selectedReceiverAccount: String, amount: Int) {
+    init(selectedReceiverBankName: String, selectedReceiverName: String, selectedReceiverAccount: String, amount: Int) {
+        self.selectedReceiverBankName = selectedReceiverBankName
         self.selectedReceiverName = selectedReceiverName
         self.selectedReceiverAccount = selectedReceiverAccount
         self.amount = amount
@@ -19,6 +20,7 @@ final class TransferCompleteViewModel {
     
     //MARK: - 계좌 정보 관련
     
+    var selectedReceiverBankName: String
     var selectedReceiverName: String
     var selectedReceiverAccount: String
     var amount: Int

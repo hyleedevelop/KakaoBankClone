@@ -94,7 +94,7 @@ final class AccountViewController: UIViewController {
         self.viewModel.fetchAccountDataFromServer { db in
             self.db = db
                 
-            self.addSubview()
+            self.setupSubview()
             self.setupLayout()
             self.setupDelegate()
             
@@ -117,7 +117,7 @@ final class AccountViewController: UIViewController {
     }
     
     // 하위 뷰 추가
-    private func addSubview() {
+    private func setupSubview() {
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.activityIndicator)
@@ -179,9 +179,12 @@ final class AccountViewController: UIViewController {
         // 하위뷰 추가
         self.view.addSubview(self.dimmingView)
         
-        // 초기 상태
-        self.dimmingView.snp.makeConstraints {
-            $0.left.right.top.bottom.equalTo(self.view)
+        // 초기 상태 (dimmingView는 view가 아닌 window의 하위뷰로 등록해야 탭바 영역도 뒤덮을 수 있음)
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(self.dimmingView)
+            self.dimmingView.snp.makeConstraints {
+                $0.edges.equalTo(window)
+            }
         }
         self.dimmingView.alpha = 0.5
         

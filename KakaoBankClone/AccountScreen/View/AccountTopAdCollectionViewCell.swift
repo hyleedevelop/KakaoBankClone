@@ -68,6 +68,7 @@ class AccountTopAdCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.addSubview()
         self.setupAutoLayout()
     }
     
@@ -77,16 +78,22 @@ class AccountTopAdCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - 메서드
+    
+    // 하위 뷰 등록
+    private func addSubview() {
+        self.contentView.addSubview(self.containerView)
+        self.containerView.addSubview(self.titleStackView)
+        self.containerView.addSubview(self.adImage)
+    }
+    
     // 오토레이아웃 설정
     private func setupAutoLayout() {
         // 컨테이너 뷰 설정
-        self.contentView.addSubview(self.containerView)
         self.containerView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
         }
         
         // 스택뷰 설정
-        self.containerView.addSubview(self.titleStackView)
         self.titleStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().offset(25)
@@ -94,7 +101,6 @@ class AccountTopAdCollectionViewCell: UICollectionViewCell {
         }
         
         // 이미지 설정
-        self.containerView.addSubview(self.adImage)
         self.adImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.bottom.equalToSuperview().offset(-10)

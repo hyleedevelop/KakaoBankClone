@@ -19,7 +19,7 @@ class ReceiverListTableViewCell: UITableViewCell {
     // 은행 로고
     private let bankLogoImage: UIImageView = {
         let view = UIImageView()
-        view.layer.cornerRadius = 25
+        view.layer.cornerRadius = 15
         view.clipsToBounds = true
         return view
     }()
@@ -81,7 +81,7 @@ class ReceiverListTableViewCell: UITableViewCell {
         self.bankLogoImage.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(30)
         }
         
         // 계좌 정보 스택뷰
@@ -94,8 +94,8 @@ class ReceiverListTableViewCell: UITableViewCell {
     
     //MARK: - 뷰컨트롤러에서 호출되는 메서드
     
-    func applyCellUI(image: UIImage, type: BankType, name: String, number: String) {
-        self.bankLogoImage.image = image
+    func applyCellUI(type: BankType, name: String, number: String) {
+        self.bankLogoImage.image = BankType.getBankLogoImage(type: type)
         self.accountNameLabel.text = name
         self.accountNumberLabel.text = "\(type.rawValue.dropLast(2)) \(number)"  // ex) 우리은행 1234 -> 우리 1234
     }

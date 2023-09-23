@@ -221,8 +221,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.selectionStyle = .none
         cell.applyCellUI(
-            image: data.bankIcon,
-            type: BankType.kakao,
+            type: BankType(rawValue: data.receiverBankName) ?? .kakao,
             name: data.receiverName,
             number: data.receiverAccountNumber
         )
@@ -241,6 +240,7 @@ extension ReceiverListViewController: UITableViewDelegate, UITableViewDataSource
                 accountName: self.viewModel.accountName,
                 accountNumber: self.viewModel.accountNumber,
                 currentBalance: self.viewModel.currentBalance,
+                selectedReceiverBankName: self.db[indexPath.row].receiverBankName,
                 selectedReceiverID: self.db[indexPath.row].receiverID,
                 selectedReceiverName: self.db[indexPath.row].receiverName,
                 selectedReceiverAccount: self.db[indexPath.row].receiverAccountNumber,

@@ -36,6 +36,8 @@ enum ThemeColor {
     case yellow
     case green
     case blue
+    case darkBlue
+    case navy
 }
 
 //MARK: - 네비게이션 바 제목
@@ -99,6 +101,23 @@ enum BankType: String {
     case kookmin = "국민은행"
     case hana = "하나은행"
     case shinhan = "신한은행"
+    
+    static func getBankLogoImage(type: BankType) -> UIImage {
+        switch type {
+        case .kakao:
+            return UIImage(named: "kakao_bank_icon") ?? UIImage()
+        case .woori:
+            return UIImage(named: "woori_bank_icon") ?? UIImage()
+        case .nonghyup:
+            return UIImage(named: "nonghyup_bank_icon") ?? UIImage()
+        case .kookmin:
+            return UIImage(named: "kookmin_bank_icon") ?? UIImage()
+        case .hana:
+            return UIImage(named: "hana_bank_icon") ?? UIImage()
+        case .shinhan:
+            return UIImage(named: "shinhan_bank_icon") ?? UIImage()
+        }
+    }
 }
 
 //MARK: - 사용자 계정

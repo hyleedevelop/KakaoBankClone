@@ -22,7 +22,7 @@ class TransferConfirmModalView: UIView {
         let view = UIImageView()
         view.image = UIImage(named: "Kakao_Bank_of_Korea_Logo")
         //view.backgroundColor = UIColor(themeColor: .blue)
-        view.layer.cornerRadius = 25
+        view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
     }()
@@ -156,7 +156,7 @@ class TransferConfirmModalView: UIView {
         
         // 은행 로고 이미지
         self.bankLogoImage.snp.makeConstraints {
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(40)
         }
     }
     
@@ -172,7 +172,10 @@ class TransferConfirmModalView: UIView {
     
     //MARK: - 뷰컨트롤러에서 호출하는 메서드
     
-    func setupMessage(selectedUserName: String, selectedUserAccount: String, currentInputAmount: Int) {
+    func setupMessage(selectedUserBankName: String, selectedUserName: String, selectedUserAccount: String, currentInputAmount: Int) {
+        // 은행 로고 설정
+        self.bankLogoImage.image = BankType.getBankLogoImage(type: BankType(rawValue: selectedUserBankName) ?? .kakao)
+        
         // 질문 메세지 문장 구성
         let fullText = "\(selectedUserName)님에게 \(currentInputAmount.commaSeparatedWon)원\n이체하시겠습니까?"
 
@@ -189,7 +192,7 @@ class TransferConfirmModalView: UIView {
 
         // 질문 메세지와 받는계좌 텍스트 내용 설정
         self.messageLabel.attributedText = attributedText.withLineSpacing(spacing: 5, alignment: .center)
-        self.accountLabel.text = "받는계좌: \(BankType.kakao.rawValue) \(selectedUserAccount)"
+        self.accountLabel.text = "받는계좌: \(selectedUserBankName.dropLast(2)) \(selectedUserAccount)"
     }
     
 }

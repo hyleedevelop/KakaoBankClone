@@ -37,9 +37,7 @@ class AccountHeaderView: UIView {
     // 프로필 이미지
     let profileImageView: UIImageView = {
         let iv = UIImageView()
-        if UserDefaults.standard.userID == "user1" { iv.image = UIImage(named: "user1_profile_image.png") }
-        if UserDefaults.standard.userID == "user2" { iv.image = UIImage(named: "user2_profile_image.png") }
-        if UserDefaults.standard.userID == "user3" { iv.image = UIImage(named: "user3_profile_image.png") }
+        iv.image = UIImage(named: "memoji_" + UserDefaults.standard.userID)
         iv.layer.cornerRadius = 20
         iv.clipsToBounds = true
         return iv

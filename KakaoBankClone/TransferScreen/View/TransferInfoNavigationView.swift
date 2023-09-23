@@ -119,7 +119,7 @@ class TransferInfoNavigationView: UIView {
         // 레이블 스택뷰
         self.labelStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(55)
-            $0.bottom.equalToSuperview().offset(0)
+            $0.bottom.equalToSuperview().offset(-3)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(150)
         }
@@ -139,7 +139,7 @@ class TransferInfoNavigationView: UIView {
     
     func setupNavigationView(bankName: String, userName: String, userAccountNumber: String) {
         self.userNameLabel.text = userName
-        self.accountNumberLabel.text = "\(bankName) \(userAccountNumber)"
+        self.accountNumberLabel.text = "\(bankName.dropLast(2)) \(userAccountNumber)"
     }
     
 }

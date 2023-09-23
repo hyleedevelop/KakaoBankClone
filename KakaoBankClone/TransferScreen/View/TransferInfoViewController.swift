@@ -101,6 +101,8 @@ final class TransferInfoViewController: UIViewController {
             .strokeColor: UIColor(themeColor: .black)
         ]
         tf.attributedPlaceholder = NSAttributedString(string: self.viewModel.userName, attributes: attributes)
+        tf.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        tf.textColor = UIColor(themeColor: .black)
         tf.textAlignment = .right
         return tf
     }()
@@ -135,6 +137,38 @@ final class TransferInfoViewController: UIViewController {
         tf.attributedPlaceholder = NSAttributedString(string: "미입력시 수취인명", attributes: attributes)
         tf.textAlignment = .right
         return tf
+    }()
+    
+    // 추가이체 레이블
+    internal let additionalTransferLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(themeColor: .black)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        label.text = "+ 추가이체"
+        label.alpha = 0
+        return label
+    }()
+    
+    // 더보기 레이블
+    internal let seeMoreLabel: UILabel = {
+        let label = UILabel()
+        let text = "더보기"
+        let attributedText = NSMutableAttributedString(string: text)
+        let underlineRange = (text as NSString).range(of: text)
+        attributedText.addAttribute(
+            NSAttributedString.Key.underlineStyle, 
+            value: NSUnderlineStyle.single.rawValue,
+            range: underlineRange
+        )
+        label.attributedText = attributedText
+        label.textColor = UIColor(themeColor: .black)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textAlignment = .right
+        label.numberOfLines = 1
+        label.alpha = 0
+        return label
     }()
     
     // 금액을 추가 버튼 생성: createAmountAddButton() 메서드 참고
@@ -239,7 +273,7 @@ final class TransferInfoViewController: UIViewController {
         self.setupDelegate()
         
         self.navigationView.setupNavigationView(
-            bankName: "카카오",
+            bankName: self.viewModel.selectedReceiverBankName,
             userName: self.viewModel.selectedReceiverName,
             userAccountNumber: self.viewModel.selectedReceiverAccount
         )

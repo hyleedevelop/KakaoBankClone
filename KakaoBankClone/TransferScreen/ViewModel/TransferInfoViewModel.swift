@@ -17,6 +17,7 @@ final class TransferInfoViewModel {
         accountName: String,
         accountNumber: String,
         currentBalance: Int,
+        selectedReceiverBankName: String,
         selectedReceiverID: String,
         selectedReceiverName: String,
         selectedReceiverAccount: String,
@@ -26,6 +27,7 @@ final class TransferInfoViewModel {
         self.accountName = accountName
         self.accountNumber = accountNumber
         self.currentBalance = currentBalance
+        self.selectedReceiverBankName = selectedReceiverBankName
         self.selectedReceiverID = selectedReceiverID
         self.selectedReceiverName = selectedReceiverName
         self.selectedReceiverAccount = selectedReceiverAccount
@@ -41,6 +43,7 @@ final class TransferInfoViewModel {
     var accountName: String
     var accountNumber: String
     var currentBalance: Int
+    var selectedReceiverBankName: String
     var selectedReceiverID: String
     var selectedReceiverName: String
     var selectedReceiverAccount: String

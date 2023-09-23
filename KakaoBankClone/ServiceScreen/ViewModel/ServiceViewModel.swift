@@ -24,22 +24,22 @@ final class ServiceViewModel {
     
     private var serviceTopAdData: [ServiceTopAdModel] = [
         ServiceTopAdModel(
-            backgroundColor: UIColor(themeColor: .blue),
-            title: "쉐보레, 더 뉴 트레일블레이저",
-            subtitle: NSAttributedString(string: "견적 상담하고\n미국 여행권 등\n선물 받아가세요").withLineSpacing(spacing: 3, alignment: .left),
-            image: UIImage(systemName: "car.side.fill")!
-        ),
-        ServiceTopAdModel(
             backgroundColor: UIColor(themeColor: .green),
-            title: "유병자를 위한 보험",
-            subtitle: NSAttributedString(string: "삼성화재 다이렉트\nSmart 유병자\n간편보험").withLineSpacing(spacing: 3, alignment: .left),
-            image: UIImage(systemName: "stethoscope")!
+            title: "오. 운. 완. 할 때마다",
+            subtitle: NSAttributedString(string: "모아봐요\n갓생살기\n기록통장").withLineSpacing(spacing: 3, alignment: .left),
+            image: UIImage(named: "account_paper")!
         ),
         ServiceTopAdModel(
-            backgroundColor: UIColor(themeColor: .yellow),
+            backgroundColor: UIColor(themeColor: .blue),
+            title: "카카오뱅크 잘 쓰기",
+            subtitle: NSAttributedString(string: "전월세보증금 대출\n좋은 조건 있다면\n갈아탈 수 있어요").withLineSpacing(spacing: 3, alignment: .left),
+            image: UIImage(named: "house_loan")!
+        ),
+        ServiceTopAdModel(
+            backgroundColor: UIColor(themeColor: .pink),
             title: "돈이 되는 꿀팁",
-            subtitle: NSAttributedString(string: "돌아온 휴가 시즌\n기차 30% 할인\n받는 방법은?").withLineSpacing(spacing: 3, alignment: .left),
-            image: UIImage(systemName: "train.side.rear.car")!
+            subtitle: NSAttributedString(string: "60만 장 선착순\n숙박 쿠폰\n놓치지 마세요").withLineSpacing(spacing: 3, alignment: .left),
+            image: UIImage(named: "discount_coupon")!
         ),
     ]
     
@@ -197,31 +197,31 @@ final class ServiceViewModel {
     private let serviceFooterAdData: [ServiceFooterAdModel] = [
         ServiceFooterAdModel(
             backgroundColor: UIColor(themeColor: .pink), title: "세이프박스",
-            subtitle: "하루만 맡겨도 이자가 쏠쏠", image: UIImage(named: "krw-money")!
+            subtitle: "하루만 맡겨도 이자가 쏠쏠", image: UIImage(named: "safebox")!
         ),
         ServiceFooterAdModel(
-            backgroundColor: UIColor(themeColor: .blue), title: "신용카드 발급했다면",
-            subtitle: "청구금액 알림을 받아보세요", image: UIImage(named: "krw-money")!
+            backgroundColor: UIColor(themeColor: .green), title: "신용카드 발급했다면",
+            subtitle: "청구금액 알림을 받아보세요", image: UIImage(named: "credit_card")!
         ),
         ServiceFooterAdModel(
-            backgroundColor: UIColor(themeColor: .green), title: "비상금대출",
+            backgroundColor: UIColor(themeColor: .blue), title: "비상금대출",
             subtitle: "대출까지 평균 60초!", image: UIImage(named: "krw-money")!
         ),
         ServiceFooterAdModel(
             backgroundColor: UIColor(themeColor: .darkGray), title: "나의 정보도 맡기고 싶다면",
-            subtitle: "돈 뿐만 아니라 정보도 편리하게", image: UIImage(named: "krw-money")!
+            subtitle: "돈 뿐만 아니라 정보도 편리하게", image: UIImage(named: "private_information")!
         ),
         ServiceFooterAdModel(
-            backgroundColor: UIColor(themeColor: .yellow), title: "해외주식투자",
-            subtitle: "테슬라, 스타벅스 천원부터", image: UIImage(named: "krw-money")!
+            backgroundColor: UIColor(themeColor: .green), title: "해외주식투자",
+            subtitle: "테슬라, 애플 천원부터", image: UIImage(named: "tesla_apple")!
         ),
         ServiceFooterAdModel(
-            backgroundColor: UIColor(themeColor: .pink), title: "mini 생활",
-            subtitle: "청소년을 위한 mini 서비스", image: UIImage(named: "krw-money")!
+            backgroundColor: UIColor(themeColor: .yellow), title: "mini 생활",
+            subtitle: "청소년을 위한 mini 서비스", image: UIImage(named: "kid_save_money")!
         ),
         ServiceFooterAdModel(
             backgroundColor: UIColor(themeColor: .blue), title: "개인사업자 보증서대출",
-            subtitle: "보증기관 방문없이 편리하게", image: UIImage(named: "krw-money")!
+            subtitle: "보증기관 방문없이 편리하게", image: UIImage(named: "loan")!
         ),
     ]
     
