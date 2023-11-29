@@ -169,9 +169,10 @@ final class AccountViewModel {
                           let receiverName = document.get("receiverName") as? String,
                           let amount = document.get("amount") as? Int else { return }
                     
-                    // 현재 로그인한 사용자의 ID가 수신인 또는 발신인인 경우에만 푸시 알림을 요청
+                    // 현재 로그인한 사용자의 ID가 이체 거래에 연관된 경우
                     guard UserDefaults.standard.userID == senderID || UserDefaults.standard.userID == receiverID else { return }
                     
+                    // 로컬 푸시 알림 요청
                     self.requestLocalPushNotification(
                         type: UserDefaults.standard.userID == senderID ? .send : .receive,
                         senderID: senderID,
@@ -190,10 +191,7 @@ final class AccountViewModel {
     }
     
     // 로컬 푸시 알림 보내기
-    private func requestLocalPushNotification(
-        type: TransactionType, senderID: String, senderName: String, receiverID: String, receiverName: String, amount: Int,
-        myAccountName: String, myAccountNumber: String, myAccountBalance: Int
-    ) {
+    private func requestLocalPushNotification(type: TransactionType, senderID: String, senderName: String, receiverID: String, receiverName: String, amount: Int, myAccountName: String, myAccountNumber: String, myAccountBalance: Int) {
         // 푸시 알림 메세지의 제목 및 내용 구성
         //
         // * 입금 메세지 예시

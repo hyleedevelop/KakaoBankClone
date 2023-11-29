@@ -168,9 +168,77 @@ final class ServiceViewController: UIViewController {
         self.collectionView.dataSource = self
     }
     
-    //MARK: - 내부 메서드
+    //MARK: - 스크롤뷰 관련 메서드
     
-    // 현재 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
+    // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // ⚠️ 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
+        if scrollView == self.tableView {
+            // 오토레이아웃을 동적으로 설정하기 위해 필요한 테이블뷰 스크롤의 현재 위치
+            // (테이블뷰 꼭대기로부터 얼마나 스크롤 되었는지)
+            let currentOffset: CGFloat = -scrollView.contentOffset.y
+            print(currentOffset)
+            
+            // 테이블뷰가 스크롤되면 현재 화면에 보이는 섹션을 확인
+            let point = CGPoint(x: 0, y: -currentOffset + ServiceLayoutValues.totalMaxHeight)
+            self.previousItemNumber = self.currentItemNumber
+            self.currentItemNumber = self.tableView.indexPathForRow(at: point)?.section ?? self.previousItemNumber
+
+            // 스크롤 정도에 따라 헤더뷰의 투명도와 오토레이아웃이 변하도록 설정
+            self.changeHeaderViewUI(with: currentOffset)
+            
+            // 기존에 선택되었다가 지금 선택 해제되는 컬렉션뷰 아이템의 UI 변경
+            self.changePreviousItemUI()
+            
+            // 기존에 선택 해제되어 있다가 지금 새로 선택되는 컬렉션뷰 아이템의 UI 변경
+            self.changeCurrentItemUI()
+        }
+    }
+    
+    // 테이블뷰의 스크롤 정도에 따른 헤더뷰의 UI 변경
+    private func changeHeaderViewUI(with currentOffset: CGFloat) {
+        // 헤더뷰의 UI가 다르게 설정되어야 하는 offset의 기준점
+        let minOffset: CGFloat = 0
+        let maxOffset: CGFloat = ServiceLayoutValues.topSafeAreaHeight
+        
+        // 현재 화면 제목의 투명도
+        let currentTitleAlpha = 1 - ((maxOffset - currentOffset) / (maxOffset - minOffset))
+        
+        // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
+        self.headerView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
+        
+        // 1) 헤더뷰 높이가 최대값으로 유지되는 구간
+        if currentOffset >= maxOffset {
+            self.headerView.alpha = 1
+            self.collectionView.alpha = 1
+            self.collectionView.layer.shadowOpacity = 0
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
+            }
+        }
+
+        // 2) 헤더뷰 높이가 변하는 구간
+        else if currentOffset >= minOffset && currentOffset < maxOffset {
+            self.headerView.alpha = 1
+            self.collectionView.alpha = 1
+            self.collectionView.layer.shadowOpacity = 0
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(ServiceLayoutValues.headerMaxHeight - (ServiceLayoutValues.topSafeAreaHeight - currentOffset))
+            }
+        }
+
+        // 3) 헤더뷰 높이가 최소값으로 유지되는 구간
+        else {
+            self.headerView.alpha = 0.98
+            self.collectionView.alpha = 0.98
+            self.collectionView.layer.shadowOpacity = 0.1
+            self.headerView.snp.updateConstraints {
+                $0.height.equalTo(ServiceLayoutValues.headerMinHeight)
+            }
+        }
+    }
+    
+    // 새로 선택되는 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
     private func changeCurrentItemUI() {
         let indexPath = IndexPath(item: self.currentItemNumber, section: 0)
         
@@ -203,7 +271,7 @@ final class ServiceViewController: UIViewController {
         }
     }
 
-    // 이전 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
+    // 이전에 선택되었던 서비스에 해당하는 상단 메뉴 컬렉션뷰 셀의 UI 변경
     private func changePreviousItemUI() {
         let indexPath = IndexPath(item: self.previousItemNumber, section: 0)
         
@@ -351,76 +419,6 @@ extension ServiceViewController: UITableViewDelegate, UITableViewDataSource {
     // 셀이 선택 되었을때 수행할 내용
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//        let currentOffset: CGFloat = -scrollView.contentOffset.y
-//        print(#function, "currentOffset: \(currentOffset), itemNumber: \(self.previousItemNumber)" + " -> " + "\(self.currentItemNumber)")
-    }
-    
-    // 테이블뷰의 스크롤이 완료되었을 때 수행할 내용
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // ⚠️ 이 조건문이 없으면 컬렉션뷰를 스크롤 할 때에도 이 델리게이트 메서드가 실행되므로 주의!
-        if scrollView == self.tableView {
-            // 동적 오토레이아웃을 설정하기 위해 필요한 테이블뷰 스크롤의 현재 위치, 최소 기준값, 최대 기준값
-            let currentOffset: CGFloat = -scrollView.contentOffset.y
-            print(currentOffset)
-            
-            let minOffset: CGFloat = 0
-            let maxOffset: CGFloat = ServiceLayoutValues.topSafeAreaHeight
-            
-            // 현재 제목의 투명도
-            let currentTitleAlpha = 1 - ((maxOffset - currentOffset) / (maxOffset - minOffset))
-            
-            // 스크롤 정도에 따라 제목 글씨의 투명도가 변하도록 설정
-            self.headerView.tabTitleLabel.textColor = UIColor(white: 0.0, alpha: currentTitleAlpha)
-            
-            // 스크롤 정도에 따라 투명도와 오토레이아웃이 변하도록 설정
-            // 1) 헤더뷰 높이가 최대값으로 유지되는 구간
-            if currentOffset >= maxOffset {
-                //print("1) 헤더뷰 높이가 최대값으로 유지되는 구간")
-                self.headerView.alpha = 1  // 1
-                self.collectionView.alpha = 1  // 1
-                self.collectionView.layer.shadowOpacity = 0
-                self.headerView.snp.updateConstraints {
-                    $0.height.equalTo(ServiceLayoutValues.headerMaxHeight)
-                }
-            }
-
-            // 2) 헤더뷰 높이가 변하는 구간
-            else if currentOffset >= minOffset && currentOffset < maxOffset {
-                //print("2) 헤더뷰 높이가 변하는 구간")
-                self.headerView.alpha = 1  // 1
-                self.collectionView.alpha = 1  // 1
-                self.collectionView.layer.shadowOpacity = 0
-                self.headerView.snp.updateConstraints {
-                    $0.height.equalTo(ServiceLayoutValues.headerMaxHeight - (ServiceLayoutValues.topSafeAreaHeight - currentOffset))
-                }
-            }
-
-            // 3) 헤더뷰 높이가 최소값으로 유지되는 구간
-            else {
-                //print("3) 헤더뷰 높이가 최소값으로 유지되는 구간")
-                self.headerView.alpha = 0.98  // 0.98
-                self.collectionView.alpha = 0.98  // 0.98
-                self.collectionView.layer.shadowOpacity = 0.1
-                self.headerView.snp.updateConstraints {
-                    $0.height.equalTo(ServiceLayoutValues.headerMinHeight)
-                }
-            }
-            
-            // 테이블뷰가 스크롤되면 현재 화면에 보이는 섹션을 확인
-            self.previousItemNumber = self.currentItemNumber
-            let point = CGPoint(
-                x: 0,
-                y: -currentOffset + ServiceLayoutValues.totalMaxHeight
-            )
-
-            self.currentItemNumber = self.tableView.indexPathForRow(at: point)?.section ?? self.previousItemNumber
-
-            self.changePreviousItemUI()
-            self.changeCurrentItemUI()
-        }
     }
     
 }

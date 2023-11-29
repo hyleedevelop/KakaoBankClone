@@ -24,6 +24,7 @@
 		075FBEA62A8BA23500A82EC1 /* ReceiverListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA52A8BA23500A82EC1 /* ReceiverListTableViewCell.swift */; };
 		075FBEA82A8BA34E00A82EC1 /* ReceiverListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA72A8BA34E00A82EC1 /* ReceiverListHeaderView.swift */; };
 		075FBEAA2A8BA57D00A82EC1 /* ReceiverListNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075FBEA92A8BA57D00A82EC1 /* ReceiverListNavigationView.swift */; };
+		0762D8892B171C3B00FC0CC4 /* WonDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0762D8882B171C3B00FC0CC4 /* WonDescription.swift */; };
 		076391072A9587870003E5BE /* TransferConfirmModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076391062A9587870003E5BE /* TransferConfirmModalView.swift */; };
 		076391092A95DE5A0003E5BE /* TransferCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */; };
 		0768481B2A7C9F6400812353 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768481A2A7C9F6400812353 /* Enums.swift */; };
@@ -112,6 +113,7 @@
 		075FBEA52A8BA23500A82EC1 /* ReceiverListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListTableViewCell.swift; sourceTree = "<group>"; };
 		075FBEA72A8BA34E00A82EC1 /* ReceiverListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListHeaderView.swift; sourceTree = "<group>"; };
 		075FBEA92A8BA57D00A82EC1 /* ReceiverListNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverListNavigationView.swift; sourceTree = "<group>"; };
+		0762D8882B171C3B00FC0CC4 /* WonDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonDescription.swift; sourceTree = "<group>"; };
 		076391062A9587870003E5BE /* TransferConfirmModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferConfirmModalView.swift; sourceTree = "<group>"; };
 		076391082A95DE5A0003E5BE /* TransferCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCompleteViewController.swift; sourceTree = "<group>"; };
 		0768481A2A7C9F6400812353 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				07AA67712A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift */,
+				0762D8882B171C3B00FC0CC4 /* WonDescription.swift */,
 			);
 			path = KakaoBankCloneTests;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07AA67722A7BB7C5009DB3F0 /* KakaoBankCloneTests.swift in Sources */,
+				0762D8892B171C3B00FC0CC4 /* WonDescription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

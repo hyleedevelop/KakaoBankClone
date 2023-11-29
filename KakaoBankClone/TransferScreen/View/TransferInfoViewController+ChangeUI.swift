@@ -45,8 +45,6 @@ extension TransferInfoViewController {
         if button.tag == 11 {
             self.currentInputAmount /= 10
         }
-        
-        //print("보낼금액: \(self.currentInputAmount)원")
     }
     
     @objc internal func nextButtonTapped(_ button: UIButton) {

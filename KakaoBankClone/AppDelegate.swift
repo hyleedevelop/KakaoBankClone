@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase 초기화
         FirebaseApp.configure()
         
-        //sleep(1)
+        // 원격 푸시 알림을 위한 준비
+        Messaging.messaging().delegate = self
+        application.registerForRemoteNotifications()
         
         // 앱 실행 후 계좌 화면의 테이블뷰 셀 애니메이션이 최초 1회만 시작되도록 설정
         UserDefaults.standard.showCellAnimation = true
         
-        // 푸시 알림 관련 설정
-        Messaging.messaging().delegate = self
-        
+        // 알림 권한 요청
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("알림 등록이 완료되었습니다.")
             }
         }
-        application.registerForRemoteNotifications()
         
         return true
     }
@@ -50,12 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // registerForRemoteNotifications() 메서드 성공 시 호출
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        // 수신된 deviceToken을 String으로 변환하기
-//        // 푸시 알림을 보낼 때 서버는 이 토큰을 “주소”로 사용하여 올바른 목적지 기기에 전달함
-//        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-//        let token = tokenParts.joined()
-//        print("Device Token: \(token)")
-        
         // FirebaseMessaging - 토큰
         Messaging.messaging().apnsToken = deviceToken
     }
